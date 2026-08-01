@@ -1,0 +1,149 @@
+import { createFileRoute } from "@tanstack/react-router";
+import { useState } from "react";
+import { MapPin, X } from "lucide-react";
+import { Header } from "@/components/gofly/Header";
+import { Footer } from "@/components/gofly/Footer";
+import { galleryItems } from "@/lib/gofly-data";
+import { Reveal } from "@/components/gofly/Reveal";
+
+const title = "Gallery — Travel Nest";
+const description =
+  "Browse our travel gallery — stunning destinations captured from around the world.";
+
+export const Route = createFileRoute("/gallery")({
+  head: () => ({
+    meta: [
+      { title },
+      { name: "description", content: description },
+      { property: "og:title", content: title },
+      { property: "og:description", content: description },
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary_large_image" },
+    ],
+  }),
+  component: Gallery,
+});
+
+function Gallery() {
+  const [selected, setSelected] = useState<number | null>(null);
+
+  return (
+    <div className="overflow-x-hidden">
+      <Header />
+      <main>
+        {/* Hero */}
+        <section className="relative h-[400px] w-full overflow-hidden">
+          <img
+            src={galleryItems[0].img}
+            alt="Gallery"
+            className="absolute inset-0 h-full w-full object-cover"
+          />
+          <div className="absolute inset-0 bg-gradient-to-b from-black/50 via-black/40 to-black/60" />
+          <div className="relative z-10 flex h-full flex-col items-center justify-center text-center">
+            <h1
+              className="font-display text-5xl font-bold text-white sm:text-6xl"
+              style={{ color: "#fff" }}
+            >
+              Gallery
+            </h1>
+            <p
+              className="mt-4 flex items-center gap-2 text-sm font-medium text-white"
+              style={{ color: "#fff" }}
+            >
+              <a href="/" className="hover:underline" style={{ color: "#fff" }}>
+                Home
+              </a>
+              <span style={{ color: "#fff" }}>•</span>
+              <span style={{ color: "#fff" }}>Gallery</span>
+            </p>
+          </div>
+        </section>
+
+        {/* Grid */}
+        <section className="py-16 sm:py-20">
+          <div className="container-gofly">
+            <div className="mx-auto max-w-2xl text-center">
+              <h2 className="font-display text-3xl font-bold text-title sm:text-[40px]">
+                Travel Nest Gallery
+              </h2>
+              <p className="mt-3 text-[15px] text-body">
+                We go beyond just booking trips — we create unforgettable travel experiences that
+                match your dreams!
+              </p>
+            </div>
+
+            <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+              {galleryItems.map((item, i) => (
+                <Reveal key={item.title} delay={i * 100}>
+                  <button
+                    type="button"
+                    onClick={() => setSelected(i)}
+                    className="group block w-full overflow-hidden rounded-2xl border border-line bg-card text-left shadow-sm transition-all duration-500 hover:-translate-y-1 hover:shadow-[var(--shadow-float)]"
+                  >
+                    <div className="overflow-hidden">
+                      <img
+                        src={item.img}
+                        alt={item.title}
+                        loading="lazy"
+                        className="h-[240px] w-full object-cover transition-transform duration-700 group-hover:scale-110"
+                      />
+                    </div>
+                    <div className="p-5">
+                      <p className="inline-flex items-center gap-1.5 text-sm font-medium text-brand">
+                        <MapPin className="size-4" /> {item.location}
+                      </p>
+                      <h3 className="mt-1.5 font-display text-lg font-semibold text-title transition-colors group-hover:text-brand">
+                        {item.title}
+                      </h3>
+                      <p className="mt-2 text-sm leading-relaxed text-body">{item.desc}</p>
+                    </div>
+                  </button>
+                </Reveal>
+              ))}
+            </div>
+          </div>
+        </section>
+      </main>
+      <Footer />
+
+      {/* Lightbox */}
+      {selected !== null && (
+        <div
+          className="fixed inset-0 z-[90] flex items-center justify-center bg-dark/80 p-4"
+          onClick={() => setSelected(null)}
+        >
+          <div
+            className="max-h-[90vh] w-full max-w-3xl overflow-hidden rounded-2xl bg-background shadow-2xl"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <div className="flex items-center justify-between border-b border-line px-5 py-3">
+              <div>
+                <h3 className="font-display text-lg font-semibold text-title">
+                  {galleryItems[selected].title}
+                </h3>
+                <p className="inline-flex items-center gap-1 text-xs text-body">
+                  <MapPin className="size-3.5 text-brand" /> {galleryItems[selected].location}
+                </p>
+              </div>
+              <button
+                aria-label="Close"
+                onClick={() => setSelected(null)}
+                className="grid size-9 place-items-center rounded-full border border-line text-title transition-colors hover:bg-soft"
+              >
+                <X className="size-4" />
+              </button>
+            </div>
+            <img
+              src={galleryItems[selected].img}
+              alt={galleryItems[selected].title}
+              className="max-h-[70vh] w-full object-cover"
+            />
+            <p className="px-5 py-4 text-sm leading-relaxed text-body">
+              {galleryItems[selected].desc}
+            </p>
+          </div>
+        </div>
+      )}
+    </div>
+  );
+}
