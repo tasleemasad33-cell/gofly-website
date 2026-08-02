@@ -169,14 +169,14 @@ export function SearchWidget() {
             SEARCH
           </button>
         </div>
-      </div>
 
-      <p className="mt-4 text-center text-sm text-white">
-        Can't find what you're looking for? create your{" "}
-        <a href="#" className="font-medium text-brand2 underline underline-offset-4">
-          Custom Itinerary
-        </a>
-      </p>
+        <p className="mt-3 border-t border-line pt-3 text-center text-sm text-body">
+          Can't find what you're looking for? create your{" "}
+          <a href="#" className="font-medium text-brand underline underline-offset-4">
+            Custom Itinerary
+          </a>
+        </p>
+      </div>
     </div>
   );
 }

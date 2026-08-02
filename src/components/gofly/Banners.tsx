@@ -74,35 +74,33 @@ export function AwardBanner() {
 
           {/* Title */}
           <h4 className="font-display text-2xl font-semibold italic text-white">
-            The World Travel Award
+            Premium Travel Experiences
           </h4>
 
           {/* Stars */}
           <div className="mt-3 flex items-center justify-center gap-1">
-            <span className="text-white/70">(</span>
             {[1, 2, 3, 4, 5].map((i) => (
-              <span key={i} className="text-xl text-white">★</span>
+              <span key={i} className="text-xl text-white">
+                ★
+              </span>
             ))}
-            <span className="text-white/70">)</span>
           </div>
 
           {/* Subtitle */}
           <h3 className="mt-6 font-display text-2xl font-medium text-white sm:text-3xl">
-            World-Wide
+            Creating
           </h3>
 
           {/* BEST */}
-          <h2 className="font-display text-7xl font-black tracking-tight text-white sm:text-[110px] lg:text-[130px]">
-            BEST
+          <h2 className="font-display text-5xl font-black tracking-tight text-white sm:text-[80px] lg:text-[100px]">
+            UNFORGETTABLE JOURNEYS
           </h2>
 
-          {/* Travel agency */}
-          <p className="font-display text-3xl font-semibold italic text-white sm:text-4xl">
-            Travel agency
-          </p>
-
           {/* Button */}
-          <a href="#" className="btn-primary mt-8 inline-flex items-center gap-2 rounded-full bg-brand px-8 py-4 font-display text-sm font-medium text-white shadow-lg transition-all hover:bg-brand/90 hover:shadow-xl">
+          <a
+            href="#"
+            className="btn-primary mt-8 inline-flex items-center gap-2 rounded-full bg-brand px-8 py-4 font-display text-sm font-medium text-white shadow-lg transition-all hover:bg-brand/90 hover:shadow-xl"
+          >
             View All Package <ArrowRight className="size-4" />
           </a>
         </Reveal>

@@ -42,7 +42,7 @@ export function Blog() {
           ))}
         </div>
         <div className="mt-10 text-center">
-          <a href="#" className="btn-outline">
+          <a href="/experiences" className="btn-outline">
             View All Inspiration <ArrowRight className="size-4" />
           </a>
         </div>

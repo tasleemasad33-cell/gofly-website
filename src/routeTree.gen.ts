@@ -11,9 +11,21 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as AboutRouteImport } from './routes/about'
+import { Route as AirTicketsRouteImport } from './routes/air-tickets'
+import { Route as CorporateToursRouteImport } from './routes/corporate-tours'
+import { Route as CruisesRouteImport } from './routes/cruises'
+import { Route as CustomizedToursRouteImport } from './routes/customized-tours'
+import { Route as DestinationWeddingRouteImport } from './routes/destination-wedding'
 import { Route as DestinationsRouteImport } from './routes/destinations'
+import { Route as EducationalToursRouteImport } from './routes/educational-tours'
+import { Route as ExperiencesRouteImport } from './routes/experiences'
 import { Route as GalleryRouteImport } from './routes/gallery'
+import { Route as GroupToursRouteImport } from './routes/group-tours'
+import { Route as HoneymoonTripsRouteImport } from './routes/honeymoon-trips'
+import { Route as HotelBookingsRouteImport } from './routes/hotel-bookings'
 import { Route as PackagesRouteImport } from './routes/packages'
+import { Route as TransportationRouteImport } from './routes/transportation'
+import { Route as VisaFacilitationRouteImport } from './routes/visa-facilitation'
 import { Route as PackagesIndexRouteImport } from './routes/packages/index'
 import { Route as PackagesSlugRouteImport } from './routes/packages.$slug'
 
@@ -27,9 +39,44 @@ const AboutRoute = AboutRouteImport.update({
   path: '/about',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AirTicketsRoute = AirTicketsRouteImport.update({
+  id: '/air-tickets',
+  path: '/air-tickets',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CorporateToursRoute = CorporateToursRouteImport.update({
+  id: '/corporate-tours',
+  path: '/corporate-tours',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CruisesRoute = CruisesRouteImport.update({
+  id: '/cruises',
+  path: '/cruises',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CustomizedToursRoute = CustomizedToursRouteImport.update({
+  id: '/customized-tours',
+  path: '/customized-tours',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const DestinationWeddingRoute = DestinationWeddingRouteImport.update({
+  id: '/destination-wedding',
+  path: '/destination-wedding',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const DestinationsRoute = DestinationsRouteImport.update({
   id: '/destinations',
   path: '/destinations',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const EducationalToursRoute = EducationalToursRouteImport.update({
+  id: '/educational-tours',
+  path: '/educational-tours',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ExperiencesRoute = ExperiencesRouteImport.update({
+  id: '/experiences',
+  path: '/experiences',
   getParentRoute: () => rootRouteImport,
 } as any)
 const GalleryRoute = GalleryRouteImport.update({
@@ -37,9 +84,34 @@ const GalleryRoute = GalleryRouteImport.update({
   path: '/gallery',
   getParentRoute: () => rootRouteImport,
 } as any)
+const GroupToursRoute = GroupToursRouteImport.update({
+  id: '/group-tours',
+  path: '/group-tours',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const HoneymoonTripsRoute = HoneymoonTripsRouteImport.update({
+  id: '/honeymoon-trips',
+  path: '/honeymoon-trips',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const HotelBookingsRoute = HotelBookingsRouteImport.update({
+  id: '/hotel-bookings',
+  path: '/hotel-bookings',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const PackagesRoute = PackagesRouteImport.update({
   id: '/packages',
   path: '/packages',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const TransportationRoute = TransportationRouteImport.update({
+  id: '/transportation',
+  path: '/transportation',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const VisaFacilitationRoute = VisaFacilitationRouteImport.update({
+  id: '/visa-facilitation',
+  path: '/visa-facilitation',
   getParentRoute: () => rootRouteImport,
 } as any)
 const PackagesIndexRoute = PackagesIndexRouteImport.update({
@@ -56,17 +128,41 @@ const PackagesSlugRoute = PackagesSlugRouteImport.update({
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
+  '/air-tickets': typeof AirTicketsRoute
+  '/corporate-tours': typeof CorporateToursRoute
+  '/cruises': typeof CruisesRoute
+  '/customized-tours': typeof CustomizedToursRoute
+  '/destination-wedding': typeof DestinationWeddingRoute
   '/destinations': typeof DestinationsRoute
+  '/educational-tours': typeof EducationalToursRoute
+  '/experiences': typeof ExperiencesRoute
   '/gallery': typeof GalleryRoute
+  '/group-tours': typeof GroupToursRoute
+  '/honeymoon-trips': typeof HoneymoonTripsRoute
+  '/hotel-bookings': typeof HotelBookingsRoute
   '/packages': typeof PackagesRouteWithChildren
+  '/transportation': typeof TransportationRoute
+  '/visa-facilitation': typeof VisaFacilitationRoute
   '/packages/$slug': typeof PackagesSlugRoute
   '/packages/': typeof PackagesIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
+  '/air-tickets': typeof AirTicketsRoute
+  '/corporate-tours': typeof CorporateToursRoute
+  '/cruises': typeof CruisesRoute
+  '/customized-tours': typeof CustomizedToursRoute
+  '/destination-wedding': typeof DestinationWeddingRoute
   '/destinations': typeof DestinationsRoute
+  '/educational-tours': typeof EducationalToursRoute
+  '/experiences': typeof ExperiencesRoute
   '/gallery': typeof GalleryRoute
+  '/group-tours': typeof GroupToursRoute
+  '/honeymoon-trips': typeof HoneymoonTripsRoute
+  '/hotel-bookings': typeof HotelBookingsRoute
+  '/transportation': typeof TransportationRoute
+  '/visa-facilitation': typeof VisaFacilitationRoute
   '/packages/$slug': typeof PackagesSlugRoute
   '/packages': typeof PackagesIndexRoute
 }
@@ -74,9 +170,21 @@ export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
+  '/air-tickets': typeof AirTicketsRoute
+  '/corporate-tours': typeof CorporateToursRoute
+  '/cruises': typeof CruisesRoute
+  '/customized-tours': typeof CustomizedToursRoute
+  '/destination-wedding': typeof DestinationWeddingRoute
   '/destinations': typeof DestinationsRoute
+  '/educational-tours': typeof EducationalToursRoute
+  '/experiences': typeof ExperiencesRoute
   '/gallery': typeof GalleryRoute
+  '/group-tours': typeof GroupToursRoute
+  '/honeymoon-trips': typeof HoneymoonTripsRoute
+  '/hotel-bookings': typeof HotelBookingsRoute
   '/packages': typeof PackagesRouteWithChildren
+  '/transportation': typeof TransportationRoute
+  '/visa-facilitation': typeof VisaFacilitationRoute
   '/packages/$slug': typeof PackagesSlugRoute
   '/packages/': typeof PackagesIndexRoute
 }
@@ -85,26 +193,62 @@ export interface FileRouteTypes {
   fullPaths:
     | '/'
     | '/about'
+    | '/air-tickets'
+    | '/corporate-tours'
+    | '/cruises'
+    | '/customized-tours'
+    | '/destination-wedding'
     | '/destinations'
+    | '/educational-tours'
+    | '/experiences'
     | '/gallery'
+    | '/group-tours'
+    | '/honeymoon-trips'
+    | '/hotel-bookings'
     | '/packages'
+    | '/transportation'
+    | '/visa-facilitation'
     | '/packages/$slug'
     | '/packages/'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
     | '/about'
+    | '/air-tickets'
+    | '/corporate-tours'
+    | '/cruises'
+    | '/customized-tours'
+    | '/destination-wedding'
     | '/destinations'
+    | '/educational-tours'
+    | '/experiences'
     | '/gallery'
+    | '/group-tours'
+    | '/honeymoon-trips'
+    | '/hotel-bookings'
+    | '/transportation'
+    | '/visa-facilitation'
     | '/packages/$slug'
     | '/packages'
   id:
     | '__root__'
     | '/'
     | '/about'
+    | '/air-tickets'
+    | '/corporate-tours'
+    | '/cruises'
+    | '/customized-tours'
+    | '/destination-wedding'
     | '/destinations'
+    | '/educational-tours'
+    | '/experiences'
     | '/gallery'
+    | '/group-tours'
+    | '/honeymoon-trips'
+    | '/hotel-bookings'
     | '/packages'
+    | '/transportation'
+    | '/visa-facilitation'
     | '/packages/$slug'
     | '/packages/'
   fileRoutesById: FileRoutesById
@@ -112,9 +256,21 @@ export interface FileRouteTypes {
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AboutRoute: typeof AboutRoute
+  AirTicketsRoute: typeof AirTicketsRoute
+  CorporateToursRoute: typeof CorporateToursRoute
+  CruisesRoute: typeof CruisesRoute
+  CustomizedToursRoute: typeof CustomizedToursRoute
+  DestinationWeddingRoute: typeof DestinationWeddingRoute
   DestinationsRoute: typeof DestinationsRoute
+  EducationalToursRoute: typeof EducationalToursRoute
+  ExperiencesRoute: typeof ExperiencesRoute
   GalleryRoute: typeof GalleryRoute
+  GroupToursRoute: typeof GroupToursRoute
+  HoneymoonTripsRoute: typeof HoneymoonTripsRoute
+  HotelBookingsRoute: typeof HotelBookingsRoute
   PackagesRoute: typeof PackagesRouteWithChildren
+  TransportationRoute: typeof TransportationRoute
+  VisaFacilitationRoute: typeof VisaFacilitationRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -133,11 +289,60 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AboutRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/air-tickets': {
+      id: '/air-tickets'
+      path: '/air-tickets'
+      fullPath: '/air-tickets'
+      preLoaderRoute: typeof AirTicketsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/corporate-tours': {
+      id: '/corporate-tours'
+      path: '/corporate-tours'
+      fullPath: '/corporate-tours'
+      preLoaderRoute: typeof CorporateToursRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/cruises': {
+      id: '/cruises'
+      path: '/cruises'
+      fullPath: '/cruises'
+      preLoaderRoute: typeof CruisesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/customized-tours': {
+      id: '/customized-tours'
+      path: '/customized-tours'
+      fullPath: '/customized-tours'
+      preLoaderRoute: typeof CustomizedToursRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/destination-wedding': {
+      id: '/destination-wedding'
+      path: '/destination-wedding'
+      fullPath: '/destination-wedding'
+      preLoaderRoute: typeof DestinationWeddingRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/destinations': {
       id: '/destinations'
       path: '/destinations'
       fullPath: '/destinations'
       preLoaderRoute: typeof DestinationsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/educational-tours': {
+      id: '/educational-tours'
+      path: '/educational-tours'
+      fullPath: '/educational-tours'
+      preLoaderRoute: typeof EducationalToursRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/experiences': {
+      id: '/experiences'
+      path: '/experiences'
+      fullPath: '/experiences'
+      preLoaderRoute: typeof ExperiencesRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/gallery': {
@@ -147,11 +352,46 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof GalleryRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/group-tours': {
+      id: '/group-tours'
+      path: '/group-tours'
+      fullPath: '/group-tours'
+      preLoaderRoute: typeof GroupToursRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/honeymoon-trips': {
+      id: '/honeymoon-trips'
+      path: '/honeymoon-trips'
+      fullPath: '/honeymoon-trips'
+      preLoaderRoute: typeof HoneymoonTripsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/hotel-bookings': {
+      id: '/hotel-bookings'
+      path: '/hotel-bookings'
+      fullPath: '/hotel-bookings'
+      preLoaderRoute: typeof HotelBookingsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/packages': {
       id: '/packages'
       path: '/packages'
       fullPath: '/packages'
       preLoaderRoute: typeof PackagesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/transportation': {
+      id: '/transportation'
+      path: '/transportation'
+      fullPath: '/transportation'
+      preLoaderRoute: typeof TransportationRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/visa-facilitation': {
+      id: '/visa-facilitation'
+      path: '/visa-facilitation'
+      fullPath: '/visa-facilitation'
+      preLoaderRoute: typeof VisaFacilitationRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/packages/': {
@@ -188,9 +428,21 @@ const PackagesRouteWithChildren = PackagesRoute._addFileChildren(
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AboutRoute: AboutRoute,
+  AirTicketsRoute: AirTicketsRoute,
+  CorporateToursRoute: CorporateToursRoute,
+  CruisesRoute: CruisesRoute,
+  CustomizedToursRoute: CustomizedToursRoute,
+  DestinationWeddingRoute: DestinationWeddingRoute,
   DestinationsRoute: DestinationsRoute,
+  EducationalToursRoute: EducationalToursRoute,
+  ExperiencesRoute: ExperiencesRoute,
   GalleryRoute: GalleryRoute,
+  GroupToursRoute: GroupToursRoute,
+  HoneymoonTripsRoute: HoneymoonTripsRoute,
+  HotelBookingsRoute: HotelBookingsRoute,
   PackagesRoute: PackagesRouteWithChildren,
+  TransportationRoute: TransportationRoute,
+  VisaFacilitationRoute: VisaFacilitationRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

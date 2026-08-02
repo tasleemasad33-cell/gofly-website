@@ -18,7 +18,7 @@ export function Carousel({
   arrows?: boolean;
   dots?: boolean;
   slideClass?: string;
-  plugins?: any[];
+  plugins?: EmblaOptionsType["plugins"];
 }) {
   const [emblaRef, embla] = useEmblaCarousel({ loop: true, align: "start", ...options }, plugins);
   const [selected, setSelected] = useState(0);
@@ -54,14 +54,14 @@ export function Carousel({
           <button
             aria-label="Previous"
             onClick={() => embla?.scrollPrev()}
-            className="absolute -left-14 top-1/2 hidden size-11 -translate-y-1/2 place-items-center rounded-full border border-line bg-background text-title shadow-[var(--shadow-card)] transition-colors hover:bg-brand hover:text-primary-foreground 2xl:grid"
+            className="absolute -left-3 top-1/2 hidden size-10 -translate-y-1/2 place-items-center rounded-full border border-line bg-background text-title shadow-[var(--shadow-card)] transition-colors hover:border-brand hover:bg-brand hover:text-primary-foreground sm:grid sm:-left-4 2xl:-left-8"
           >
             <ChevronLeft className="size-5" />
           </button>
           <button
             aria-label="Next"
             onClick={() => embla?.scrollNext()}
-            className="absolute -right-14 top-1/2 hidden size-11 -translate-y-1/2 place-items-center rounded-full border border-line bg-background text-title shadow-[var(--shadow-card)] transition-colors hover:bg-brand hover:text-primary-foreground 2xl:grid"
+            className="absolute -right-3 top-1/2 hidden size-10 -translate-y-1/2 place-items-center rounded-full border border-line bg-background text-title shadow-[var(--shadow-card)] transition-colors hover:border-brand hover:bg-brand hover:text-primary-foreground sm:grid sm:-right-4 2xl:-right-8"
           >
             <ChevronRight className="size-5" />
           </button>
