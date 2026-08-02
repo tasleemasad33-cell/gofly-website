@@ -8,7 +8,7 @@ const contactItems = [
     value:
       "Office no 311, 3rd floor, Gulberg Empire Building, Executive Block, Civic Centre, Gulberg Greens, Islamabad",
   },
-  { icon: Phone, label: "Phone", value: "0092 322 9606256" },
+  { icon: Phone, label: "Phone", value: "92 322 9606256" },
   { icon: Mail, label: "Mail Us", value: "Info@travelnest.com" },
 ];
 

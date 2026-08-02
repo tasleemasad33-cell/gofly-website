@@ -15,9 +15,19 @@ function DestinationHero() {
       />
       <div className="absolute inset-0 bg-gradient-to-b from-black/50 via-black/40 to-black/60" />
       <div className="relative z-10 flex h-full flex-col items-center justify-center text-center">
-        <h1 className="font-display text-5xl font-bold text-white sm:text-6xl" style={{ color: "#fff" }}>Destinations</h1>
-        <p className="mt-4 flex items-center gap-2 text-sm font-medium text-white" style={{ color: "#fff" }}>
-          <a href="/" className="hover:underline" style={{ color: "#fff" }}>Home</a>
+        <h1
+          className="font-display text-5xl font-bold text-white sm:text-6xl"
+          style={{ color: "#fff" }}
+        >
+          Destinations
+        </h1>
+        <p
+          className="mt-4 flex items-center gap-2 text-sm font-medium text-white"
+          style={{ color: "#fff" }}
+        >
+          <a href="/" className="hover:underline" style={{ color: "#fff" }}>
+            Home
+          </a>
           <span style={{ color: "#fff" }}>•</span>
           <span style={{ color: "#fff" }}>Destinations</span>
         </p>
@@ -26,10 +36,23 @@ function DestinationHero() {
   );
 }
 
-function DestinationCard({ img, title, tours, index }: { img: string; title: string; tours: string; index: number }) {
+function DestinationCard({
+  img,
+  title,
+  tours,
+  index,
+}: {
+  img: string;
+  title: string;
+  tours: string;
+  index: number;
+}) {
   return (
     <Reveal delay={index * 100}>
-      <a href="#" className="group relative block h-[200px] overflow-hidden rounded-2xl shadow-md transition-all duration-500 hover:-translate-y-1 hover:shadow-xl sm:h-[260px]">
+      <a
+        href="#"
+        className="group relative block h-[200px] overflow-hidden rounded-2xl shadow-md transition-all duration-500 hover:-translate-y-1 hover:shadow-xl sm:h-[260px]"
+      >
         <img
           src={img}
           alt={title}
@@ -47,16 +70,18 @@ function DestinationCard({ img, title, tours, index }: { img: string; title: str
 }
 
 function TravelPackageSlider() {
-  const [emblaRef] = useEmblaCarousel(
-    { loop: true, align: "start", slidesToScroll: 1 },
-    [Autoplay({ delay: 2000, stopOnInteraction: false, stopOnMouseEnter: true, playOnInit: true })]
-  );
+  const [emblaRef] = useEmblaCarousel({ loop: true, align: "start", slidesToScroll: 1 }, [
+    Autoplay({ delay: 2000, stopOnInteraction: false, stopOnMouseEnter: true, playOnInit: true }),
+  ]);
 
   return (
     <div className="overflow-hidden" ref={emblaRef}>
       <div className="-ml-6 flex">
         {destinationPackages.map((pkg) => (
-          <div key={pkg.title} className="min-w-0 flex-[0_0_100%] pl-6 sm:flex-[0_0_50%] lg:flex-[0_0_33.333%]">
+          <div
+            key={pkg.title}
+            className="min-w-0 flex-[0_0_100%] pl-6 sm:flex-[0_0_50%] lg:flex-[0_0_33.333%]"
+          >
             <PackageCard pkg={pkg} />
           </div>
         ))}

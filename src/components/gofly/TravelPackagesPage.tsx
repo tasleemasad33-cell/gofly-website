@@ -2,7 +2,6 @@ import { useEffect, useMemo, useState } from "react";
 import useEmblaCarousel from "embla-carousel-react";
 import {
   ArrowRight,
-  ChevronDown,
   ChevronLeft,
   ChevronRight,
   Clock,
@@ -14,6 +13,13 @@ import {
 import { allPackages, getPackageDetail, IMG, type Pkg } from "@/lib/gofly-data";
 import { SectionTitle } from "./SectionTitle";
 import { Reveal } from "./Reveal";
+import {
+  FilterCheckbox,
+  FilterGroup,
+  InquiryStrip,
+  PackageRowCard,
+  parsePrice,
+} from "./TourListing";
 
 /* ─── Hero ─── */
 function PackagesHero() {
@@ -172,217 +178,6 @@ function FeaturedPackage() {
                   Book Now <ArrowRight className="size-4" />
                 </a>
               </div>
-            </div>
-          </div>
-        </Reveal>
-      </div>
-    </section>
-  );
-}
-
-/* ─── Sidebar filter group (accordion) ─── */
-function FilterGroup({
-  title,
-  open,
-  onToggle,
-  children,
-}: {
-  title: string;
-  open: boolean;
-  onToggle: () => void;
-  children: React.ReactNode;
-}) {
-  return (
-    <div className="rounded-2xl border border-line bg-card">
-      <button
-        onClick={onToggle}
-        className="flex w-full items-center justify-between px-5 py-4 text-left"
-      >
-        <span className="font-display text-base font-semibold text-title">{title}</span>
-        <ChevronDown
-          className={`size-4 text-body transition-transform duration-300 ${open ? "rotate-180" : ""}`}
-        />
-      </button>
-      {open && <div className="px-5 pb-5">{children}</div>}
-    </div>
-  );
-}
-
-function FilterCheckbox({
-  label,
-  count,
-  checked,
-  onChange,
-}: {
-  label: string;
-  count?: number;
-  checked: boolean;
-  onChange: () => void;
-}) {
-  return (
-    <label className="flex cursor-pointer items-center justify-between py-1.5 text-sm text-body">
-      <span className="flex items-center gap-2.5">
-        <input
-          type="checkbox"
-          checked={checked}
-          onChange={onChange}
-          className="size-4 accent-[oklch(0.27_0.05_260)]"
-        />
-        {label}
-      </span>
-      {count !== undefined && (
-        <span className="rounded-full bg-soft px-2 py-0.5 text-xs font-medium text-title">
-          {count}
-        </span>
-      )}
-    </label>
-  );
-}
-
-/* ─── Package row card (list style) ─── */
-function PackageRowCard({ pkg, index }: { pkg: Pkg; index: number }) {
-  const [open, setOpen] = useState<string | null>(null);
-  return (
-    <Reveal delay={index * 80}>
-      <article className="group overflow-hidden rounded-2xl border border-line bg-card transition-all duration-500 hover:-translate-y-1 hover:shadow-[var(--shadow-float)]">
-        <div className="grid md:grid-cols-[220px_1fr]">
-          <a
-            href={`/packages/${pkg.slug}`}
-            className="relative block h-[200px] overflow-hidden md:h-full"
-          >
-            <img
-              src={pkg.images[0]}
-              alt={pkg.title}
-              loading="lazy"
-              className="size-full object-cover transition-transform duration-700 group-hover:scale-110"
-            />
-            {pkg.badge && (
-              <span className="absolute left-3 top-3 z-10 rounded-full bg-brand2 px-3 py-1 font-display text-[11px] font-medium text-white">
-                {pkg.badge}
-              </span>
-            )}
-          </a>
-
-          <div className="flex flex-col p-5">
-            <div className="flex flex-wrap items-center gap-3">
-              <span className="inline-flex items-center gap-1 text-xs font-medium text-body">
-                <Star className="size-3.5 fill-brand2 text-brand2" />
-                {pkg.rating ?? 4.5} ({pkg.reviews ?? 0} reviews)
-              </span>
-              <span className="inline-flex items-center gap-1.5 text-xs font-medium text-body">
-                <MapPin className="size-3.5 text-brand" /> {pkg.location}
-              </span>
-              {pkg.duration && (
-                <span className="inline-flex items-center gap-1.5 text-xs font-medium text-body">
-                  <Clock className="size-3.5 text-brand" /> {pkg.duration}
-                </span>
-              )}
-            </div>
-
-            <h3 className="mt-2 font-display text-lg font-semibold text-title transition-colors hover:text-brand sm:text-xl">
-              <a href={`/packages/${pkg.slug}`}>{pkg.title}</a>
-            </h3>
-
-            <p className="mt-2 line-clamp-2 text-sm leading-relaxed text-body">
-              {getPackageDetail(pkg.slug)?.description ??
-                "A curated travel package designed for an unforgettable experience."}
-            </p>
-
-            <div className="mt-4 flex flex-wrap items-center gap-3">
-              {["No Booking Fee", "Best Price Ever"].map((t) => (
-                <span
-                  key={t}
-                  className="rounded-full border border-line px-2.5 py-0.5 text-[11px] font-medium text-body"
-                >
-                  {t}
-                </span>
-              ))}
-            </div>
-
-            <div className="mt-auto flex flex-wrap items-center justify-between gap-4 border-t border-line pt-4">
-              <a
-                href={`/packages/${pkg.slug}`}
-                className="btn-primary px-5 py-2.5 text-xs sm:text-sm"
-              >
-                Book Now
-              </a>
-              <div className="text-right">
-                <p className="font-display text-[10px] font-medium text-body sm:text-xs">
-                  Per Person
-                </p>
-                <p className="font-display text-lg font-semibold text-title sm:text-xl">
-                  {pkg.oldPrice && (
-                    <span className="mr-1 text-xs font-normal text-body line-through sm:text-sm">
-                      {pkg.oldPrice}
-                    </span>
-                  )}
-                  {pkg.price}
-                </p>
-              </div>
-            </div>
-
-            <div className="mt-3 flex items-center gap-4 border-t border-line pt-3">
-              <button
-                onClick={() => setOpen(open === "Experience" ? null : "Experience")}
-                className="inline-flex items-center gap-1.5 font-display text-xs font-medium text-title transition-colors hover:text-brand sm:text-sm"
-              >
-                <span className="grid size-5 place-items-center rounded-full border border-line text-[10px] text-brand">
-                  i
-                </span>
-                Experience
-              </button>
-              <button
-                onClick={() => setOpen(open === "Inclusion" ? null : "Inclusion")}
-                className="inline-flex items-center gap-1.5 font-display text-xs font-medium text-title transition-colors hover:text-brand sm:text-sm"
-              >
-                <span className="grid size-5 place-items-center rounded-full border border-line text-[10px] text-brand">
-                  i
-                </span>
-                Inclusion
-              </button>
-              {open && (
-                <span className="hidden text-xs text-body sm:inline">
-                  {open === "Experience"
-                    ? "Including Activities Scuba Diving, Zip-lining, Rafting & Rock Climbing with this premium package."
-                    : "This package covers Accommodation, Daily Meals, Entry Fees & Local Transfers to ensure a worry-free trip."}
-                </span>
-              )}
-            </div>
-          </div>
-        </div>
-      </article>
-    </Reveal>
-  );
-}
-
-/* ─── Inquiry strip ─── */
-function InquiryStrip() {
-  return (
-    <section className="bg-soft py-16">
-      <div className="container-gofly">
-        <Reveal>
-          <div className="text-center">
-            <h2 className="font-display text-2xl font-bold text-title sm:text-3xl">
-              To More Inquiry
-            </h2>
-            <p className="mt-2 text-sm text-body">Don&apos;t hesitate to call Travel Nest.</p>
-            <div className="mt-8 grid gap-6 sm:grid-cols-3">
-              {[
-                { icon: "💬", label: "WhatsApp", value: "+91 345 533 865" },
-                { icon: "✉️", label: "Mail Us", value: "info@travelnest.com" },
-                { icon: "📞", label: "Call Us", value: "+91 456 453 345" },
-              ].map((c) => (
-                <div
-                  key={c.label}
-                  className="rounded-2xl border border-line bg-card p-6 text-center"
-                >
-                  <span className="mx-auto grid size-12 place-items-center rounded-full bg-brand/10 text-xl">
-                    {c.icon}
-                  </span>
-                  <h5 className="mt-3 font-display text-sm font-semibold text-title">{c.label}</h5>
-                  <p className="mt-1 text-sm font-medium text-brand">{c.value}</p>
-                </div>
-              ))}
             </div>
           </div>
         </Reveal>
@@ -665,8 +460,4 @@ export function TravelPackagesPage() {
       <InquiryStrip />
     </>
   );
-}
-
-function parsePrice(price: string): number {
-  return parseInt(price.replace(/[^0-9]/g, ""), 10) || 0;
 }

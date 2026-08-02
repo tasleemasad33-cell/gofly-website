@@ -18,6 +18,8 @@ export const heroSlides = [
   },
 ];
 
+export type PkgCategory = "group" | "honeymoon" | "corporate" | "customized" | "educational";
+
 export type Pkg = {
   images: string[];
   badge?: string;
@@ -29,6 +31,7 @@ export type Pkg = {
   slug: string;
   rating?: number;
   reviews?: number;
+  category?: PkgCategory;
 };
 
 export const popularPackages: Pkg[] = [
@@ -465,12 +468,591 @@ export const destinationPackages: Pkg[] = [
   },
 ];
 
+export const groupTourPackages: Pkg[] = [
+  {
+    images: [
+      `${IMG}/home1/tour-package-img11.jpg`,
+      `${IMG}/home1/tour-package-img10.jpg`,
+      `${IMG}/home2/destination-img1.jpg`,
+    ],
+    badge: "Group Tour",
+    title: "Baku, Azerbaijan",
+    location: "Azerbaijan",
+    duration: "05 Days / 04 Nights",
+    price: "PKR 235,000",
+    slug: "baku-azerbaijan-group-tour",
+    category: "group",
+    rating: 4.6,
+    reviews: 87,
+  },
+  {
+    images: [
+      `${IMG}/home2/tour-package-img2.jpg`,
+      `${IMG}/home1/tour-package-img8.jpg`,
+      `${IMG}/home1/tour-package-img1.jpg`,
+    ],
+    badge: "Group Tour",
+    title: "Dubai",
+    location: "United Arab Emirates",
+    duration: "05 Days / 04 Nights",
+    price: "PKR 255,000",
+    slug: "dubai-group-tour",
+    category: "group",
+    rating: 4.7,
+    reviews: 121,
+  },
+  {
+    images: [
+      `${IMG}/home1/tour-package-img2.jpg`,
+      `${IMG}/home1/tour-package-img5.jpg`,
+      `${IMG}/home1/tour-package-img10.jpg`,
+    ],
+    badge: "Group Tour",
+    title: "Bali, Indonesia",
+    location: "Indonesia",
+    duration: "06 Days / 05 Nights",
+    price: "PKR 395,000",
+    slug: "bali-indonesia-group-tour",
+    category: "group",
+    rating: 4.8,
+    reviews: 96,
+  },
+  {
+    images: [
+      `${IMG}/home1/tour-package-img1.jpg`,
+      `${IMG}/home1/tour-package-img3.jpg`,
+      `${IMG}/home2/destination-img1.jpg`,
+    ],
+    badge: "Group Tour",
+    title: "Malaysia (Kuala Lumpur)",
+    location: "Malaysia",
+    duration: "06 Days / 05 Nights",
+    price: "PKR 295,000",
+    slug: "kuala-lumpur-malaysia-group-tour",
+    category: "group",
+    rating: 4.5,
+    reviews: 74,
+  },
+  {
+    images: [
+      `${IMG}/home1/tour-package-img6.jpg`,
+      `${IMG}/home1/tour-package-img9.jpg`,
+      `${IMG}/home1/tour-package-img12.jpg`,
+    ],
+    badge: "Group Tour",
+    title: "Thailand (Bangkok, Phuket & Krabi)",
+    location: "Thailand",
+    duration: "09 Days / 08 Nights",
+    price: "PKR 395,000",
+    slug: "thailand-bangkok-phuket-krabi-group-tour",
+    category: "group",
+    rating: 4.6,
+    reviews: 89,
+  },
+  {
+    images: [
+      `${IMG}/home2/tour-package-img1.jpg`,
+      `${IMG}/home1/tour-package-img2.jpg`,
+      `${IMG}/home1/tour-package-img5.jpg`,
+    ],
+    badge: "Group Tour",
+    title: "Bali & Malaysia",
+    location: "Indonesia & Malaysia",
+    duration: "08 Days / 07 Nights",
+    price: "PKR 449,000",
+    slug: "bali-malaysia-group-tour",
+    category: "group",
+    rating: 4.7,
+    reviews: 68,
+  },
+  {
+    images: [
+      `${IMG}/home1/tour-package-img4.jpg`,
+      `${IMG}/home1/tour-package-img6.jpg`,
+      `${IMG}/home1/tour-package-img9.jpg`,
+    ],
+    badge: "Group Tour",
+    title: "Thailand & Malaysia",
+    location: "Thailand & Malaysia",
+    duration: "08 Days / 07 Nights",
+    price: "PKR 385,000",
+    slug: "thailand-malaysia-group-tour",
+    category: "group",
+    rating: 4.6,
+    reviews: 71,
+  },
+  {
+    images: [
+      `${IMG}/home1/tour-package-img12.jpg`,
+      `${IMG}/home1/tour-package-img4.jpg`,
+      `${IMG}/home1/tour-package-img6.jpg`,
+    ],
+    badge: "Group Tour",
+    title: "Sri Lanka, Thailand & Malaysia",
+    location: "Sri Lanka, Thailand & Malaysia",
+    duration: "09 Days / 08 Nights",
+    price: "PKR 385,000",
+    slug: "sri-lanka-thailand-malaysia-group-tour",
+    category: "group",
+    rating: 4.5,
+    reviews: 63,
+  },
+  {
+    images: [
+      `${IMG}/home1/tour-package-img13.jpg`,
+      `${IMG}/home1/tour-package-img22.jpg`,
+      `${IMG}/home1/destination-img5.jpg`,
+    ],
+    badge: "Group Tour",
+    title: "Skardu, Pakistan",
+    location: "Pakistan",
+    duration: "04 Days / 03 Nights",
+    price: "PKR 115,000",
+    slug: "skardu-pakistan-group-tour",
+    category: "group",
+    rating: 4.9,
+    reviews: 132,
+  },
+];
+
+export const honeymoonPackages: Pkg[] = [
+  {
+    images: [
+      `${IMG}/home1/tour-package-img2.jpg`,
+      `${IMG}/home1/tour-package-img5.jpg`,
+      `${IMG}/home1/tour-package-img10.jpg`,
+    ],
+    badge: "Honeymoon",
+    title: "Bali Honeymoon",
+    location: "Indonesia",
+    duration: "06 Days / 05 Nights",
+    price: "PKR 350,000",
+    slug: "bali-honeymoon",
+    category: "honeymoon",
+    rating: 4.8,
+    reviews: 102,
+  },
+  {
+    images: [
+      `${IMG}/home2/tour-package-img2.jpg`,
+      `${IMG}/home1/tour-package-img8.jpg`,
+      `${IMG}/home1/tour-package-img1.jpg`,
+    ],
+    badge: "Honeymoon",
+    title: "Dubai Honeymoon",
+    location: "United Arab Emirates",
+    duration: "05 Days / 04 Nights",
+    price: "PKR 325,000",
+    slug: "dubai-honeymoon",
+    category: "honeymoon",
+    rating: 4.7,
+    reviews: 84,
+  },
+  {
+    images: [
+      `${IMG}/home1/tour-package-img10.jpg`,
+      `${IMG}/home1/tour-package-img11.jpg`,
+      `${IMG}/home1/tour-package-img21.jpg`,
+    ],
+    badge: "Honeymoon",
+    title: "Maldives Honeymoon",
+    location: "Maldives",
+    duration: "05 Days / 04 Nights",
+    price: "PKR 550,000",
+    slug: "maldives-honeymoon",
+    category: "honeymoon",
+    rating: 4.9,
+    reviews: 156,
+  },
+  {
+    images: [
+      `${IMG}/home1/tour-package-img6.jpg`,
+      `${IMG}/home1/tour-package-img9.jpg`,
+      `${IMG}/home1/tour-package-img12.jpg`,
+    ],
+    badge: "Honeymoon",
+    title: "Thailand Honeymoon",
+    location: "Thailand",
+    duration: "07 Days / 06 Nights",
+    price: "PKR 385,000",
+    slug: "thailand-honeymoon",
+    category: "honeymoon",
+    rating: 4.6,
+    reviews: 77,
+  },
+  {
+    images: [
+      `${IMG}/home2/destination-img2.jpg`,
+      `${IMG}/home1/tour-package-img14.jpg`,
+      `${IMG}/home1/tour-package-img15.jpg`,
+    ],
+    badge: "Honeymoon",
+    title: "Turkey Honeymoon",
+    location: "Turkey",
+    duration: "07 Days / 06 Nights",
+    price: "PKR 420,000",
+    slug: "turkey-honeymoon",
+    category: "honeymoon",
+    rating: 4.7,
+    reviews: 91,
+  },
+  {
+    images: [
+      `${IMG}/home1/tour-package-img11.jpg`,
+      `${IMG}/home1/tour-package-img10.jpg`,
+      `${IMG}/home2/destination-img1.jpg`,
+    ],
+    badge: "Honeymoon",
+    title: "Baku Honeymoon",
+    location: "Azerbaijan",
+    duration: "05 Days / 04 Nights",
+    price: "PKR 295,000",
+    slug: "baku-honeymoon",
+    category: "honeymoon",
+    rating: 4.5,
+    reviews: 58,
+  },
+  {
+    images: [
+      `${IMG}/home1/tour-package-img1.jpg`,
+      `${IMG}/home1/tour-package-img3.jpg`,
+      `${IMG}/home2/destination-img3.jpg`,
+    ],
+    badge: "Honeymoon",
+    title: "Malaysia Honeymoon",
+    location: "Malaysia",
+    duration: "06 Days / 05 Nights",
+    price: "PKR 315,000",
+    slug: "malaysia-honeymoon",
+    category: "honeymoon",
+    rating: 4.5,
+    reviews: 66,
+  },
+  {
+    images: [
+      `${IMG}/home1/tour-package-img4.jpg`,
+      `${IMG}/home1/tour-package-img12.jpg`,
+      `${IMG}/home1/tour-package-img19.jpg`,
+    ],
+    badge: "Honeymoon",
+    title: "Sri Lanka Honeymoon",
+    location: "Sri Lanka",
+    duration: "06 Days / 05 Nights",
+    price: "PKR 305,000",
+    slug: "sri-lanka-honeymoon",
+    category: "honeymoon",
+    rating: 4.6,
+    reviews: 59,
+  },
+];
+
+export const corporatePackages: Pkg[] = [
+  {
+    images: [
+      `${IMG}/home2/tour-package-img2.jpg`,
+      `${IMG}/home1/tour-package-img8.jpg`,
+      `${IMG}/home1/tour-package-img1.jpg`,
+    ],
+    badge: "Corporate",
+    title: "Dubai Corporate Retreat",
+    location: "United Arab Emirates",
+    duration: "05 Days / 04 Nights",
+    price: "PKR 285,000",
+    slug: "dubai-corporate-tour",
+    category: "corporate",
+    rating: 4.7,
+    reviews: 48,
+  },
+  {
+    images: [
+      `${IMG}/home1/tour-package-img11.jpg`,
+      `${IMG}/home1/tour-package-img10.jpg`,
+      `${IMG}/home2/destination-img1.jpg`,
+    ],
+    badge: "Corporate",
+    title: "Baku Corporate Retreat",
+    location: "Azerbaijan",
+    duration: "05 Days / 04 Nights",
+    price: "PKR 265,000",
+    slug: "baku-corporate-tour",
+    category: "corporate",
+    rating: 4.5,
+    reviews: 39,
+  },
+  {
+    images: [
+      `${IMG}/home1/tour-package-img2.jpg`,
+      `${IMG}/home1/tour-package-img5.jpg`,
+      `${IMG}/home1/tour-package-img10.jpg`,
+    ],
+    badge: "Corporate",
+    title: "Bali Corporate Retreat",
+    location: "Indonesia",
+    duration: "06 Days / 05 Nights",
+    price: "PKR 395,000",
+    slug: "bali-corporate-tour",
+    category: "corporate",
+    rating: 4.6,
+    reviews: 44,
+  },
+  {
+    images: [
+      `${IMG}/home1/tour-package-img1.jpg`,
+      `${IMG}/home1/tour-package-img3.jpg`,
+      `${IMG}/home2/destination-img3.jpg`,
+    ],
+    badge: "Corporate",
+    title: "Malaysia Corporate Tour",
+    location: "Malaysia",
+    duration: "06 Days / 05 Nights",
+    price: "PKR 305,000",
+    slug: "malaysia-corporate-tour",
+    category: "corporate",
+    rating: 4.5,
+    reviews: 36,
+  },
+  {
+    images: [
+      `${IMG}/home1/tour-package-img6.jpg`,
+      `${IMG}/home1/tour-package-img9.jpg`,
+      `${IMG}/home1/tour-package-img12.jpg`,
+    ],
+    badge: "Corporate",
+    title: "Thailand Corporate Tour",
+    location: "Thailand",
+    duration: "07 Days / 06 Nights",
+    price: "PKR 325,000",
+    slug: "thailand-corporate-tour",
+    category: "corporate",
+    rating: 4.6,
+    reviews: 41,
+  },
+  {
+    images: [
+      `${IMG}/home2/destination-img2.jpg`,
+      `${IMG}/home1/tour-package-img14.jpg`,
+      `${IMG}/home1/tour-package-img15.jpg`,
+    ],
+    badge: "Corporate",
+    title: "Turkey Corporate Retreat",
+    location: "Turkey",
+    duration: "07 Days / 06 Nights",
+    price: "PKR 385,000",
+    slug: "turkey-corporate-tour",
+    category: "corporate",
+    rating: 4.7,
+    reviews: 52,
+  },
+  {
+    images: [
+      `${IMG}/home1/tour-package-img19.jpg`,
+      `${IMG}/home1/tour-package-img20.jpg`,
+      `${IMG}/home2/destination-img5.jpg`,
+    ],
+    badge: "Corporate",
+    title: "Europe Corporate Retreat",
+    location: "Europe",
+    duration: "09 Days / 08 Nights",
+    price: "PKR 795,000",
+    slug: "europe-corporate-tour",
+    category: "corporate",
+    rating: 4.8,
+    reviews: 60,
+  },
+];
+
+export const customizedPackages: Pkg[] = [
+  "Thailand",
+  "Malaysia",
+  "Azerbaijan",
+  "Turkey",
+  "Pakistan",
+  "Indonesia",
+  "Sri Lanka",
+  "Maldives",
+  "China",
+  "Japan",
+  "Qatar",
+  "Bahrain",
+  "Uzbekistan",
+  "Egypt",
+  "Singapore",
+  "Saudi Arabia",
+  "Dubai",
+  "Cambodia",
+  "Philippines",
+  "Vietnam",
+].map((name, i): Pkg => {
+  const imgs = [
+    `${IMG}/home1/tour-package-img${[6, 1, 11, 14, 13, 2, 4, 10, 7, 7, 8, 9, 15, 12, 3, 16, 8, 5, 17, 18][i]}.jpg`,
+    `${IMG}/home1/tour-package-img${[9, 3, 10, 15, 22, 5, 12, 21, 17, 18, 1, 14, 16, 6, 1, 18, 1, 9, 19, 9][i]}.jpg`,
+    `${IMG}/home2/destination-img${(i % 7) + 1}.jpg`,
+  ];
+  return {
+    images: imgs,
+    badge: "Customized",
+    title: `${name} Customized Tour`,
+    location: name,
+    duration: "06 Days / 05 Nights",
+    price: `PKR ${[265, 245, 235, 385, 145, 395, 255, 495, 465, 625, 285, 275, 325, 425, 335, 355, 295, 315, 375, 365][i]},000`,
+    slug: `customized-tour-${name.toLowerCase().replace(/[^a-z0-9]+/g, "-")}`,
+    category: "customized",
+    rating: 4.5,
+    reviews: 30 + i,
+  };
+});
+
+export const educationalPackages: Pkg[] = [
+  {
+    images: [
+      `${IMG}/home2/destination-img5.jpg`,
+      `${IMG}/home1/tour-package-img16.jpg`,
+      `${IMG}/home1/tour-package-img17.jpg`,
+    ],
+    badge: "Educational",
+    title: "Spain Educational Tour",
+    location: "Spain",
+    duration: "07 Days / 06 Nights",
+    price: "PKR 485,000",
+    slug: "educational-tour-spain",
+    category: "educational",
+    rating: 4.7,
+    reviews: 55,
+  },
+  {
+    images: [
+      `${IMG}/home1/tour-package-img6.jpg`,
+      `${IMG}/home1/tour-package-img9.jpg`,
+      `${IMG}/home1/tour-package-img12.jpg`,
+    ],
+    badge: "Educational",
+    title: "Thailand Educational Tour",
+    location: "Thailand",
+    duration: "06 Days / 05 Nights",
+    price: "PKR 295,000",
+    slug: "educational-tour-thailand",
+    category: "educational",
+    rating: 4.5,
+    reviews: 47,
+  },
+  {
+    images: [
+      `${IMG}/home1/tour-package-img16.jpg`,
+      `${IMG}/home1/tour-package-img17.jpg`,
+      `${IMG}/home1/tour-package-img18.jpg`,
+    ],
+    badge: "Educational",
+    title: "Australia Educational Tour",
+    location: "Australia",
+    duration: "09 Days / 08 Nights",
+    price: "PKR 645,000",
+    slug: "educational-tour-australia",
+    category: "educational",
+    rating: 4.8,
+    reviews: 62,
+  },
+  {
+    images: [
+      `${IMG}/home2/destination-img2.jpg`,
+      `${IMG}/home1/tour-package-img4.jpg`,
+      `${IMG}/home1/tour-package-img21.jpg`,
+    ],
+    badge: "Educational",
+    title: "Italy Educational Tour",
+    location: "Italy",
+    duration: "07 Days / 06 Nights",
+    price: "PKR 525,000",
+    slug: "educational-tour-italy",
+    category: "educational",
+    rating: 4.6,
+    reviews: 44,
+  },
+  {
+    images: [
+      `${IMG}/home1/tour-package-img12.jpg`,
+      `${IMG}/home1/tour-package-img6.jpg`,
+      `${IMG}/home1/tour-package-img10.jpg`,
+    ],
+    badge: "Educational",
+    title: "Egypt Educational Tour",
+    location: "Egypt",
+    duration: "06 Days / 05 Nights",
+    price: "PKR 385,000",
+    slug: "educational-tour-egypt",
+    category: "educational",
+    rating: 4.4,
+    reviews: 38,
+  },
+  {
+    images: [
+      `${IMG}/home1/tour-package-img17.jpg`,
+      `${IMG}/home1/tour-package-img18.jpg`,
+      `${IMG}/home1/tour-package-img20.jpg`,
+    ],
+    badge: "Educational",
+    title: "England Educational Tour",
+    location: "United Kingdom",
+    duration: "07 Days / 06 Nights",
+    price: "PKR 585,000",
+    slug: "educational-tour-england",
+    category: "educational",
+    rating: 4.6,
+    reviews: 51,
+  },
+  {
+    images: [
+      `${IMG}/home1/tour-package-img18.jpg`,
+      `${IMG}/home1/tour-package-img19.jpg`,
+      `${IMG}/home1/tour-package-img20.jpg`,
+    ],
+    badge: "Educational",
+    title: "Sweden Educational Tour",
+    location: "Sweden",
+    duration: "07 Days / 06 Nights",
+    price: "PKR 595,000",
+    slug: "educational-tour-sweden",
+    category: "educational",
+    rating: 4.7,
+    reviews: 40,
+  },
+  {
+    images: [
+      `${IMG}/home1/tour-package-img22.jpg`,
+      `${IMG}/home2/destination-img7.jpg`,
+      `${IMG}/home1/tour-package-img21.jpg`,
+    ],
+    badge: "Educational",
+    title: "Norway Educational Tour",
+    location: "Norway",
+    duration: "07 Days / 06 Nights",
+    price: "PKR 615,000",
+    slug: "educational-tour-norway",
+    category: "educational",
+    rating: 4.8,
+    reviews: 57,
+  },
+];
+
+export const tourPackages: Pkg[] = [
+  ...groupTourPackages,
+  ...honeymoonPackages,
+  ...corporatePackages,
+  ...customizedPackages,
+  ...educationalPackages,
+];
+
 export const allPackages: Pkg[] = [
   ...popularPackages,
   ...oneDayTrips,
   ...lastMinuteDeals,
   ...destinationPackages.filter(
     (p) => ![...popularPackages, ...oneDayTrips, ...lastMinuteDeals].some((x) => x.slug === p.slug),
+  ),
+  ...tourPackages.filter(
+    (p) =>
+      ![...popularPackages, ...oneDayTrips, ...lastMinuteDeals, ...destinationPackages].some(
+        (x) => x.slug === p.slug,
+      ),
   ),
 ];
 
@@ -2368,6 +2950,116 @@ export function getPackageBySlug(slug: string): Pkg | undefined {
   return allPackages.find((p) => p.slug === slug);
 }
 
+const TOUR_TYPE_BY_CATEGORY: Record<string, string> = {
+  group: "Group Tour",
+  honeymoon: "Honeymoon Tour",
+  corporate: "Corporate Tour",
+  customized: "Customized Tour",
+  educational: "Educational Tour",
+};
+
+function parseDays(duration?: string): number {
+  if (!duration) return 5;
+  const m = duration.match(/(\d+)\s*Days?/i);
+  const n = m ? Number(m[1]) : 5;
+  return Math.min(Math.max(n, 1), 9);
+}
+
+function buildPackageDetail(pkg: Pkg): PackageDetail {
+  const days = parseDays(pkg.duration);
+  const type = TOUR_TYPE_BY_CATEGORY[pkg.category ?? "group"] ?? "Group Tour";
+  const dest = pkg.location.split(",").map((s) => s.trim());
+  const itinerary: PackageDetail["itinerary"] = Array.from({ length: days }, (_, i) => ({
+    day: `Day-0${i + 1}`,
+    title:
+      i === 0
+        ? `Arrival & Welcome to ${dest[0]}`
+        : i === days - 1
+          ? "Leisure & Departure"
+          : `Explore ${dest[0]} Highlights`,
+    desc:
+      i === 0
+        ? `Arrive in ${dest[0]}, complete your transfer and check-in, then enjoy a welcome orientation and first evening at leisure.`
+        : i === days - 1
+          ? "A relaxed morning before your departure transfer. Optional shopping and souvenir time before your flight home."
+          : `A full day of guided sightseeing across the top attractions of ${dest[0]}, with photo stops, local cuisine and free time to explore.`,
+    transport: "Private AC Vehicle",
+    activities:
+      i === 0
+        ? "Arrival transfer, Welcome orientation"
+        : i === days - 1
+          ? "Leisure, Departure transfer"
+          : "Guided sightseeing, Photo stops",
+    meals: "Breakfast, Dinner",
+    accommodation: "4 Star Hotel",
+  }));
+
+  return {
+    slug: pkg.slug,
+    rating: pkg.rating ?? 4.5,
+    reviews: pkg.reviews ?? 40,
+    destinations: dest,
+    description: `${pkg.title} — a hand-crafted ${type.toLowerCase()} package from Travel Nest. Enjoy ${pkg.duration ?? "a memorable journey"} of curated sightseeing, comfortable stays, seamless transfers and 24/7 support so you can focus on making unforgettable memories in ${pkg.location}.`,
+    tourType: type,
+    groupSize: "02-15",
+    info: [
+      { label: "Accommodation", value: "4 Star Hotel" },
+      { label: "Meals", value: "Daily Breakfast" },
+      { label: "Transportation", value: "Private AC Vehicle" },
+      { label: "Group Size", value: "02-15" },
+      { label: "Language", value: "English" },
+      { label: "Age Range", value: "All Ages" },
+      { label: "Season", value: "All Season" },
+      { label: "Category", value: type },
+    ],
+    locations: Array.from({ length: Math.min(3, dest.length) }, (_, i) => ({
+      img: pkg.images[i % pkg.images.length],
+      title: dest[i],
+      days: i === 0 ? "01 Days" : "02 Days",
+    })),
+    highlights: [
+      `Curated itinerary covering the best of ${pkg.location}.`,
+      "4 star accommodation with daily breakfast.",
+      "Comfortable private transfers throughout.",
+      "Guided sightseeing at every major highlight.",
+      "Visa facilitation and 24/7 Travel Nest support.",
+    ],
+    itinerary,
+    includes: [
+      "Return air tickets.",
+      "4 star hotel accommodation.",
+      "Daily breakfast.",
+      "Tours & transfers.",
+      "Visa facilitation.",
+      "24/7 support.",
+    ],
+    excludes: [
+      "Travel insurance.",
+      "Personal expenses (shopping, tips).",
+      "Lunches & dinners unless stated.",
+      "Optional activities not listed.",
+    ],
+    additionalInfo: [
+      "Free cancellation – up to 5 days before departure.",
+      "Group discounts available for 6+ travellers.",
+    ],
+    faqs: [
+      {
+        q: `Is the ${pkg.title} package customizable?`,
+        a: "Yes — our team can tailor dates, hotels and activities to your preferences.",
+      },
+      {
+        q: "How do I confirm my booking?",
+        a: "Contact Travel Nest on WhatsApp or phone and our team will guide you through the process.",
+      },
+    ],
+  };
+}
+
 export function getPackageDetail(slug: string): PackageDetail | undefined {
-  return packageDetails[slug];
+  const detail = packageDetails[slug];
+  if (detail) return detail;
+  const pkg = getPackageBySlug(slug);
+  if (!pkg) return undefined;
+  return buildPackageDetail(pkg);
 }

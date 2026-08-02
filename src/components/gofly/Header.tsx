@@ -115,7 +115,7 @@ export function Header() {
               </span>
               <div className="leading-tight">
                 <span className="text-xs text-body">Need Help?</span>
-                <p className="font-display text-sm font-bold text-title">0092 322 9606256</p>
+                <p className="font-display text-sm font-bold text-title">92 322 9606256</p>
               </div>
             </div>
 

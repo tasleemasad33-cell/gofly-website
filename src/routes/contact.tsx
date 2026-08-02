@@ -5,7 +5,7 @@ import { ContactPage } from "@/components/gofly/ContactPage";
 
 const title = "Contact Us — Travel Nest";
 const description =
-  "Get in touch with Travel Nest — office at Gulberg Greens, Islamabad. Call +92 322 9606256 or email Info@travelnest.com for tours, hotels, visas and more.";
+  "Get in touch with Travel Nest — office at Gulberg Greens, Islamabad. Call 92 322 9606256 or email Info@travelnest.com for tours, hotels, visas and more.";
 
 export const Route = createFileRoute("/contact")({
   head: () => ({
