@@ -17,7 +17,7 @@ const pageLinks = [
   { label: "Tours", href: "/packages" },
   { label: "Services", href: "#" },
   { label: "About Us", href: "/about" },
-  { label: "Contact Us", href: "#" },
+  { label: "Contact Us", href: "/contact" },
   { label: "Travel Inspiration", href: "/experiences" },
 ];
 
@@ -72,7 +72,7 @@ export function Footer() {
         {/* Logo */}
         <div>
           <div className="inline-flex rounded-xl bg-white p-3">
-            <img src="/footer-logo.jpeg" alt="Travel Nest" className="h-14 w-auto" />
+            <img src="/logo.png" alt="Travel Nest" className="h-14 w-auto" />
           </div>
           <p className="mt-4 max-w-xs text-sm leading-relaxed">
             Travel Nest is a full service travel agency creating exceptional journeys — flights,

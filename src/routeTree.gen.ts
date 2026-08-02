@@ -12,6 +12,7 @@ import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as AboutRouteImport } from './routes/about'
 import { Route as AirTicketsRouteImport } from './routes/air-tickets'
+import { Route as ContactRouteImport } from './routes/contact'
 import { Route as CorporateToursRouteImport } from './routes/corporate-tours'
 import { Route as CruisesRouteImport } from './routes/cruises'
 import { Route as CustomizedToursRouteImport } from './routes/customized-tours'
@@ -42,6 +43,11 @@ const AboutRoute = AboutRouteImport.update({
 const AirTicketsRoute = AirTicketsRouteImport.update({
   id: '/air-tickets',
   path: '/air-tickets',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ContactRoute = ContactRouteImport.update({
+  id: '/contact',
+  path: '/contact',
   getParentRoute: () => rootRouteImport,
 } as any)
 const CorporateToursRoute = CorporateToursRouteImport.update({
@@ -129,6 +135,7 @@ export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
   '/air-tickets': typeof AirTicketsRoute
+  '/contact': typeof ContactRoute
   '/corporate-tours': typeof CorporateToursRoute
   '/cruises': typeof CruisesRoute
   '/customized-tours': typeof CustomizedToursRoute
@@ -150,6 +157,7 @@ export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
   '/air-tickets': typeof AirTicketsRoute
+  '/contact': typeof ContactRoute
   '/corporate-tours': typeof CorporateToursRoute
   '/cruises': typeof CruisesRoute
   '/customized-tours': typeof CustomizedToursRoute
@@ -171,6 +179,7 @@ export interface FileRoutesById {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
   '/air-tickets': typeof AirTicketsRoute
+  '/contact': typeof ContactRoute
   '/corporate-tours': typeof CorporateToursRoute
   '/cruises': typeof CruisesRoute
   '/customized-tours': typeof CustomizedToursRoute
@@ -194,6 +203,7 @@ export interface FileRouteTypes {
     | '/'
     | '/about'
     | '/air-tickets'
+    | '/contact'
     | '/corporate-tours'
     | '/cruises'
     | '/customized-tours'
@@ -215,6 +225,7 @@ export interface FileRouteTypes {
     | '/'
     | '/about'
     | '/air-tickets'
+    | '/contact'
     | '/corporate-tours'
     | '/cruises'
     | '/customized-tours'
@@ -235,6 +246,7 @@ export interface FileRouteTypes {
     | '/'
     | '/about'
     | '/air-tickets'
+    | '/contact'
     | '/corporate-tours'
     | '/cruises'
     | '/customized-tours'
@@ -257,6 +269,7 @@ export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AboutRoute: typeof AboutRoute
   AirTicketsRoute: typeof AirTicketsRoute
+  ContactRoute: typeof ContactRoute
   CorporateToursRoute: typeof CorporateToursRoute
   CruisesRoute: typeof CruisesRoute
   CustomizedToursRoute: typeof CustomizedToursRoute
@@ -294,6 +307,13 @@ declare module '@tanstack/react-router' {
       path: '/air-tickets'
       fullPath: '/air-tickets'
       preLoaderRoute: typeof AirTicketsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/contact': {
+      id: '/contact'
+      path: '/contact'
+      fullPath: '/contact'
+      preLoaderRoute: typeof ContactRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/corporate-tours': {
@@ -429,6 +449,7 @@ const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AboutRoute: AboutRoute,
   AirTicketsRoute: AirTicketsRoute,
+  ContactRoute: ContactRoute,
   CorporateToursRoute: CorporateToursRoute,
   CruisesRoute: CruisesRoute,
   CustomizedToursRoute: CustomizedToursRoute,

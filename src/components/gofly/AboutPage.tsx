@@ -1,8 +1,6 @@
-import { useState } from "react";
-import { ArrowRight, Check, ChevronDown, Compass, CreditCard, Globe, MapPin, Shield, Star, Users, Wallet } from "lucide-react";
+import { Check, Compass, Mail, MapPin, MessageCircle, Phone, Quote, Sparkles } from "lucide-react";
 import { IMG } from "@/lib/gofly-data";
 import { Reveal } from "./Reveal";
-import { useCountUp } from "./useCountUp";
 
 /* ─── Hero ─── */
 function AboutHero() {
@@ -10,14 +8,24 @@ function AboutHero() {
     <section className="relative h-[400px] w-full overflow-hidden">
       <img
         src={`${IMG}/home2/banner-img1.jpg`}
-        alt="About Us"
+        alt="Travel Nest"
         className="absolute inset-0 h-full w-full object-cover"
       />
       <div className="absolute inset-0 bg-gradient-to-b from-black/50 via-black/30 to-black/60" />
-      <div className="relative z-10 flex h-full flex-col items-center justify-center text-center text-white">
-        <h1 className="font-display text-5xl font-bold text-white sm:text-6xl" style={{ color: "#fff" }}>About GoFly</h1>
+      <div className="relative z-10 flex h-full flex-col items-center justify-center text-center">
+        <h1 className="font-display text-5xl font-bold sm:text-6xl" style={{ color: "#fff" }}>
+          Travel Nest
+        </h1>
+        <p
+          className="mt-3 font-display text-lg font-medium italic sm:text-xl"
+          style={{ color: "#fff" }}
+        >
+          Journeys Crafted. Memories Nested.
+        </p>
         <p className="mt-4 flex items-center gap-2 text-sm font-medium" style={{ color: "#fff" }}>
-          <a href="/" className="hover:underline" style={{ color: "#fff" }}>Home</a>
+          <a href="/" className="hover:underline" style={{ color: "#fff" }}>
+            Home
+          </a>
           <span style={{ color: "#fff" }}>•</span>
           <span style={{ color: "#fff" }}>About Us</span>
         </p>
@@ -26,281 +34,261 @@ function AboutHero() {
   );
 }
 
-/* ─── Why We're Best Agency ─── */
-function WhyBestAgency() {
+/* ─── Our Story ─── */
+function OurStory() {
   return (
-    <section className="py-20">
-      <div className="container-gofly grid gap-10 lg:grid-cols-2 lg:items-center">
+    <section className="overflow-hidden py-20">
+      <div className="container-gofly">
+        <div className="grid items-center gap-12 lg:grid-cols-2 lg:gap-16">
+          {/* Image side */}
+          <Reveal className="relative">
+            <div className="relative mx-auto max-w-lg">
+              {/* Decorative frame */}
+              <div className="absolute -left-4 -top-4 hidden h-full w-full rounded-3xl border-2 border-dashed border-brand/40 sm:block" />
+              <div className="absolute -bottom-6 -right-6 hidden h-40 w-40 rounded-3xl bg-brand/10 sm:block" />
+
+              <div className="relative overflow-hidden rounded-3xl shadow-xl">
+                <img
+                  src="/story-vienna.jpg"
+                  alt="Travel Nest journey"
+                  className="aspect-[4/5] w-full object-cover sm:aspect-square lg:aspect-[4/5]"
+                  loading="lazy"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/30 via-transparent to-transparent" />
+              </div>
+
+              {/* Floating badge */}
+              <div className="absolute -bottom-5 left-6 flex items-center gap-3 rounded-2xl border border-line bg-background px-4 py-3 shadow-lg">
+                <span className="grid size-11 place-items-center rounded-full bg-brand text-white">
+                  <Sparkles className="size-5" />
+                </span>
+                <div>
+                  <p className="font-display text-sm font-bold text-title">Inspired in Vienna</p>
+                  <p className="text-xs text-body">Where the vision began</p>
+                </div>
+              </div>
+            </div>
+          </Reveal>
+
+          {/* Text side */}
+          <Reveal delay={120}>
+            <div>
+              <span className="inline-flex items-center gap-2 rounded-full bg-brand/10 px-4 py-1.5 text-xs font-bold uppercase tracking-widest text-brand">
+                <Compass className="size-3.5" />
+                Our Story
+              </span>
+              <h2 className="mt-4 font-display text-3xl font-bold sm:text-4xl">
+                Travel is more than reaching a destination—
+                <span className="text-brand"> it is about creating memories.</span>
+              </h2>
+
+              <div className="mt-6 space-y-4 text-[15px] leading-relaxed text-body">
+                <p>
+                  The inspiration behind Travel Nest comes from years of personally experiencing the
+                  world. During my time in{" "}
+                  <span className="font-semibold text-title">Vienna, Austria</span>, I had the
+                  privilege of travelling extensively across Europe and witnessing firsthand how
+                  travel enriches lives, broadens perspectives, and builds understanding between
+                  cultures. Those journeys continued across Asia, the Middle East, and Africa, where
+                  every destination offered its own unique history, traditions, hospitality, and way
+                  of life.
+                </p>
+                <p>
+                  These experiences taught me that every traveller has different expectations. Some
+                  seek adventure, others relaxation, cultural discovery, family time, business
+                  opportunities, or once-in-a-lifetime celebrations. What they all deserve is a
+                  journey that is carefully planned, professionally managed, and genuinely
+                  memorable.
+                </p>
+              </div>
+
+              <div className="relative mt-6 rounded-2xl border-l-4 border-brand bg-soft p-6">
+                <Quote className="absolute right-5 top-5 size-8 text-brand/20" />
+                <p className="font-display text-xl font-bold italic leading-snug text-title">
+                  That vision became Travel Nest.
+                </p>
+              </div>
+
+              <div className="mt-6 space-y-4 text-[15px] leading-relaxed text-body">
+                <p>
+                  Our goal is not simply to sell travel packages—we are committed to crafting
+                  personalised travel experiences tailored to each client's interests, budget, and
+                  aspirations. By working with carefully selected international partners, trusted
+                  Destination Management Companies (DMCs), quality hotels, and reliable service
+                  providers, we strive to deliver journeys that are seamless from the moment you
+                  start planning until you return home with unforgettable memories.
+                </p>
+                <p>
+                  Whether you are planning a family holiday, a honeymoon, a corporate trip, or a
+                  customised international adventure, we believe every journey should be designed
+                  with care, integrity, and attention to detail.
+                </p>
+              </div>
+
+              {/* Signature */}
+              <div className="mt-8 flex items-center gap-4 border-t border-line pt-6">
+                <div className="flex h-12 w-12 items-center justify-center rounded-full bg-brand font-display text-lg font-bold text-white">
+                  AM
+                </div>
+                <div>
+                  <p className="font-display font-bold text-title">Amer Manzoor</p>
+                  <p className="text-sm text-body">Founder, Travel Nest</p>
+                </div>
+              </div>
+            </div>
+          </Reveal>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+/* ─── Checklist section ─── */
+function ChecklistSection({
+  title,
+  items,
+  light = false,
+}: {
+  title: string;
+  items: string[];
+  light?: boolean;
+}) {
+  return (
+    <section className={light ? "bg-soft py-16" : "py-16"}>
+      <div className="container-gofly">
         <Reveal>
-          <div>
-            <h2 className="font-display text-3xl font-bold sm:text-4xl">Why We're Best Agency</h2>
-            <p className="mt-2 font-display text-lg text-brand">Welcome to GoFly Travel Agency – Your Gateway to Unforgettable Journeys!</p>
+          <h2 className="font-display text-2xl font-bold sm:text-3xl">{title}</h2>
+          <ul className="mt-6 grid gap-3 sm:grid-cols-2">
+            {items.map((item) => (
+              <li key={item} className="flex items-start gap-3">
+                <span className="mt-0.5 grid size-6 shrink-0 place-items-center rounded-full bg-brand/10 text-brand">
+                  <Check className="size-3.5" />
+                </span>
+                <span className="text-[15px] leading-relaxed text-body">{item}</span>
+              </li>
+            ))}
+          </ul>
+        </Reveal>
+      </div>
+    </section>
+  );
+}
+
+/* ─── Our Commitment ─── */
+function CommitmentSection() {
+  const items = [
+    "Personalised travel planning",
+    "Transparent pricing",
+    "Prompt customer support",
+    "Reliable global partnerships",
+    "Professional service from enquiry to return",
+  ];
+
+  return (
+    <section className="py-16">
+      <div className="container-gofly">
+        <Reveal>
+          <h2 className="font-display text-2xl font-bold sm:text-3xl">Our Commitment</h2>
+          <p className="mt-4 max-w-3xl text-[15px] leading-relaxed text-body">
+            At Travel Nest, we believe that trust is the foundation of every successful journey. We
+            work with carefully selected destination management companies (DMCs), hotels, transport
+            providers and tourism partners to deliver reliable, high-quality travel solutions.
+          </p>
+          <p className="mt-4 font-display font-semibold text-title">We are committed to:</p>
+          <ul className="mt-4 space-y-3">
+            {items.map((item) => (
+              <li key={item} className="flex items-start gap-3">
+                <span className="mt-0.5 grid size-6 shrink-0 place-items-center rounded-full bg-brand/10 text-brand">
+                  <Check className="size-3.5" />
+                </span>
+                <span className="text-[15px] leading-relaxed text-body">{item}</span>
+              </li>
+            ))}
+          </ul>
+        </Reveal>
+      </div>
+    </section>
+  );
+}
+
+/* ─── Vision & Mission ─── */
+function VisionMission() {
+  return (
+    <section className="bg-soft py-16">
+      <div className="container-gofly grid gap-8 lg:grid-cols-2">
+        <Reveal>
+          <div className="h-full rounded-3xl border border-line bg-background p-8 sm:p-10">
+            <h2 className="font-display text-2xl font-bold sm:text-3xl">Vision</h2>
             <p className="mt-4 text-[15px] leading-relaxed text-body">
-              GoFly Travel Agency is a trusted name in the travel industry, offering seamless travel planning, personalized itineraries, and unforgettable adventures. With a passion for exploration and a commitment to customer satisfaction, we handle every detail—from flights and accommodations to guided tours and exclusive experiences—so you can focus on making memories.
+              To become one of Pakistan's most trusted boutique travel companies, recognised for
+              delivering personalised travel experiences and building long-term relationships with
+              travellers and global partners.
             </p>
-            <p className="mt-3 text-[15px] leading-relaxed text-body">
-              We believe that travel is more than just moving from one place to another—it's about discovering new cultures, creating extraordinary experiences, and making lifelong connections.
+          </div>
+        </Reveal>
+        <Reveal delay={120}>
+          <div className="h-full rounded-3xl border border-line bg-background p-8 sm:p-10">
+            <h2 className="font-display text-2xl font-bold sm:text-3xl">Mission</h2>
+            <p className="mt-4 text-[15px] leading-relaxed text-body">
+              To connect people with extraordinary destinations through thoughtful planning,
+              dependable service and trusted travel partnerships while creating memorable journeys
+              that exceed expectations.
             </p>
-            <div className="mt-6 flex items-center gap-3">
-              <img src={`${IMG}/home1/testimonial-author-img1.png`} alt="Robert Harrington" className="size-12 rounded-full object-cover" />
-              <div>
-                <p className="font-display font-semibold text-title">Robert Harrington</p>
-                <p className="text-sm text-body">Founder at GoFly</p>
+          </div>
+        </Reveal>
+      </div>
+    </section>
+  );
+}
+
+/* ─── Contact ─── */
+function AboutContact() {
+  const contacts = [
+    { icon: MapPin, label: "Location", value: "Islamabad, Pakistan" },
+    { icon: Phone, label: "Mobile / WhatsApp", value: "+92 322 96 6256" },
+    { icon: Mail, label: "Email", value: "info@travelnest.pk" },
+  ];
+
+  return (
+    <section className="py-16">
+      <div className="container-gofly">
+        <Reveal>
+          <div className="mx-auto max-w-2xl rounded-3xl border border-line bg-card p-8 sm:p-10">
+            <h2 className="text-center font-display text-2xl font-bold sm:text-3xl">Contact</h2>
+            <div className="mt-6 space-y-4">
+              {contacts.map(({ icon: Icon, label, value }) => (
+                <div key={label} className="flex items-center justify-center gap-3">
+                  <span className="grid size-10 shrink-0 place-items-center rounded-full bg-brand/10 text-brand">
+                    <Icon className="size-4" />
+                  </span>
+                  <p className="text-[15px] text-body">
+                    <span className="font-display font-semibold text-title">{label}:</span> {value}
+                  </p>
+                </div>
+              ))}
+              <div className="flex items-center justify-center gap-3">
+                <span className="grid size-10 shrink-0 place-items-center rounded-full bg-brand/10 text-brand">
+                  <MessageCircle className="size-4" />
+                </span>
+                <p className="text-[15px] text-body">
+                  <span className="font-display font-semibold text-title">Instagram:</span>{" "}
+                  @gramofytravel
+                </p>
+              </div>
+              <div className="flex items-center justify-center gap-3">
+                <span className="grid size-10 shrink-0 place-items-center rounded-full bg-brand/10 text-brand">
+                  <MapPin className="size-4" />
+                </span>
+                <p className="text-[15px] text-body">
+                  <span className="font-display font-semibold text-title">Website:</span>{" "}
+                  www.travelnest.pk
+                </p>
               </div>
             </div>
           </div>
         </Reveal>
-        <Reveal delay={150}>
-          <div className="relative">
-            <img src={`${IMG}/home2/blog-img1.jpg`} alt="Travel" className="rounded-2xl shadow-lg" />
-          </div>
-        </Reveal>
       </div>
     </section>
-  );
-}
-
-/* ─── Service Banner ─── */
-function ServiceBanner() {
-  const features = [
-    { icon: MapPin, title: "Local Guidance", desc: "Your go-to experts with experienced professionals' guidance." },
-    { icon: Star, title: "Deals & Discounts", desc: "Exclusive offers on flights, hotels, & packages." },
-    { icon: Wallet, title: "Saves Money", desc: "Affordable fares, compare a search trips. Multi-destination & budget-friendly options." },
-  ];
-
-  return (
-    <section className="bg-soft py-16">
-      <div className="container-gofly text-center">
-        <Reveal>
-          <h2 className="font-display text-2xl font-bold sm:text-3xl">We're Providing Best Service Ever!</h2>
-          <div className="mx-auto mt-10 grid max-w-4xl gap-8 sm:grid-cols-3">
-            {features.map((f) => (
-              <div key={f.title} className="flex flex-col items-center text-center">
-                <span className="grid size-14 place-items-center rounded-full border-2 border-brand bg-white text-brand shadow-sm">
-                  <f.icon className="size-6" />
-                </span>
-                <h4 className="mt-4 font-display text-lg font-semibold text-title">{f.title}</h4>
-                <p className="mt-2 text-sm leading-relaxed text-body">{f.desc}</p>
-              </div>
-            ))}
-          </div>
-          <a href="#" className="mt-8 inline-flex items-center gap-2 rounded-full bg-brand px-7 py-3.5 font-display text-sm font-medium text-white transition-colors hover:bg-title">
-            Get 30% Discounts All Package – Check Offer <ArrowRight className="size-4" />
-          </a>
-        </Reveal>
-      </div>
-    </section>
-  );
-}
-
-/* ─── Behind The Journey ─── */
-function BehindJourney() {
-  const milestones = [
-    { year: "1986", label: "1986 – The Birth of Travel Agencies", desc: "The first-ever travel agency was founded by Thomas Cook in England. He organized group trips, starting with a short train ride from Leicester to Loughborough, and later expanded to trips to Paris and beyond. He introduced the first-ever travel brochures, guiding travelers on destinations & makes." },
-    { year: "1996", label: "1996", desc: "Digital revolution begins in the travel industry with online booking systems." },
-    { year: "2006", label: "2006", desc: "Social media and mobile apps transform how travelers discover and book trips." },
-    { year: "2016", label: "2016", desc: "AI-powered personalization and immersive experiences become mainstream." },
-    { year: "2022", label: "2022", desc: "Sustainable and responsible tourism gains global momentum." },
-    { year: "2023", label: "2023", desc: "Hyper-personalized travel with cutting-edge technology." },
-  ];
-
-  const [active, setActive] = useState(0);
-
-  return (
-    <section className="py-20">
-      <div className="container-gofly text-center">
-        <Reveal>
-          <h2 className="font-display text-3xl font-bold sm:text-4xl">Behind The Journey</h2>
-          <p className="mt-3 text-[15px] text-body">With years of experience in the travel industry, we specialize in crafting personalized journeys.</p>
-        </Reveal>
-
-        <Reveal delay={100}>
-          {/* Timeline images */}
-          <div className="mt-12 flex items-end justify-start gap-3 overflow-x-auto pb-4 sm:justify-center sm:gap-4">
-            {milestones.map((m, i) => (
-              <button
-                key={m.year}
-                onClick={() => setActive(i)}
-                className="group flex flex-col items-center transition-transform duration-300 hover:-translate-y-1"
-              >
-                <div className={`mb-3 overflow-hidden rounded-full border-4 transition-all duration-300 ${
-                  active === i ? "size-16 border-brand sm:size-20" : "size-11 border-line sm:size-14"
-                }`}>
-                  <img
-                    src={`${IMG}/home2/destination-img${(i % 6) + 1}.jpg`}
-                    alt={m.year}
-                    className="h-full w-full object-cover"
-                  />
-                </div>
-                <span className={`font-display text-xs font-bold sm:text-sm ${active === i ? "text-brand" : "text-title"}`}>
-                  {m.year}
-                </span>
-              </button>
-            ))}
-          </div>
-
-          {/* Timeline content */}
-          <div className="mx-auto mt-10 max-w-2xl text-left">
-            <h3 className="font-display text-lg font-bold text-title">{milestones[active].label}</h3>
-            <p className="mt-3 text-[15px] leading-relaxed text-body">{milestones[active].desc}</p>
-          </div>
-        </Reveal>
-      </div>
-    </section>
-  );
-}
-
-/* ─── Why Travel With Us ─── */
-function WhyTravelWithUs() {
-  const features = [
-    { icon: Compass, title: "Expertly Curated Tours." },
-    { icon: CreditCard, title: "Affordable & Flexible Packages." },
-    { icon: Shield, title: "24/7 Customer Support" },
-    { icon: Users, title: "Certified & Experienced Guides." },
-  ];
-
-  const partners = [1, 2, 3, 4, 5, 6].map((n) => `${IMG}/home1/partner-0${n}.png`);
-
-  return (
-    <section className="bg-soft py-20">
-      <div className="container-gofly text-center">
-        <Reveal>
-          <h2 className="font-display text-3xl font-bold sm:text-4xl">Why Travel with Us?</h2>
-          <p className="mt-3 text-[15px] text-body">We specialize in crafting personalized journeys that suit every traveler's dream.</p>
-        </Reveal>
-
-        <Reveal delay={100}>
-          <div className="mx-auto mt-10 grid max-w-4xl gap-6 sm:grid-cols-2 lg:grid-cols-4">
-            {features.map((f) => (
-              <div key={f.title} className="rounded-2xl border border-line bg-white p-6 text-center shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-[var(--shadow-float)]">
-                <span className="mx-auto grid size-14 place-items-center rounded-full border-2 border-brand bg-white text-brand">
-                  <f.icon className="size-6" />
-                </span>
-                <h4 className="mt-4 font-display text-sm font-semibold text-title">{f.title}</h4>
-              </div>
-            ))}
-          </div>
-        </Reveal>
-
-        <Reveal delay={150}>
-          <p className="mt-10 text-sm font-medium text-body">These Company You Can Easily Trust!</p>
-          <div className="mt-6 flex flex-wrap items-center justify-center gap-8">
-            {partners.map((p) => (
-              <img key={p} src={p} alt="" className="h-8 opacity-50 grayscale transition-all hover:opacity-100 hover:grayscale-0" loading="lazy" />
-            ))}
-          </div>
-        </Reveal>
-      </div>
-    </section>
-  );
-}
-
-/* ─── Paragliding Image ─── */
-function ParaglidingSection() {
-  return (
-    <section className="py-20">
-      <div className="container-gofly">
-        <Reveal>
-          <div className="overflow-hidden rounded-2xl">
-            <img
-              src={`${IMG}/home2/banner-img2.jpg`}
-              alt="Adventure"
-              className="h-[250px] w-full object-cover sm:h-[350px] lg:h-[400px]"
-            />
-          </div>
-        </Reveal>
-      </div>
-    </section>
-  );
-}
-
-/* ─── FAQ ─── */
-function FAQSection() {
-  const faqs = [
-    { q: "What Services Does Your Travel Agency Provide?", a: "We provide comprehensive travel services including flight bookings, hotel reservations, customized tour packages, visa assistance, travel insurance, and 24/7 customer support." },
-    { q: "Do You Offer Customized Travel Packages?", a: "Yes, we specialize in creating personalized itineraries tailored to your preferences, budget, and travel dates." },
-    { q: "Can I Book Flights, Hotels, and Tours Separately?", a: "Absolutely! You can book each service individually or combine them for a complete travel package." },
-    { q: "Do You Provide Visa Assistance?", a: "Yes, we provide complete visa assistance including documentation, application, and follow-up for all major destinations." },
-    { q: "What Payment Methods Do You Accept?", a: "We accept all major credit/debit cards, bank transfers, PayPal, and installment payment options." },
-    { q: "What Travel Documents Are Required for International Travel?", a: "Requirements vary by destination but typically include a valid passport, visa, travel insurance, and vaccination certificates." },
-  ];
-
-  const [openIndex, setOpenIndex] = useState(0);
-
-  return (
-    <section className="py-20">
-      <div className="container-gofly">
-        <Reveal>
-          <div className="text-center">
-            <h2 className="font-display text-3xl font-bold sm:text-4xl">Questions & Answer</h2>
-            <p className="mt-3 text-[15px] text-body">We are committed to offering more than just vacations—we provide exceptional experiences.</p>
-          </div>
-        </Reveal>
-
-        <Reveal delay={100}>
-          <div className="mx-auto mt-12 max-w-3xl space-y-3">
-            {faqs.map((faq, i) => (
-              <div
-                key={i}
-                className={`overflow-hidden rounded-xl border transition-all duration-300 ${
-                  openIndex === i ? "border-brand shadow-sm" : "border-line"
-                }`}
-              >
-                <button
-                  onClick={() => setOpenIndex(openIndex === i ? -1 : i)}
-                  className="flex w-full items-center justify-between px-6 py-4 text-left"
-                >
-                  <span className={`font-display text-sm font-semibold ${openIndex === i ? "text-brand" : "text-title"}`}>
-                    {faq.q}
-                  </span>
-                  <ChevronDown className={`size-5 shrink-0 transition-transform duration-300 ${
-                    openIndex === i ? "rotate-180 text-brand" : "text-body"
-                  }`} />
-                </button>
-                {openIndex === i && (
-                  <div className="px-6 pb-4">
-                    <p className="text-[15px] leading-relaxed text-body">{faq.a}</p>
-                  </div>
-                )}
-              </div>
-            ))}
-          </div>
-        </Reveal>
-      </div>
-    </section>
-  );
-}
-
-/* ─── Counters ─── */
-function AboutCounters() {
-  const data = [
-    { value: 2, suffix: "K+", label: "Tour Completed" },
-    { value: 1, suffix: "+", label: "Travel Experience" },
-    { value: 2, suffix: "+", label: "Happy Traveler" },
-    { value: 10, suffix: "%", label: "Retention Rate" },
-  ];
-
-  return (
-    <section className="border-y border-line py-14">
-      <div className="container-gofly grid grid-cols-2 gap-8 lg:grid-cols-4">
-        {data.map((c) => (
-          <AboutCounter key={c.label} {...c} />
-        ))}
-      </div>
-    </section>
-  );
-}
-
-function AboutCounter({ value, suffix, label }: { value: number; suffix: string; label: string }) {
-  const { ref, value: current } = useCountUp(value);
-  return (
-    <div className="text-center">
-      <p className="font-display text-4xl font-semibold text-title">
-        <span ref={ref}>{current}</span>
-        <span className="text-brand">{suffix}</span>
-      </p>
-      <p className="mt-1 text-sm text-body">{label}</p>
-    </div>
   );
 }
 
@@ -309,13 +297,37 @@ export function AboutPage() {
   return (
     <>
       <AboutHero />
-      <WhyBestAgency />
-      <ServiceBanner />
-      <BehindJourney />
-      <WhyTravelWithUs />
-      <ParaglidingSection />
-      <FAQSection />
-      <AboutCounters />
+      <OurStory />
+      <ChecklistSection
+        title="Our Services"
+        items={[
+          "Customised International Holidays",
+          "Family Vacations",
+          "Honeymoon Tours",
+          "Group Tours",
+          "Corporate Travel",
+          "Visa Assistance",
+          "Hotel Reservations",
+          "Airport Transfers",
+          "Sightseeing",
+          "Travel Insurance Assistance",
+        ]}
+        light
+      />
+      <ChecklistSection
+        title="Why Choose Travel Nest"
+        items={[
+          "Tailor-made itineraries",
+          "Trusted international partners",
+          "Transparent pricing",
+          "Dedicated travel consultant",
+          "Professional planning",
+          "Customer-first approach",
+        ]}
+      />
+      <CommitmentSection />
+      <VisionMission />
+      <AboutContact />
     </>
   );
 }
