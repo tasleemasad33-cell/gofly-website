@@ -8,11 +8,11 @@ const supportChannels = [
 ];
 
 const helpLinks = [
-  "Frequently Asked Questions",
-  "Terms & Conditions",
-  "Privacy Policy",
-  "Refund Policy",
-  "Travel Guide",
+  { label: "Frequently Asked Questions", href: "/contact" },
+  { label: "Terms & Conditions", href: "/contact" },
+  { label: "Privacy Policy", href: "/contact" },
+  { label: "Refund Policy", href: "/contact" },
+  { label: "Travel Guide", href: "/experiences" },
 ];
 
 const moreLinks = ["About Us", "Contact Us"];
@@ -238,9 +238,9 @@ export function ContactPage() {
             </h5>
             <ul className="mt-4 space-y-2.5 text-sm">
               {helpLinks.map((l) => (
-                <li key={l}>
-                  <a href="#" className="text-body transition-colors hover:text-brand2">
-                    {l}
+                <li key={l.label}>
+                  <a href={l.href} className="text-body transition-colors hover:text-brand2">
+                    {l.label}
                   </a>
                 </li>
               ))}

@@ -486,8 +486,7 @@ function Reviews({ pkg }: { pkg: Pkg }) {
           </div>
         </div>
         <a
-          href="#"
-          onClick={(e) => e.preventDefault()}
+          href="/contact"
           className="inline-flex items-center gap-2 rounded-full bg-brand px-6 py-3 font-display text-sm font-medium text-white transition-colors hover:bg-brand2"
         >
           Write a Review
@@ -783,8 +782,7 @@ function BookingSidebar({ pkg }: { pkg: Pkg }) {
             Guide Await to Help You
           </p>
           <a
-            href="#"
-            onClick={(e) => e.preventDefault()}
+            href="/customized-tours"
             className="mt-5 inline-flex items-center gap-2 rounded-full bg-brand2 px-7 py-3.5 font-display text-sm font-medium text-dark transition-colors hover:bg-brand hover:text-white"
           >
             Customize Package <ArrowRight className="size-4" />

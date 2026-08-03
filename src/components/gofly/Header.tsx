@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { useNavigate } from "@tanstack/react-router";
 import { ChevronDown, Menu, Phone, Search, X } from "lucide-react";
 
 const navItems = [
@@ -16,7 +17,7 @@ const navItems = [
   },
   {
     label: "Services",
-    href: "#",
+    href: "/experiences",
     children: [
       { label: "Visa Facilitation", href: "/visa-facilitation" },
       { label: "Air Tickets", href: "/air-tickets" },
@@ -31,6 +32,7 @@ const navItems = [
 ];
 
 export function Header() {
+  const navigate = useNavigate();
   const [sticky, setSticky] = useState(false);
   const [open, setOpen] = useState(false);
 
@@ -122,6 +124,7 @@ export function Header() {
             {/* Search */}
             <button
               aria-label="Search"
+              onClick={() => navigate({ to: "/packages" })}
               className="grid size-10 place-items-center rounded-full border border-line text-title transition-colors hover:bg-soft"
             >
               <Search className="size-5" />

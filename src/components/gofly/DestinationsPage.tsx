@@ -50,7 +50,7 @@ function DestinationCard({
   return (
     <Reveal delay={index * 100}>
       <a
-        href="#"
+        href="/packages"
         className="group relative block h-[200px] overflow-hidden rounded-2xl shadow-md transition-all duration-500 hover:-translate-y-1 hover:shadow-xl sm:h-[260px]"
       >
         <img

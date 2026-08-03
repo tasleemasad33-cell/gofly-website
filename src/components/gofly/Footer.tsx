@@ -15,7 +15,7 @@ const contactItems = [
 const pageLinks = [
   { label: "Home", href: "/" },
   { label: "Tours", href: "/packages" },
-  { label: "Services", href: "#" },
+  { label: "Services", href: "/experiences" },
   { label: "About Us", href: "/about" },
   { label: "Contact Us", href: "/contact" },
   { label: "Travel Inspiration", href: "/experiences" },
@@ -82,7 +82,15 @@ export function Footer() {
             {[Facebook, Twitter, Instagram].map((Icon, i) => (
               <a
                 key={i}
-                href="#"
+                href={
+                  i === 0
+                    ? "https://www.facebook.com/"
+                    : i === 1
+                      ? "https://www.twitter.com/"
+                      : "https://www.instagram.com/"
+                }
+                target="_blank"
+                rel="noreferrer"
                 className="grid size-9 place-items-center rounded-full border border-white/20 transition-colors hover:border-brand hover:bg-brand hover:text-white"
               >
                 <Icon className="size-4" />
@@ -96,10 +104,10 @@ export function Footer() {
         <div className="container-gofly flex flex-col items-center justify-between gap-3 text-sm sm:flex-row">
           <p>© {new Date().getFullYear()} Travel Nest. All Rights Reserved.</p>
           <div className="flex gap-5">
-            <a href="#" className="transition-colors hover:text-brand2">
+            <a href="/contact" className="transition-colors hover:text-brand2">
               Terms & Conditions
             </a>
-            <a href="#" className="transition-colors hover:text-brand2">
+            <a href="/contact" className="transition-colors hover:text-brand2">
               Privacy Policy
             </a>
           </div>

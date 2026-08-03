@@ -26,7 +26,7 @@ export function OfferBanner() {
                 <h2 className="mt-4 font-display text-3xl font-semibold text-white sm:text-[38px]">
                   Flash 50% off all tour packages
                 </h2>
-                <a href="#" className="btn-primary mt-6 bg-dark hover:bg-brand">
+                <a href="/packages" className="btn-primary mt-6 bg-dark hover:bg-brand">
                   Grab the Deal Now <ArrowRight className="size-4" />
                 </a>
               </div>
@@ -98,7 +98,7 @@ export function AwardBanner() {
 
           {/* Button */}
           <a
-            href="#"
+            href="/packages"
             className="btn-primary mt-8 inline-flex items-center gap-2 rounded-full bg-brand px-8 py-4 font-display text-sm font-medium text-white shadow-lg transition-all hover:bg-brand/90 hover:shadow-xl"
           >
             View All Package <ArrowRight className="size-4" />

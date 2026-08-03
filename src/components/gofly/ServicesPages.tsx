@@ -443,7 +443,7 @@ export function VisaFacilitationPage() {
               </div>
             </div>
             <div className="mt-8 text-center">
-              <a href="#" className="btn-primary">
+              <a href="/contact" className="btn-primary">
                 Send Message <ArrowRight className="size-4" />
               </a>
             </div>
@@ -549,7 +549,7 @@ export function AirTicketsPage() {
               </div>
             </div>
             <div className="mt-8 text-center">
-              <a href="#" className="btn-primary">
+              <a href="/contact" className="btn-primary">
                 Send Message <ArrowRight className="size-4" />
               </a>
             </div>
@@ -688,7 +688,7 @@ export function TransportationPage() {
             <p className="mx-auto mt-3 max-w-xl text-sm text-body">
               Share your route and dates, and we'll arrange the right vehicle for your group.
             </p>
-            <a href="#" className="btn-primary mt-8">
+            <a href="/contact" className="btn-primary mt-8">
               Request Transport <ArrowRight className="size-4" />
             </a>
           </div>
@@ -816,7 +816,7 @@ export function CruisesPage() {
               </div>
             </div>
             <div className="mt-8 text-center">
-              <a href="#" className="btn-primary">
+              <a href="/contact" className="btn-primary">
                 Send Enquiry <ArrowRight className="size-4" />
               </a>
             </div>
@@ -899,11 +899,11 @@ export function DestinationWeddingPage() {
                   </div>
                 </div>
                 <div className="mt-6 flex flex-col gap-4 sm:flex-row">
-                  <a href="#" className="btn-primary">
+                  <a href="/contact" className="btn-primary">
                     Plan Your Wedding <ArrowRight className="size-4" />
                   </a>
                   <a
-                    href="#"
+                    href="/contact"
                     className="btn-primary bg-transparent border border-brand text-brand hover:bg-brand hover:text-primary-foreground"
                   >
                     Get Free Consultation
@@ -946,7 +946,7 @@ export function DestinationWeddingPage() {
           </div>
 
           <div className="mt-14 flex flex-col items-center justify-center gap-4 sm:flex-row">
-            <a href="#" className="btn-primary">
+            <a href="/contact" className="btn-primary">
               Book Consultation <ArrowRight className="size-4" />
             </a>
           </div>

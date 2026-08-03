@@ -80,7 +80,7 @@ export function Features() {
               <span className="rounded-full bg-dark px-6 py-3 font-display text-sm font-medium text-white">
                 Find Your Favourite Travel Package!
               </span>
-              <a href="#" className="btn-primary">
+              <a href="/packages" className="btn-primary">
                 Discover Today <ArrowRight className="size-4" />
               </a>
             </div>
@@ -104,7 +104,7 @@ export function TopDestinations() {
             plugins={[Autoplay({ delay: 3800, stopOnInteraction: false })]}
           >
             {destinations.map((d) => (
-              <a key={d.title} href="#" className="group block">
+              <a key={d.title} href="/destinations" className="group block">
                 <div className="relative overflow-hidden rounded-[20px]">
                   <img
                     src={d.img}

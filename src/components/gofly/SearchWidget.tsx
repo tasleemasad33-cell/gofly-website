@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useNavigate } from "@tanstack/react-router";
 import { Building2, CalendarDays, MapPin, Plane, Search, StampIcon, Users } from "lucide-react";
 import { searchDestinations, tourCategories } from "@/lib/gofly-data";
 
@@ -44,6 +45,7 @@ function Field({
 }
 
 export function SearchWidget() {
+  const navigate = useNavigate();
   const [tab, setTab] = useState<TabId>("tours");
   const [dropdown, setDropdown] = useState<string | null>(null);
   const [destination, setDestination] = useState(searchDestinations[0]);
@@ -164,7 +166,21 @@ export function SearchWidget() {
             )}
           </div>
 
-          <button className="btn-primary w-full justify-center px-8 py-4 lg:w-auto">
+          <button
+            className="btn-primary w-full justify-center px-8 py-4 lg:w-auto"
+            onClick={() =>
+              navigate({
+                to:
+                  tab === "hotels"
+                    ? "/hotel-bookings"
+                    : tab === "visa"
+                      ? "/visa-facilitation"
+                      : tab === "experience"
+                        ? "/experiences"
+                        : "/packages",
+              })
+            }
+          >
             <Search className="size-4" />
             SEARCH
           </button>
@@ -172,7 +188,10 @@ export function SearchWidget() {
 
         <p className="mt-3 border-t border-line pt-3 text-center text-sm text-body">
           Can't find what you're looking for? create your{" "}
-          <a href="#" className="font-medium text-brand underline underline-offset-4">
+          <a
+            href="/customized-tours"
+            className="font-medium text-brand underline underline-offset-4"
+          >
             Custom Itinerary
           </a>
         </p>

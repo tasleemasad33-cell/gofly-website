@@ -172,7 +172,7 @@ export function ExperiencesPage() {
               plugins={[Autoplay({ delay: 3800, stopOnInteraction: false })]}
             >
               {experienceDestinations.map((d) => (
-                <a key={d.title} href="#" className="group block text-center">
+                <a key={d.title} href="/destinations" className="group block text-center">
                   <div className="relative mx-auto size-[160px] overflow-hidden rounded-full shadow-[0_4px_20px_rgba(0,0,0,0.08)] transition-all duration-500 group-hover:scale-105 group-hover:shadow-[0_8px_30px_rgba(0,0,0,0.15)] sm:size-[200px] lg:size-[240px]">
                     <img
                       src={d.img}
@@ -218,7 +218,7 @@ export function ExperiencesPage() {
               <p className="text-sm text-body">5.0 Rating out of 5.0 based on 24,000 reviews</p>
             </div>
             <a
-              href="#"
+              href="/customized-tours"
               className="inline-flex items-center gap-2 rounded-full bg-title px-7 py-3.5 font-display text-sm font-medium text-white transition-colors hover:bg-brand"
             >
               Customize Package <ArrowRight className="size-4" />
@@ -308,7 +308,7 @@ export function ExperiencesPage() {
                         <p className="font-display text-2xl font-bold text-title">{a.price}</p>
                       </div>
                       <a
-                        href="#"
+                        href="/contact"
                         className="rounded-full bg-brand px-6 py-3 font-display text-sm font-medium text-white transition-colors hover:bg-dark"
                       >
                         Book Now
@@ -354,7 +354,7 @@ export function ExperiencesPage() {
                       ))}
                     </ul>
                     <a
-                      href="#"
+                      href="/packages"
                       className="btn-primary mt-8 inline-flex items-center gap-2 rounded-full bg-white px-7 py-3.5 font-display text-sm font-medium text-title transition-colors hover:bg-brand hover:text-white"
                     >
                       View All Activities <ArrowRight className="size-4" />
@@ -444,7 +444,7 @@ export function ExperiencesPage() {
                       </h3>
                       <p className="mt-4 leading-relaxed text-body">{t.text}</p>
                       <a
-                        href="#"
+                        href="/contact"
                         className="btn-primary mt-8 inline-flex items-center gap-2 rounded-full bg-brand px-7 py-3.5 font-display text-sm font-medium text-white transition-colors hover:bg-dark"
                       >
                         Book Now <ArrowRight className="size-4" />

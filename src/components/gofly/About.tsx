@@ -4,12 +4,12 @@ import { Reveal } from "./Reveal";
 import { useCountUp } from "./useCountUp";
 
 const services = [
-  { label: "Hotel Booking", icon: Building2 },
-  { label: "Top Destinations", icon: MapPin },
-  { label: "Visa Processing", icon: StampIcon },
-  { label: "Tour Experineces", icon: Compass },
-  { label: "Customize Package", icon: Settings2 },
-  { label: "Adventure Travel", icon: Mountain },
+  { label: "Hotel Booking", icon: Building2, href: "/hotel-bookings" },
+  { label: "Top Destinations", icon: MapPin, href: "/destinations" },
+  { label: "Visa Processing", icon: StampIcon, href: "/visa-facilitation" },
+  { label: "Tour Experineces", icon: Compass, href: "/experiences" },
+  { label: "Customize Package", icon: Settings2, href: "/customized-tours" },
+  { label: "Adventure Travel", icon: Mountain, href: "/experiences" },
 ];
 
 export function About() {
@@ -48,10 +48,10 @@ export function About() {
               We Provide to Smart Services
             </h6>
             <div className="mt-4 grid grid-cols-2 gap-3 sm:grid-cols-3">
-              {services.map(({ label, icon: Icon }, i) => (
+              {services.map(({ label, icon: Icon, href }, i) => (
                 <Reveal key={label} delay={i * 80}>
                   <a
-                    href="#"
+                    href={href}
                     className="flex h-full items-center gap-2 rounded-xl bg-background px-3 py-3 text-sm font-medium text-title transition-all hover:-translate-y-1 hover:text-brand card-shadow"
                   >
                     <Icon className="size-4 shrink-0 text-brand" />
