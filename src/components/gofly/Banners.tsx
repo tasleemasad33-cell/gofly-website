@@ -1,5 +1,6 @@
 import { ArrowRight } from "lucide-react";
 import { IMG, partners } from "@/lib/gofly-data";
+import { clientBannerImage } from "@/lib/client-images";
 import { Reveal } from "./Reveal";
 
 export function OfferBanner() {
@@ -31,10 +32,10 @@ export function OfferBanner() {
                 </a>
               </div>
               <img
-                src={`${IMG}/home2/home2-offer-banner-img.png`}
-                alt="Happy family travelling"
+                src={clientBannerImage}
+                alt="Travel destinations"
                 loading="lazy"
-                className="w-full max-w-md object-contain"
+                className="w-full max-w-md rounded-2xl object-cover"
               />
             </div>
           </div>

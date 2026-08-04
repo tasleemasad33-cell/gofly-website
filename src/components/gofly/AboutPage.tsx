@@ -27,6 +27,12 @@ import {
   Wallet,
 } from "lucide-react";
 import { IMG } from "@/lib/gofly-data";
+import {
+  clientAboutHero,
+  clientStoryImage,
+  clientCollageImages,
+  clientJourneyImages,
+} from "@/lib/client-images";
 import { Reveal } from "./Reveal";
 import { SectionTitle } from "./SectionTitle";
 import { Counters } from "./Sections";
@@ -36,7 +42,7 @@ function AboutHero() {
   return (
     <section className="relative h-[400px] w-full overflow-hidden">
       <img
-        src={`${IMG}/home2/banner-img1.jpg`}
+        src={clientAboutHero}
         alt="Travel Nest"
         className="absolute inset-0 h-full w-full object-cover"
       />
@@ -137,20 +143,23 @@ function AboutIntro() {
             </div>
           </Reveal>
 
-          {/* Image side */}
+          {/* Image side — collage */}
           <Reveal delay={120} className="relative">
             <div className="relative mx-auto max-w-lg">
               <div className="absolute -left-4 -top-4 hidden h-full w-full rounded-3xl border-2 border-dashed border-brand/40 sm:block" />
               <div className="absolute -bottom-6 -right-6 hidden h-40 w-40 rounded-3xl bg-brand/10 sm:block" />
 
-              <div className="relative overflow-hidden rounded-3xl shadow-xl">
-                <img
-                  src="/story-vienna.jpg"
-                  alt="Travel Nest journey"
-                  className="aspect-[4/5] w-full object-cover sm:aspect-square lg:aspect-[4/5]"
-                  loading="lazy"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/30 via-transparent to-transparent" />
+              <div className="grid grid-cols-2 gap-3">
+                {clientCollageImages.map((src, i) => (
+                  <div key={i} className="overflow-hidden rounded-2xl shadow-lg">
+                    <img
+                      src={src}
+                      alt={`Travel Nest story ${i + 1}`}
+                      className={`w-full object-cover ${i % 2 === 0 ? "aspect-[3/4]" : "aspect-square"}`}
+                      loading="lazy"
+                    />
+                  </div>
+                ))}
               </div>
 
               <div className="absolute -bottom-5 left-6 flex items-center gap-3 rounded-2xl border border-line bg-background px-4 py-3 shadow-lg">
@@ -214,22 +223,22 @@ function ServicesSection() {
 /* ─── Behind The Journey ─── */
 const journey = [
   {
-    img: `${IMG}/innerpages/about-page-journey-img1.jpg`,
+    img: clientJourneyImages[0],
     title: "The Inspiration",
     text: "During time in Vienna, Austria, the vision of Travel Nest began — travelling across Europe and witnessing how travel enriches lives, broadens perspectives and builds understanding between cultures.",
   },
   {
-    img: `${IMG}/innerpages/about-page-journey-img2.jpg`,
+    img: clientJourneyImages[1],
     title: "Wider Horizons",
     text: "Those journeys continued across Asia, the Middle East and Africa, where every destination offered its own unique history, traditions, hospitality and way of life.",
   },
   {
-    img: `${IMG}/innerpages/about-page-journey-img3.jpg`,
+    img: clientJourneyImages[2],
     title: "The Vision",
     text: "Every traveller has different expectations — adventure, relaxation, culture, family time or celebrations. What they all deserve is a journey carefully planned, professionally managed and genuinely memorable.",
   },
   {
-    img: `${IMG}/innerpages/about-page-journey-img4.jpg`,
+    img: clientJourneyImages[3],
     title: "Travel Nest Today",
     text: "Working with carefully selected DMCs, quality hotels and reliable providers, we craft personalised journeys that are seamless from the moment you start planning until you return home.",
   },

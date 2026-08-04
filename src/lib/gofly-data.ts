@@ -1,22 +1,8 @@
 export const IMG = "https://demo.egenslab.com/html/gofly/preview/assets/img";
 
-export const heroSlides = [
-  {
-    img: `${IMG}/home2/banner-img1.jpg`,
-    title: "All-in-one Travel Booking.",
-    text: "Highlights convenience and simplicity, Best for agencies with online & mobile-friendly services.",
-  },
-  {
-    img: `${IMG}/home2/banner-img2.jpg`,
-    title: "Plan Your Trip, Your Way.",
-    text: "Perfect for customized travel experiences — tailored flights, stays, and tours just for you.",
-  },
-  {
-    img: `${IMG}/home2/destination-img6.jpg`,
-    title: "Your Gateway To The World.",
-    text: "Ideal for explorers seeking seamless booking and expert travel support every step of the way.",
-  },
-];
+import { clientHeroSlides, clientGalleryImages, clientGalleryItems } from "@/lib/client-images";
+
+export const heroSlides = clientHeroSlides;
 
 export type PkgCategory = "group" | "honeymoon" | "corporate" | "customized" | "educational";
 
@@ -296,53 +282,12 @@ export const counters = [
   { value: 98, suffix: "%", label: "Retention Rate" },
 ];
 
-export const galleryImages = [
-  `${IMG}/home2/gallery-img1.jpg`,
-  `${IMG}/home2/gallery-img2.jpg`,
-  `${IMG}/home2/gallery-img3.jpg`,
-  `${IMG}/home2/gallery-img4.jpg`,
-  `${IMG}/home2/gallery-img5.jpg`,
-  `${IMG}/home2/gallery-img6.jpg`,
-];
+export const galleryImages = clientGalleryImages;
 
-export const galleryItems = [
-  {
-    img: `${IMG}/home2/gallery-img1.jpg`,
-    title: "Maldives Beach Paradise",
-    location: "Maldives",
-    desc: "Crystal-clear lagoons and powdery white sands for the perfect island escape.",
-  },
-  {
-    img: `${IMG}/home2/gallery-img2.jpg`,
-    title: "Swiss Alps Adventure",
-    location: "Switzerland",
-    desc: "Snow-capped peaks, scenic train rides and alpine villages that take your breath away.",
-  },
-  {
-    img: `${IMG}/home2/gallery-img3.jpg`,
-    title: "Santorini Sunset",
-    location: "Greece",
-    desc: "White-washed villages and unforgettable sunsets over the Aegean Sea.",
-  },
-  {
-    img: `${IMG}/home2/gallery-img4.jpg`,
-    title: "African Safari",
-    location: "Kenya",
-    desc: "Spot the Big Five on an unforgettable safari across the wild savannah.",
-  },
-  {
-    img: `${IMG}/home2/gallery-img5.jpg`,
-    title: "Bali Rice Terraces",
-    location: "Indonesia",
-    desc: "Emerald-green terraces and the spiritual heart of the Island of the Gods.",
-  },
-  {
-    img: `${IMG}/home2/gallery-img6.jpg`,
-    title: "Northern Lights",
-    location: "Norway",
-    desc: "Chase the magical aurora borealis dancing across Arctic skies.",
-  },
-];
+export const galleryItems = clientGalleryItems.map((item) => ({
+  ...item,
+  desc: "A stunning destination curated by Travel Nest for unforgettable journeys.",
+}));
 
 export const partners = [1, 2, 3, 4, 5, 6].map((n) => `${IMG}/home1/partner-0${n}.png`);
 
