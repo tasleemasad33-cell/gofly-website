@@ -1,6 +1,6 @@
 import { useState } from "react";
 import Autoplay from "embla-carousel-autoplay";
-import { ArrowRight, Clock, MapPin } from "lucide-react";
+import { ArrowRight, Calendar, Clock, MapPin, Minus, Plus, Users, X } from "lucide-react";
 import { IMG } from "@/lib/gofly-data";
 import { PageHero } from "./PageHero";
 import { SectionTitle } from "./SectionTitle";
@@ -88,6 +88,13 @@ const guides = [
   { img: `${IMG}/home7/tour-guide-img6.png`, name: "Thomas Mitchell", role: "Scuba Expert" },
 ];
 
+type Activity = {
+  title: string;
+  location: string;
+  duration: string;
+  price: string;
+};
+
 const activityTabs = [
   {
     id: "scuba",
@@ -95,6 +102,9 @@ const activityTabs = [
     img: `${IMG}/home7/activity-tab-img1.jpg`,
     title: "Adventure Scuba Diving",
     text: "Experience the breathtaking beauty of the ocean like never before! With 35% OFF on scuba diving experiences across all destinations.",
+    location: "Maldives",
+    duration: "01 Hour",
+    price: "$99",
   },
   {
     id: "paragliding",
@@ -102,6 +112,9 @@ const activityTabs = [
     img: `${IMG}/home7/activity-tab-img2.jpg`,
     title: "Thrilling Paragliding Ride",
     text: "Soar through the skies and take in stunning views from above! Enjoy 25% OFF on paragliding adventures at all destinations.",
+    location: "Nepal",
+    duration: "40 Minute",
+    price: "$129",
   },
   {
     id: "rafting",
@@ -109,6 +122,9 @@ const activityTabs = [
     img: `${IMG}/home7/activity-tab-img3.jpg`,
     title: "Exciting River Rafting",
     text: "Feel the adrenaline rush as you conquer wild rapids! Get 20% OFF on rafting experiences across all destinations.",
+    location: "Goa, India",
+    duration: "01 Hour",
+    price: "$59",
   },
   {
     id: "bungee",
@@ -116,6 +132,9 @@ const activityTabs = [
     img: `${IMG}/home7/activity-tab-img4.jpg`,
     title: "Extreme Bungee Jumping",
     text: "Take the leap of a lifetime from breathtaking heights! Enjoy 35% OFF on bungee jump adventures in all locations.",
+    location: "Hawaii, USA",
+    duration: "30 Minute",
+    price: "$109",
   },
 ];
 
@@ -150,8 +169,138 @@ function Counter({ value, suffix, label }: { value: number; suffix: string; labe
   );
 }
 
+/* ───────────── Activity booking modal ───────────── */
+
+function ActivityBookingModal({
+  activity,
+  image,
+  onClose,
+}: {
+  activity: Activity;
+  image: string;
+  onClose: () => void;
+}) {
+  const [adults, setAdults] = useState(2);
+  const [children, setChildren] = useState(0);
+  const total = adults + children;
+
+  return (
+    <div
+      className="fixed inset-0 z-[90] flex items-center justify-center bg-dark/60 p-4"
+      onClick={onClose}
+    >
+      <div
+        className="max-h-[90vh] w-full max-w-xl overflow-y-auto rounded-2xl bg-background p-6 shadow-2xl"
+        onClick={(e) => e.stopPropagation()}
+      >
+        <div className="flex items-center justify-between border-b border-line pb-4">
+          <h3 className="font-display text-xl font-semibold text-title">{activity.title}</h3>
+          <button
+            aria-label="Close"
+            onClick={onClose}
+            className="grid size-9 place-items-center rounded-full border border-line text-body hover:bg-soft"
+          >
+            <X className="size-4" />
+          </button>
+        </div>
+
+        <div className="mt-4 flex items-center gap-3 overflow-hidden rounded-xl border border-line p-3">
+          <img
+            src={image}
+            alt={activity.title}
+            className="size-16 shrink-0 rounded-lg object-cover"
+          />
+          <div className="min-w-0">
+            <p className="font-display text-sm font-semibold text-title">{activity.title}</p>
+            <p className="mt-0.5 flex items-center gap-1.5 text-xs text-body">
+              <MapPin className="size-3.5 text-brand" /> {activity.location}
+            </p>
+            <p className="mt-0.5 flex items-center gap-1.5 text-xs text-body">
+              <Clock className="size-3.5 text-brand" /> {activity.duration}
+            </p>
+          </div>
+        </div>
+
+        <div className="mt-5 space-y-4">
+          <label className="flex items-center gap-3 rounded-xl border border-line px-4 py-3">
+            <Calendar className="size-5 text-brand" />
+            <div>
+              <span className="block text-xs text-body">Select Date</span>
+              <input
+                type="date"
+                className="w-full bg-transparent font-display text-sm text-title outline-none"
+              />
+            </div>
+          </label>
+
+          <div className="flex items-center justify-between rounded-xl border border-line px-4 py-3">
+            <div className="flex items-center gap-3">
+              <Users className="size-5 text-brand" />
+              <div>
+                <span className="block text-xs text-body">Travelers</span>
+                <span className="font-display text-sm font-medium text-title">
+                  {adults} Adults, {children} Child
+                </span>
+              </div>
+            </div>
+            <div className="flex items-center gap-3">
+              {[
+                { label: "Adult", val: adults, set: setAdults },
+                { label: "Child", val: children, set: setChildren },
+              ].map((g) => (
+                <div key={g.label} className="flex items-center gap-2">
+                  <button
+                    aria-label={`Remove ${g.label}`}
+                    onClick={() => g.set(Math.max(0, g.val - 1))}
+                    className="grid size-7 place-items-center rounded-full border border-line text-body hover:border-brand hover:text-brand"
+                  >
+                    <Minus className="size-3" />
+                  </button>
+                  <span className="w-6 text-center font-display text-sm font-semibold text-title">
+                    {g.val}
+                  </span>
+                  <button
+                    aria-label={`Add ${g.label}`}
+                    onClick={() => g.set(g.val + 1)}
+                    className="grid size-7 place-items-center rounded-full border border-line text-body hover:border-brand hover:text-brand"
+                  >
+                    <Plus className="size-3" />
+                  </button>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          <div className="flex items-center justify-between rounded-xl bg-soft px-4 py-3">
+            <span className="font-display text-sm font-medium text-title">
+              Total ({total} persons)
+            </span>
+            <span className="font-display text-lg font-semibold text-title">{activity.price}</span>
+          </div>
+
+          <div className="flex flex-wrap gap-3">
+            <button
+              onClick={onClose}
+              className="inline-flex flex-1 items-center justify-center gap-2 rounded-full bg-brand px-6 py-3.5 font-display text-sm font-medium text-white transition-colors hover:bg-brand2"
+            >
+              Book Now <ArrowRight className="size-4" />
+            </button>
+            <button
+              onClick={onClose}
+              className="inline-flex flex-1 items-center justify-center gap-2 rounded-full border border-title px-6 py-3.5 font-display text-sm font-medium text-title transition-colors hover:bg-title hover:text-white"
+            >
+              Add to Cart
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
 export function ExperiencesPage() {
   const [active, setActive] = useState(activityTabs[0].id);
+  const [booking, setBooking] = useState<{ activity: Activity; image: string } | null>(null);
 
   return (
     <div className="overflow-x-hidden">
@@ -307,12 +456,13 @@ export function ExperiencesPage() {
                         <p className="text-xs text-body">Per Person</p>
                         <p className="font-display text-2xl font-bold text-title">{a.price}</p>
                       </div>
-                      <a
-                        href="/contact"
+                      <button
+                        type="button"
+                        onClick={() => setBooking({ activity: a, image: a.img })}
                         className="rounded-full bg-brand px-6 py-3 font-display text-sm font-medium text-white transition-colors hover:bg-dark"
                       >
                         Book Now
-                      </a>
+                      </button>
                     </div>
                   </div>
                 </article>
@@ -443,12 +593,13 @@ export function ExperiencesPage() {
                         {t.title}
                       </h3>
                       <p className="mt-4 leading-relaxed text-body">{t.text}</p>
-                      <a
-                        href="/contact"
+                      <button
+                        type="button"
+                        onClick={() => setBooking({ activity: t, image: t.img })}
                         className="btn-primary mt-8 inline-flex items-center gap-2 rounded-full bg-brand px-7 py-3.5 font-display text-sm font-medium text-white transition-colors hover:bg-dark"
                       >
                         Book Now <ArrowRight className="size-4" />
-                      </a>
+                      </button>
                     </div>
                   </div>
                 </Reveal>
@@ -456,6 +607,14 @@ export function ExperiencesPage() {
           </div>
         </div>
       </section>
+
+      {booking && (
+        <ActivityBookingModal
+          activity={booking.activity}
+          image={booking.image}
+          onClose={() => setBooking(null)}
+        />
+      )}
     </div>
   );
 }
