@@ -21,6 +21,7 @@ import { IMG, allPackages, getPackageDetail, type Pkg } from "@/lib/gofly-data";
 import { PackageCard } from "./PackageCard";
 import { Carousel } from "./Carousel";
 import { SectionTitle } from "./SectionTitle";
+import { WhatsAppBookingForm } from "./WhatsAppBookingForm";
 
 const TRIPADVISOR_IMG = `${IMG}/innerpages/icon/tripadvisor-rating.svg`;
 const CARBON_IMG = `${IMG}/innerpages/icon/carbon-icon.svg`;
@@ -541,13 +542,9 @@ function Reviews({ pkg }: { pkg: Pkg }) {
   );
 }
 
-/* ───────────── Booking modal ───────────── */
+/* ───────────── Booking modal (WhatsApp) ───────────── */
 
 function BookingModal({ pkg, onClose }: { pkg: Pkg; onClose: () => void }) {
-  const [adults, setAdults] = useState(2);
-  const [children, setChildren] = useState(0);
-  const total = adults + children;
-
   return (
     <div
       className="fixed inset-0 z-[90] flex items-center justify-center bg-dark/60 p-4"
@@ -558,9 +555,7 @@ function BookingModal({ pkg, onClose }: { pkg: Pkg; onClose: () => void }) {
         onClick={(e) => e.stopPropagation()}
       >
         <div className="flex items-center justify-between border-b border-line pb-4">
-          <h3 className="font-display text-xl font-semibold text-title">
-            Dates &amp; Availability
-          </h3>
+          <h3 className="font-display text-xl font-semibold text-title">Book {pkg.title}</h3>
           <button
             aria-label="Close"
             onClick={onClose}
@@ -569,78 +564,8 @@ function BookingModal({ pkg, onClose }: { pkg: Pkg; onClose: () => void }) {
             <X className="size-4" />
           </button>
         </div>
-
-        <div className="mt-5 space-y-4">
-          <label className="flex items-center gap-3 rounded-xl border border-line px-4 py-3">
-            <Calendar className="size-5 text-brand" />
-            <div>
-              <span className="block text-xs text-body">Select Date</span>
-              <input
-                type="date"
-                className="w-full bg-transparent font-display text-sm text-title outline-none"
-              />
-            </div>
-          </label>
-
-          <div className="flex items-center justify-between rounded-xl border border-line px-4 py-3">
-            <div className="flex items-center gap-3">
-              <Users className="size-5 text-brand" />
-              <div>
-                <span className="block text-xs text-body">Travelers</span>
-                <span className="font-display text-sm font-medium text-title">
-                  {adults} Adults, {children} Child
-                </span>
-              </div>
-            </div>
-            <div className="flex items-center gap-3">
-              {[
-                { label: "Adult", val: adults, set: setAdults },
-                { label: "Child", val: children, set: setChildren },
-              ].map((g) => (
-                <div key={g.label} className="flex items-center gap-2">
-                  <button
-                    aria-label={`Remove ${g.label}`}
-                    onClick={() => g.set(Math.max(0, g.val - 1))}
-                    className="grid size-7 place-items-center rounded-full border border-line text-body hover:border-brand hover:text-brand"
-                  >
-                    <Minus className="size-3" />
-                  </button>
-                  <span className="w-6 text-center font-display text-sm font-semibold text-title">
-                    {g.val}
-                  </span>
-                  <button
-                    aria-label={`Add ${g.label}`}
-                    onClick={() => g.set(g.val + 1)}
-                    className="grid size-7 place-items-center rounded-full border border-line text-body hover:border-brand hover:text-brand"
-                  >
-                    <Plus className="size-3" />
-                  </button>
-                </div>
-              ))}
-            </div>
-          </div>
-
-          <div className="flex items-center justify-between rounded-xl bg-soft px-4 py-3">
-            <span className="font-display text-sm font-medium text-title">
-              Total ({total} persons)
-            </span>
-            <span className="font-display text-lg font-semibold text-title">{pkg.price}</span>
-          </div>
-
-          <div className="flex flex-wrap gap-3">
-            <button
-              onClick={onClose}
-              className="inline-flex flex-1 items-center justify-center gap-2 rounded-full bg-brand px-6 py-3.5 font-display text-sm font-medium text-white transition-colors hover:bg-brand2"
-            >
-              Book Now <ArrowRight className="size-4" />
-            </button>
-            <button
-              onClick={onClose}
-              className="inline-flex flex-1 items-center justify-center gap-2 rounded-full border border-title px-6 py-3.5 font-display text-sm font-medium text-title transition-colors hover:bg-title hover:text-white"
-            >
-              Add to Cart
-            </button>
-          </div>
+        <div className="mt-5">
+          <WhatsAppBookingForm tourName={pkg.title} onClose={onClose} />
         </div>
       </div>
     </div>
