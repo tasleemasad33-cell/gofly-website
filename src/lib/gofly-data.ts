@@ -171,7 +171,7 @@ export const lastMinuteDeals: Pkg[] = [
 ];
 
 export const destinations = [
-  { img: `${IMG}/home2/destination-img1.jpg`, title: "Great Wall of China", tours: "Tours (12)" },
+  { img: "/images/client/tours/China-Customized-Tour.png", title: "Great Wall of China", tours: "Tours (12)" },
   { img: `${IMG}/home2/destination-img2.jpg`, title: "Rome, Italy", tours: "Tours (06)" },
   { img: `${IMG}/home2/destination-img3.jpg`, title: "Machu Picchu of Peru", tours: "Tours (16)" },
   { img: `${IMG}/home2/destination-img4.jpg`, title: "Great Temple Jordan", tours: "Tours (10)" },
@@ -299,7 +299,7 @@ export const destinationPageHero = `${IMG}/home2/banner-img2.jpg`;
 
 export const destinationCards = [
   { img: `${IMG}/home2/destination-img2.jpg`, title: "Rome, Italy", tours: "Tours (06)" },
-  { img: `${IMG}/home2/destination-img1.jpg`, title: "Great Wall of China", tours: "Tours (12)" },
+  { img: "/images/client/tours/China-Customized-Tour.png", title: "Great Wall of China", tours: "Tours (12)" },
   { img: `${IMG}/home2/destination-img4.jpg`, title: "Great Temple Jordan", tours: "Tours (18)" },
   { img: `${IMG}/home2/destination-img6.jpg`, title: "Switzerland", tours: "Tours (14)" },
   { img: `${IMG}/home2/destination-img5.jpg`, title: "Santorini, Greece", tours: "Tours (07)" },
