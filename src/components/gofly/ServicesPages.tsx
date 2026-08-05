@@ -475,7 +475,7 @@ export function AirTicketsPage() {
       <PageHero
         title="Air Ticket Booking"
         crumb="Services / Air Tickets"
-        image={`${IMG}/home1/banner-img2.jpg`}
+        image="/images/client/tours/Dubai.png"
       />
       <section className="py-20">
         <div className="container-gofly">
@@ -591,7 +591,7 @@ export function HotelBookingsPage() {
       <PageHero
         title="Find Your Perfect Stay Anywhere in the World"
         crumb="Services / Hotel Bookings"
-        image={`${IMG}/home1/banner-img1.jpg`}
+        image="/images/client/tours/Maldives.png"
       />
       <section className="py-20">
         <div className="container-gofly">
