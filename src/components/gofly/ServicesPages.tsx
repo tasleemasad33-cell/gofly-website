@@ -17,6 +17,8 @@ import { PageHero } from "./PageHero";
 import { SectionTitle } from "./SectionTitle";
 import { Reveal } from "./Reveal";
 
+const WHATSAPP = "923229606256";
+
 /* ────────────── Visa Facilitation ────────────── */
 
 const visaCountries = [
@@ -318,6 +320,12 @@ const visaSteps = [
 
 export function VisaFacilitationPage() {
   const [activeCountry, setActiveCountry] = useState("Azerbaijan");
+  const [departureCity, setDepartureCity] = useState("");
+  const [visaCountry, setVisaCountry] = useState("");
+
+  const visaWhatsappUrl = `https://wa.me/${WHATSAPP}?text=${encodeURIComponent(
+    `Hi Travel Nest, I need help with visa facilitation.\n\nDeparture City: ${departureCity || "Not selected"}\nVisa Country: ${visaCountry || "Not selected"}`
+  )}`;
 
   return (
     <div className="overflow-x-hidden">
@@ -404,7 +412,11 @@ export function VisaFacilitationPage() {
                   <span className="mb-1.5 block text-xs font-semibold uppercase tracking-wide text-body">
                     Departure City
                   </span>
-                  <select className="w-full rounded-xl border border-line bg-background px-4 py-3 text-sm text-title outline-none transition-colors focus:border-brand">
+                  <select
+                    value={departureCity}
+                    onChange={(e) => setDepartureCity(e.target.value)}
+                    className="w-full rounded-xl border border-line bg-background px-4 py-3 text-sm text-title outline-none transition-colors focus:border-brand"
+                  >
                     <option value="">--- Select Departure City ---</option>
                     {visaDepartureCities.map((c) => (
                       <option key={c} value={c}>
@@ -417,7 +429,11 @@ export function VisaFacilitationPage() {
                   <span className="mb-1.5 block text-xs font-semibold uppercase tracking-wide text-body">
                     Visa Country
                   </span>
-                  <select className="w-full rounded-xl border border-line bg-background px-4 py-3 text-sm text-title outline-none transition-colors focus:border-brand">
+                  <select
+                    value={visaCountry}
+                    onChange={(e) => setVisaCountry(e.target.value)}
+                    className="w-full rounded-xl border border-line bg-background px-4 py-3 text-sm text-title outline-none transition-colors focus:border-brand"
+                  >
                     <option value="">--- Select Country ---</option>
                     {visaCountries.map((c) => (
                       <option key={c} value={c}>
@@ -429,7 +445,12 @@ export function VisaFacilitationPage() {
               </div>
             </div>
             <div className="mt-8 text-center">
-              <a href="/contact" className="btn-primary">
+              <a
+                href={visaWhatsappUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="btn-primary"
+              >
                 Send Message <ArrowRight className="size-4" />
               </a>
             </div>
@@ -535,7 +556,12 @@ export function AirTicketsPage() {
               </div>
             </div>
             <div className="mt-8 text-center">
-              <a href="/contact" className="btn-primary">
+              <a
+                href={`https://wa.me/${WHATSAPP}?text=${encodeURIComponent("Hi Travel Nest, I need help finding the best air ticket options.")}`}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="btn-primary"
+              >
                 Send Message <ArrowRight className="size-4" />
               </a>
             </div>
@@ -674,7 +700,12 @@ export function TransportationPage() {
             <p className="mx-auto mt-3 max-w-xl text-sm text-body">
               Share your route and dates, and we'll arrange the right vehicle for your group.
             </p>
-            <a href="/contact" className="btn-primary mt-8">
+            <a
+              href={`https://wa.me/${WHATSAPP}?text=${encodeURIComponent("Hi Travel Nest, I need transportation for my trip. Please share the details.")}`}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="btn-primary mt-8"
+            >
               Request Transport <ArrowRight className="size-4" />
             </a>
           </div>
@@ -890,11 +921,18 @@ export function DestinationWeddingPage() {
                   </div>
                 </div>
                 <div className="mt-6 flex flex-col gap-4 sm:flex-row">
-                  <a href="/contact" className="btn-primary">
+                  <a
+                    href={`https://wa.me/${WHATSAPP}?text=${encodeURIComponent("Hi Travel Nest, I'm interested in planning a destination wedding. Please share the details.")}`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="btn-primary"
+                  >
                     Plan Your Wedding <ArrowRight className="size-4" />
                   </a>
                   <a
-                    href="/contact"
+                    href={`https://wa.me/${WHATSAPP}?text=${encodeURIComponent("Hi Travel Nest, I'd like a free consultation for a destination wedding.")}`}
+                    target="_blank"
+                    rel="noopener noreferrer"
                     className="btn-primary bg-transparent border border-brand text-brand hover:bg-brand hover:text-primary-foreground"
                   >
                     Get Free Consultation
@@ -937,7 +975,12 @@ export function DestinationWeddingPage() {
           </div>
 
           <div className="mt-14 flex flex-col items-center justify-center gap-4 sm:flex-row">
-            <a href="/contact" className="btn-primary">
+            <a
+              href={`https://wa.me/${WHATSAPP}?text=${encodeURIComponent("Hi Travel Nest, I'd like to book a consultation for a destination wedding.")}`}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="btn-primary"
+            >
               Book Consultation <ArrowRight className="size-4" />
             </a>
           </div>
