@@ -486,7 +486,7 @@ function FAQSection() {
   const [openIdx, setOpenIdx] = useState<number | null>(null);
 
   return (
-    <section className="py-20">
+    <section id="faq" className="py-20">
       <div className="container-gofly">
         <SectionTitle
           title="Questions & Answer"

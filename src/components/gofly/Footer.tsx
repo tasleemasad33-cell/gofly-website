@@ -16,9 +16,10 @@ const pageLinks = [
   { label: "Home", href: "/" },
   { label: "Tours", href: "/packages" },
   { label: "Services", href: "/experiences" },
+  { label: "Travel Inspirations", href: "/experiences" },
+  { label: "FAQ", href: "/about#faq" },
   { label: "About Us", href: "/about" },
-  { label: "Contact Us", href: "/contact" },
-  { label: "Travel Inspiration", href: "/experiences" },
+  { label: "Contact", href: "/contact" },
 ];
 
 export function Footer() {
