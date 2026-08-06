@@ -57,27 +57,50 @@ export function Features() {
     <section className="py-16">
       <div className="container-gofly">
         <Reveal>
-          <div className="rounded-[32px] bg-[oklch(0.96_0.06_110)] px-6 py-12 sm:px-12">
-            <h2 className="text-center font-display text-2xl font-semibold sm:text-[32px]">
+          <div className="relative overflow-hidden rounded-[32px] bg-[#1a1f4e] px-6 py-12 sm:px-12">
+            {/* Decorative SVG vectors */}
+            <svg
+              className="absolute right-0 top-0 size-40 text-white/5"
+              viewBox="0 0 200 200"
+              fill="currentColor"
+            >
+              <circle cx="100" cy="100" r="100" />
+            </svg>
+            <svg
+              className="absolute -bottom-10 -left-10 size-60 text-white/5"
+              viewBox="0 0 200 200"
+              fill="currentColor"
+            >
+              <circle cx="100" cy="100" r="100" />
+            </svg>
+            <svg
+              className="absolute bottom-4 right-8 size-24 text-white/5"
+              viewBox="0 0 200 200"
+              fill="currentColor"
+            >
+              <circle cx="100" cy="100" r="100" />
+            </svg>
+
+            <h2 className="relative text-center font-display text-2xl font-semibold text-white sm:text-[32px]">
               Travel Nest – Your Journey, Our Priority!
             </h2>
-            <div className="mt-10 grid gap-8 md:grid-cols-3">
+            <div className="relative mt-10 grid gap-8 md:grid-cols-3">
               {features.map((f, i) => (
                 <Reveal key={f.title} delay={i * 120}>
                   <div className="flex gap-4">
-                    <span className="grid size-12 shrink-0 place-items-center rounded-full bg-background text-xl">
+                    <span className="grid size-12 shrink-0 place-items-center rounded-full bg-white/10 text-xl">
                       {f.icon}
                     </span>
                     <div>
-                      <h4 className="font-display text-lg font-semibold">{f.title}</h4>
-                      <p className="mt-1 text-sm leading-relaxed text-body">{f.text}</p>
+                      <h4 className="font-display text-lg font-semibold text-white">{f.title}</h4>
+                      <p className="mt-1 text-sm leading-relaxed text-white/70">{f.text}</p>
                     </div>
                   </div>
                 </Reveal>
               ))}
             </div>
-            <div className="mt-10 flex flex-wrap items-center justify-center gap-4">
-              <span className="rounded-full bg-dark px-6 py-3 font-display text-sm font-medium text-white">
+            <div className="relative mt-10 flex flex-wrap items-center justify-center gap-4">
+              <span className="rounded-full bg-white/10 px-6 py-3 font-display text-sm font-medium text-white">
                 Find Your Favourite Travel Package!
               </span>
               <a href="/packages" className="btn-primary">
