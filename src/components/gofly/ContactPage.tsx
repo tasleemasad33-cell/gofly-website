@@ -1,5 +1,7 @@
 import { useState, type FormEvent } from "react";
-import { CircleHelp, Mail, MapPin, MessageCircle, Phone, Send } from "lucide-react";
+import { CircleHelp, Mail, MapPin, Phone, Send } from "lucide-react";
+import { IMG } from "@/lib/gofly-data";
+import { PageHero } from "./PageHero";
 
 const supportChannels = [
   { icon: Phone, label: "Phone", value: "92 322 9606256" },
@@ -8,7 +10,7 @@ const supportChannels = [
 ];
 
 const helpLinks = [
-  { label: "Frequently Asked Questions", href: "/contact" },
+  { label: "Frequently Asked Questions", href: "/about" },
   { label: "Terms & Conditions", href: "/contact" },
   { label: "Privacy Policy", href: "/contact" },
   { label: "Refund Policy", href: "/contact" },
@@ -19,73 +21,30 @@ const moreLinks = ["About Us", "Contact Us"];
 
 export function ContactPage() {
   const [sent, setSent] = useState(false);
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [subject, setSubject] = useState("");
+  const [message, setMessage] = useState("");
 
   const onSubmit = (e: FormEvent) => {
     e.preventDefault();
+    const text = `Hi Travel Nest,\n\nName: ${name}\nEmail: ${email}\nSubject: ${subject}\n\nMessage: ${message}`;
+    window.open(`https://wa.me/923229606256?text=${encodeURIComponent(text)}`, "_blank");
     setSent(true);
   };
 
   return (
     <div className="overflow-x-hidden">
-      {/* Header */}
-      <section className="pt-16 sm:pt-20">
-        <div className="text-center">
-          <h1 className="font-display text-3xl font-bold tracking-wide text-title sm:text-4xl">
-            Contact Us
-          </h1>
-          <div className="mx-auto mt-3 h-0.5 w-14 bg-brand2" />
-          <p className="mx-auto mt-4 max-w-md text-sm leading-relaxed text-body">
-            Visit our studio or reach out to our team — we're here to help.
-          </p>
-        </div>
-      </section>
-
-      {/* Studio card */}
-      <section className="pb-12 pt-10">
-        <div className="mx-auto max-w-lg">
-          <div className="space-y-4 border border-line bg-soft2 p-6 sm:p-8">
-            <span className="text-[11px] font-bold uppercase tracking-[0.2em] text-brand2">
-              Travel Studio
-            </span>
-            <h3 className="font-display text-base font-semibold text-title">
-              Travel Nest — Islamabad
-            </h3>
-            <p className="text-[11px] font-semibold uppercase tracking-[0.2em] text-brand2">
-              Appointment Only
-            </p>
-            <div className="space-y-3 text-sm text-body">
-              <p className="flex items-start gap-3">
-                <MapPin className="mt-0.5 size-4 shrink-0 text-title" />
-                <span>
-                  Office no 311, 3rd floor, Gulberg Empire Building, Executive Block, Civic Centre,
-                  Gulberg Greens, Islamabad
-                </span>
-              </p>
-              <p className="flex items-center gap-3">
-                <Phone className="size-4 shrink-0 text-title" />
-                <a href="tel:+923229606256" className="hover:text-brand2">
-                  92 322 9606256
-                </a>
-              </p>
-              <p className="flex items-center gap-3">
-                <Mail className="size-4 shrink-0 text-title" />
-                <a href="mailto:Info@travelnest.com" className="hover:text-brand2">
-                  Info@travelnest.com
-                </a>
-              </p>
-            </div>
-          </div>
-        </div>
-      </section>
+      <PageHero title="Contact Us" crumb="Contact Us" image={`${IMG}/home2/banner-img2.jpg`} />
 
       {/* Write To Us + Support Channels */}
-      <section className="border-t border-line pb-16 pt-12">
+      <section className="pb-16 pt-12">
         <div className="container-gofly grid grid-cols-1 gap-12 lg:grid-cols-12">
           {/* Left: Write To Us */}
           <div className="space-y-6 lg:col-span-7">
             <div>
               <h2 className="flex items-center gap-2 font-display text-xl font-semibold text-title">
-                <Mail className="size-5 text-brand2" /> Write To Us
+                <Mail className="size-5 text-brand" /> Write To Us
               </h2>
               <p className="mt-1 text-sm text-body">
                 Have questions about tours, bookings, visas or our packages? Send us a message and
@@ -105,7 +64,17 @@ export function ContactPage() {
                   <p className="mt-2 max-w-sm text-sm text-body">
                     Thank you for reaching out. Our team will contact you shortly.
                   </p>
-                  <button type="button" onClick={() => setSent(false)} className="btn-outline mt-6">
+                  <button
+                    type="button"
+                    onClick={() => {
+                      setSent(false);
+                      setName("");
+                      setEmail("");
+                      setSubject("");
+                      setMessage("");
+                    }}
+                    className="btn-outline mt-6"
+                  >
                     Send Another Message
                   </button>
                 </div>
@@ -120,6 +89,8 @@ export function ContactPage() {
                         type="text"
                         placeholder="Your Name"
                         required
+                        value={name}
+                        onChange={(e) => setName(e.target.value)}
                         className="w-full border border-line bg-background px-3 py-2.5 outline-none transition-colors focus:border-title"
                       />
                     </div>
@@ -131,6 +102,8 @@ export function ContactPage() {
                         type="email"
                         placeholder="Your Email"
                         required
+                        value={email}
+                        onChange={(e) => setEmail(e.target.value)}
                         className="w-full border border-line bg-background px-3 py-2.5 outline-none transition-colors focus:border-title"
                       />
                     </div>
@@ -143,6 +116,8 @@ export function ContactPage() {
                       type="text"
                       placeholder="Subject"
                       required
+                      value={subject}
+                      onChange={(e) => setSubject(e.target.value)}
                       className="w-full border border-line bg-background px-3 py-2.5 outline-none transition-colors focus:border-title"
                     />
                   </div>
@@ -154,6 +129,8 @@ export function ContactPage() {
                       rows={5}
                       placeholder="Message"
                       required
+                      value={message}
+                      onChange={(e) => setMessage(e.target.value)}
                       className="w-full resize-none border border-line bg-background px-3 py-2.5 outline-none transition-colors focus:border-title"
                     />
                   </div>
@@ -172,7 +149,7 @@ export function ContactPage() {
           <div className="space-y-6 lg:col-span-5">
             <div>
               <h2 className="flex items-center gap-2 font-display text-xl font-semibold text-title">
-                <CircleHelp className="size-5 text-brand2" /> Support Channels
+                <CircleHelp className="size-5 text-brand" /> Support Channels
               </h2>
               <p className="mt-1 text-sm text-body">
                 Reach out directly — we're available to help.
@@ -186,11 +163,11 @@ export function ContactPage() {
                   <span>
                     <strong className="font-semibold text-title">{label}:</strong>{" "}
                     {label === "Phone" ? (
-                      <a href="tel:+923229606256" className="hover:text-brand2">
+                      <a href="tel:+923229606256" className="hover:text-brand">
                         {value}
                       </a>
                     ) : label === "Email" ? (
-                      <a href="mailto:Info@travelnest.com" className="hover:text-brand2">
+                      <a href="mailto:Info@travelnest.com" className="hover:text-brand">
                         {value}
                       </a>
                     ) : (
@@ -205,7 +182,7 @@ export function ContactPage() {
               href="https://wa.me/923229606256?text=Hi!%20I'm%20interested%20in%20Travel%20Nest%20packages."
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 px-6 py-3 text-xs font-semibold uppercase tracking-widest text-white transition-colors hover:opacity-90"
+              className="inline-flex items-center gap-2 rounded-full px-6 py-3 text-xs font-semibold uppercase tracking-widest text-white transition-colors hover:opacity-90"
               style={{ backgroundColor: "#25D366" }}
             >
               <svg className="size-4 fill-white" viewBox="0 0 24 24">
@@ -214,7 +191,7 @@ export function ContactPage() {
               Chat on WhatsApp
             </a>
 
-            <div className="h-64 w-full overflow-hidden border border-line">
+            <div className="h-64 w-full overflow-hidden rounded-2xl border border-line">
               <iframe
                 title="Travel Nest - Islamabad"
                 src="https://maps.google.com/maps?q=Gulberg%20Greens%2C%20Islamabad&t=&z=13&ie=UTF8&iwloc=&output=embed"
@@ -239,7 +216,7 @@ export function ContactPage() {
             <ul className="mt-4 space-y-2.5 text-sm">
               {helpLinks.map((l) => (
                 <li key={l.label}>
-                  <a href={l.href} className="text-body transition-colors hover:text-brand2">
+                  <a href={l.href} className="text-body transition-colors hover:text-brand">
                     {l.label}
                   </a>
                 </li>
@@ -255,7 +232,7 @@ export function ContactPage() {
                 <li key={l}>
                   <a
                     href={l === "About Us" ? "/about" : "/contact"}
-                    className="text-body transition-colors hover:text-brand2"
+                    className="text-body transition-colors hover:text-brand"
                   >
                     {l}
                   </a>
