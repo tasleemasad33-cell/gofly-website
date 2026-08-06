@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "@tanstack/react-router";
-import { ChevronDown, Menu, Phone, Search, X } from "lucide-react";
+import { ChevronDown, Menu, Phone, X } from "lucide-react";
 
 const navItems = [
   { label: "Home", href: "/" },
@@ -27,8 +27,9 @@ const navItems = [
       { label: "Destination Wedding", href: "/destination-wedding" },
     ],
   },
+  { label: "Gallery", href: "/gallery" },
   { label: "About Us", href: "/about" },
-  { label: "Contact Us", href: "/contact" },
+  { label: "Contact", href: "/contact" },
 ];
 
 export function Header() {
@@ -80,13 +81,15 @@ export function Header() {
                     {item.label}
                     <ChevronDown className="size-3.5 transition-transform duration-200 group-hover:rotate-180" />
                   </a>
-                  <div className="invisible absolute left-1/2 top-full z-50 -translate-x-1/2 pt-2 opacity-0 transition-all duration-200 group-hover:visible group-hover:opacity-100">
-                    <div className="min-w-[210px] rounded-xl border border-line bg-background p-2 shadow-[var(--shadow-float)]">
-                      {item.children.map((c) => (
+                  {/* Dropdown with slide-down + fade animation */}
+                  <div className="pointer-events-none absolute left-1/2 top-full z-50 -translate-x-1/2 pt-2">
+                    <div className="min-w-[210px] rounded-xl border border-line bg-background p-2 shadow-[var(--shadow-float)] opacity-0 translate-y-[-8px] transition-all duration-300 delay-150 ease-out group-hover:pointer-events-auto group-hover:opacity-100 group-hover:translate-y-0">
+                      {item.children.map((c, idx) => (
                         <a
                           key={c.label}
                           href={c.href}
                           className="block rounded-lg px-3 py-2 font-display text-sm text-title transition-colors hover:bg-soft hover:text-brand"
+                          style={{ transitionDelay: `${idx * 40}ms` }}
                         >
                           {c.label}
                         </a>
@@ -120,15 +123,6 @@ export function Header() {
                 <p className="font-display text-sm font-bold text-title">92 322 9606256</p>
               </div>
             </div>
-
-            {/* Search */}
-            <button
-              aria-label="Search"
-              onClick={() => navigate({ to: "/packages" })}
-              className="grid size-10 place-items-center rounded-full border border-line text-title transition-colors hover:bg-soft"
-            >
-              <Search className="size-5" />
-            </button>
 
             {/* Mobile menu */}
             <button
