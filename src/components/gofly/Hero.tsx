@@ -66,13 +66,26 @@ export function Hero() {
           {heroSlides.map((slide, i) => (
             <div key={slide.title} className="relative min-w-0 flex-[0_0_100%]">
               <div className="relative h-[500px] w-full sm:h-[620px] lg:h-[680px]">
-                <img
-                  src={slide.img}
-                  alt={slide.title}
-                  className={`absolute inset-0 size-full object-cover transition-transform duration-[7000ms] ease-out ${
-                    selected === i ? "scale-110" : "scale-100"
-                  }`}
-                />
+                {"video" in slide && slide.video ? (
+                  <video
+                    src={slide.video}
+                    autoPlay
+                    muted
+                    loop
+                    playsInline
+                    className={`absolute inset-0 size-full object-cover transition-transform duration-[7000ms] ease-out ${
+                      selected === i ? "scale-110" : "scale-100"
+                    }`}
+                  />
+                ) : (
+                  <img
+                    src={slide.img}
+                    alt={slide.title}
+                    className={`absolute inset-0 size-full object-cover transition-transform duration-[7000ms] ease-out ${
+                      selected === i ? "scale-110" : "scale-100"
+                    }`}
+                  />
+                )}
                 <div className="absolute inset-0 bg-gradient-to-b from-dark/50 via-dark/20 to-dark/50" />
                 <div className="container-gofly relative flex h-full flex-col items-center justify-center text-center">
                   <h1

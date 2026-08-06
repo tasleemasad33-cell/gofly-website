@@ -5,8 +5,18 @@
 
 const C = "/images/client";
 
-/* ── Hero slides (3 wide landscape) ── */
-export const clientHeroSlides = [
+/* ── Hero slides (1 video + 3 pictures) ── */
+export const clientHeroSlides: {
+  img?: string;
+  video?: string;
+  title: string;
+  text: string;
+}[] = [
+  {
+    video: `${C}/hero/hero-video.mp4`,
+    title: "Discover the World with Travel Nest",
+    text: "From breathtaking landscapes to iconic landmarks — explore handcrafted journeys designed just for you.",
+  },
   {
     img: `${C}/HallStatt.jpg.jpeg`,
     title: "All-in-one Travel Booking.",
