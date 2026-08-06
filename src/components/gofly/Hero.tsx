@@ -65,7 +65,7 @@ export function Hero() {
         <div className="flex">
           {heroSlides.map((slide, i) => (
             <div key={slide.title} className="relative min-w-0 flex-[0_0_100%]">
-              <div className="relative h-[320px] w-full sm:h-[400px] lg:h-[480px]">
+              <div className="relative h-[360px] w-full sm:h-[440px] lg:h-[520px]">
                 {"video" in slide && slide.video ? (
                   <video
                     src={slide.video}
@@ -120,20 +120,20 @@ export function Hero() {
       <button
         aria-label="Previous slide"
         onClick={() => embla?.scrollPrev()}
-        className="absolute left-3 top-[40%] z-10 grid size-10 -translate-y-1/2 place-items-center rounded-full bg-white/20 text-white backdrop-blur-sm transition-all hover:bg-white/40 sm:left-6 sm:size-12"
+        className="absolute left-3 top-[35%] z-10 grid size-10 -translate-y-1/2 place-items-center rounded-full bg-white/20 text-white backdrop-blur-sm transition-all hover:bg-white/40 sm:left-6 sm:size-12"
       >
         <ChevronLeft className="size-5 sm:size-6" />
       </button>
       <button
         aria-label="Next slide"
         onClick={() => embla?.scrollNext()}
-        className="absolute right-3 top-[40%] z-10 grid size-10 -translate-y-1/2 place-items-center rounded-full bg-white/20 text-white backdrop-blur-sm transition-all hover:bg-white/40 sm:right-6 sm:size-12"
+        className="absolute right-3 top-[35%] z-10 grid size-10 -translate-y-1/2 place-items-center rounded-full bg-white/20 text-white backdrop-blur-sm transition-all hover:bg-white/40 sm:right-6 sm:size-12"
       >
         <ChevronRight className="size-5 sm:size-6" />
       </button>
 
       {/* Hero dots */}
-      <div className="absolute inset-x-0 bottom-[45%] flex justify-center gap-2 sm:bottom-[42%]">
+      <div className="absolute inset-x-0 bottom-4 flex justify-center gap-2">
         {heroSlides.map((s, i) => (
           <button
             key={s.title}
