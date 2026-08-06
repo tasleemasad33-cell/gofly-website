@@ -18,6 +18,7 @@ export type Pkg = {
   rating?: number;
   reviews?: number;
   category?: PkgCategory;
+  subcategory?: string;
 };
 
 export const popularPackages: Pkg[] = [
@@ -171,7 +172,11 @@ export const lastMinuteDeals: Pkg[] = [
 ];
 
 export const destinations = [
-  { img: "/images/client/tours/China-Customized-Tour.png", title: "Great Wall of China", tours: "Tours (12)" },
+  {
+    img: "/images/client/tours/China-Customized-Tour.png",
+    title: "Great Wall of China",
+    tours: "Tours (12)",
+  },
   { img: `${IMG}/home2/destination-img2.jpg`, title: "Rome, Italy", tours: "Tours (06)" },
   { img: `${IMG}/home2/destination-img3.jpg`, title: "Machu Picchu of Peru", tours: "Tours (16)" },
   { img: `${IMG}/home2/destination-img4.jpg`, title: "Great Temple Jordan", tours: "Tours (10)" },
@@ -299,7 +304,11 @@ export const destinationPageHero = `${IMG}/home2/banner-img2.jpg`;
 
 export const destinationCards = [
   { img: `${IMG}/home2/destination-img2.jpg`, title: "Rome, Italy", tours: "Tours (06)" },
-  { img: "/images/client/tours/China-Customized-Tour.png", title: "Great Wall of China", tours: "Tours (12)" },
+  {
+    img: "/images/client/tours/China-Customized-Tour.png",
+    title: "Great Wall of China",
+    tours: "Tours (12)",
+  },
   { img: `${IMG}/home2/destination-img4.jpg`, title: "Great Temple Jordan", tours: "Tours (18)" },
   { img: `${IMG}/home2/destination-img6.jpg`, title: "Switzerland", tours: "Tours (14)" },
   { img: `${IMG}/home2/destination-img5.jpg`, title: "Santorini, Greece", tours: "Tours (07)" },
@@ -367,6 +376,7 @@ export const groupTourPackages: Pkg[] = [
     price: "PKR 235,000",
     slug: "baku-azerbaijan-group-tour",
     category: "group",
+    subcategory: "international",
     rating: 4.6,
     reviews: 87,
   },
@@ -379,6 +389,7 @@ export const groupTourPackages: Pkg[] = [
     price: "PKR 255,000",
     slug: "dubai-group-tour",
     category: "group",
+    subcategory: "international",
     rating: 4.7,
     reviews: 121,
   },
@@ -391,6 +402,7 @@ export const groupTourPackages: Pkg[] = [
     price: "PKR 395,000",
     slug: "bali-indonesia-group-tour",
     category: "group",
+    subcategory: "international",
     rating: 4.8,
     reviews: 96,
   },
@@ -403,6 +415,7 @@ export const groupTourPackages: Pkg[] = [
     price: "PKR 295,000",
     slug: "kuala-lumpur-malaysia-group-tour",
     category: "group",
+    subcategory: "international",
     rating: 4.5,
     reviews: 74,
   },
@@ -415,6 +428,7 @@ export const groupTourPackages: Pkg[] = [
     price: "PKR 395,000",
     slug: "thailand-bangkok-phuket-krabi-group-tour",
     category: "group",
+    subcategory: "international",
     rating: 4.6,
     reviews: 89,
   },
@@ -430,6 +444,7 @@ export const groupTourPackages: Pkg[] = [
     price: "PKR 449,000",
     slug: "bali-malaysia-group-tour",
     category: "group",
+    subcategory: "international",
     rating: 4.7,
     reviews: 68,
   },
@@ -445,6 +460,7 @@ export const groupTourPackages: Pkg[] = [
     price: "PKR 385,000",
     slug: "thailand-malaysia-group-tour",
     category: "group",
+    subcategory: "international",
     rating: 4.6,
     reviews: 71,
   },
@@ -461,6 +477,7 @@ export const groupTourPackages: Pkg[] = [
     price: "PKR 385,000",
     slug: "sri-lanka-thailand-malaysia-group-tour",
     category: "group",
+    subcategory: "international",
     rating: 4.5,
     reviews: 63,
   },
@@ -473,8 +490,22 @@ export const groupTourPackages: Pkg[] = [
     price: "PKR 115,000",
     slug: "skardu-pakistan-group-tour",
     category: "group",
+    subcategory: "domestic",
     rating: 4.9,
     reviews: 132,
+  },
+  {
+    images: ["/images/client/tours/Saudi-Arabia-Customized-Tour.png"],
+    badge: "Umrah",
+    title: "Umrah Economy Package",
+    location: "Saudi Arabia",
+    duration: "20 Days & 22 Days",
+    price: "PKR 254,000",
+    slug: "umrah-economy-package",
+    category: "group",
+    subcategory: "umrah",
+    rating: 4.8,
+    reviews: 215,
   },
 ];
 

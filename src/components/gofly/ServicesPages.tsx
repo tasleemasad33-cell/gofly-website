@@ -333,20 +333,6 @@ export function VisaFacilitationPage() {
             subtitle="At Travel Nest, we make international travel simple by offering professional visa facilitation services tailored to your needs. Whether you're planning a holiday, business trip, group tour, study abroad journey, or Umrah, our experienced team ensures your application is handled accurately and efficiently. Visa processes can be complex, with strict requirements and documentation, but we guide you at every step to avoid delays or rejections. From personalized consultation and document preparation to application submission and appointment scheduling, we manage everything with care."
           />
 
-          <h2 className="mt-14 text-center font-display text-2xl font-semibold text-title sm:text-3xl">
-            Countries We Offer
-          </h2>
-          <div className="mt-8 flex flex-wrap justify-center gap-3">
-            {visaCountries.map((c) => (
-              <span
-                key={c}
-                className="rounded-full border border-line bg-background px-5 py-2 font-display text-sm font-medium text-title transition-colors hover:border-brand hover:text-brand"
-              >
-                {c}
-              </span>
-            ))}
-          </div>
-
           {/* Visa Requirements */}
           <h2 className="mt-16 text-center font-display text-2xl font-semibold text-title sm:text-3xl">
             Visa Requirements
