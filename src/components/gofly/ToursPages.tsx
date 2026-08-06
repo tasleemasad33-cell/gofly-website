@@ -307,6 +307,7 @@ export function CorporatePage() {
                   <img
                     src={d.img}
                     alt={d.name}
+                    loading="lazy"
                     className="size-full object-cover transition-transform duration-500 group-hover:scale-110"
                   />
                 </div>

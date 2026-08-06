@@ -67,20 +67,21 @@ export function Hero() {
             <div key={slide.title} className="relative min-w-0 flex-[0_0_100%]">
               <div className="relative h-[360px] w-full sm:h-[440px] lg:h-[520px]">
                 {"video" in slide && slide.video ? (
-                  <video
-                    src={slide.video}
-                    autoPlay
-                    muted
-                    loop
-                    playsInline
-                    className={`absolute inset-0 size-full object-cover transition-transform duration-[7000ms] ease-out ${
-                      selected === i ? "scale-110" : "scale-100"
-                    }`}
-                  />
+                  selected === i ? (
+                    <video
+                      src={slide.video}
+                      autoPlay
+                      muted
+                      loop
+                      playsInline
+                      className="absolute inset-0 size-full object-cover transition-transform duration-[7000ms] ease-out scale-110"
+                    />
+                  ) : null
                 ) : (
                   <img
                     src={slide.img}
                     alt={slide.title}
+                    loading={i === 0 ? "eager" : "lazy"}
                     className={`absolute inset-0 size-full object-cover transition-transform duration-[7000ms] ease-out ${
                       selected === i ? "scale-110" : "scale-100"
                     }`}
