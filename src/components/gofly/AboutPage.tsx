@@ -7,6 +7,7 @@ import {
   Bus,
   Camera,
   Check,
+  ChevronDown,
   Compass,
   Eye,
   Globe,
@@ -90,13 +91,12 @@ function AboutIntro() {
               <div className="mt-6 space-y-4 text-[15px] leading-relaxed text-body">
                 <p>
                   The inspiration behind Travel Nest comes from years of personally experiencing the
-                  world. During my time in{" "}
-                  <span className="font-semibold text-title">Vienna, Austria</span>, I had the
-                  privilege of travelling extensively across Europe and witnessing firsthand how
-                  travel enriches lives, broadens perspectives, and builds understanding between
-                  cultures. Those journeys continued across Asia, the Middle East, and Africa, where
-                  every destination offered its own unique history, traditions, hospitality, and way
-                  of life.
+                  world. During my time in <span className="font-semibold text-title">Austria</span>
+                  , I had the privilege of travelling extensively across Europe and witnessing
+                  firsthand how travel enriches lives, broadens perspectives, and builds
+                  understanding between cultures. Those journeys continued across Asia, the Middle
+                  East, and Africa, where every destination offered its own unique history,
+                  traditions, hospitality, and way of life.
                 </p>
                 <p>
                   These experiences taught me that every traveller has different expectations. Some
@@ -167,7 +167,7 @@ function AboutIntro() {
                   <Sparkles className="size-5" />
                 </span>
                 <div>
-                  <p className="font-display text-sm font-bold text-title">Inspired in Vienna</p>
+                  <p className="font-display text-sm font-bold text-title">Inspired in Austria</p>
                   <p className="text-xs text-body">Where the vision began</p>
                 </div>
               </div>
@@ -225,7 +225,7 @@ const journey = [
   {
     img: clientJourneyImages[0],
     title: "The Inspiration",
-    text: "During time in Vienna, Austria, the vision of Travel Nest began — travelling across Europe and witnessing how travel enriches lives, broadens perspectives and builds understanding between cultures.",
+    text: "During time in Austria, the vision of Travel Nest began — travelling across Europe and witnessing how travel enriches lives, broadens perspectives and builds understanding between cultures.",
   },
   {
     img: clientJourneyImages[1],
@@ -454,62 +454,71 @@ function VisionMission() {
   );
 }
 
-/* ─── Contact ─── */
-function AboutContact() {
-  const contacts = [
-    { icon: MapPin, label: "Location", value: "Gulberg Greens, Islamabad" },
-    { icon: Phone, label: "Mobile / WhatsApp", value: "92 322 9606256" },
-    { icon: Mail, label: "Email", value: "Info@travelnest.com" },
-  ];
+/* ─── FAQ ─── */
+const faqs = [
+  {
+    q: "What Services Does Your Travel Agency Provide?",
+    a: "A travel agency typically provides a wide range of services to ensure a smooth and enjoyable travel experience — including hotel booking, flight booking, visa facilitation, and customized travel packages.",
+  },
+  {
+    q: "Do You Offer Customized Travel Packages?",
+    a: "Absolutely! We offer fully customized travel packages based on your interests, budget, and schedule. Whether you're planning a solo adventure, a family vacation, a romantic getaway, or a group tour, our team will tailor every detail to create a personalized travel experience just for you.",
+  },
+  {
+    q: "Can I Book Flights, Hotels, and Tours Separately?",
+    a: "Yes, you can! We provide the flexibility to book flights, hotels, and tours separately based on your specific needs. Whether you need just a flight, only accommodation, or want to add a tour later — we're here to help you plan each part of your trip your way.",
+  },
+  {
+    q: "Do You Provide Visa Assistance?",
+    a: "Yes, we do! Our team offers complete visa assistance services to help you navigate the application process smoothly. From providing guidance on required documents to scheduling appointments and submitting applications, we're here to support you every step of the way.",
+  },
+  {
+    q: "What Payment Methods Do You Accept?",
+    a: "We accept a variety of payment methods to make your booking process easy and convenient. These include cash, bank transfers, mobile payments, and major debit/credit cards. If you have a preferred payment option, feel free to let us know!",
+  },
+  {
+    q: "What Travel Documents are Required for International Travel?",
+    a: "For international travel, you'll typically need several important travel documents, including a valid passport, visa (if required), airline tickets, travel insurance, and any related health certificates. Depending on your destination, additional documents may be necessary. Our team will guide you through the specific requirements for your trip.",
+  },
+];
+
+function FAQSection() {
+  const [openIdx, setOpenIdx] = useState<number | null>(null);
 
   return (
     <section className="py-20">
       <div className="container-gofly">
-        <Reveal>
-          <div className="mx-auto max-w-2xl rounded-3xl border border-line bg-card p-8 sm:p-10">
-            <h2 className="text-center font-display text-3xl font-bold sm:text-4xl">
-              Get in Touch
-            </h2>
-            <p className="mx-auto mt-3 max-w-md text-center text-[15px] text-body">
-              Visit our studio or reach out to our team — we're here to help plan your next journey.
-            </p>
-            <div className="mt-8 space-y-4">
-              {contacts.map(({ icon: Icon, label, value }) => (
-                <div key={label} className="flex items-center justify-center gap-3">
-                  <span className="grid size-10 shrink-0 place-items-center rounded-full bg-brand/10 text-brand">
-                    <Icon className="size-4" />
-                  </span>
-                  <p className="text-[15px] text-body">
-                    <span className="font-display font-semibold text-title">{label}:</span> {value}
-                  </p>
+        <SectionTitle
+          title="Questions & Answer"
+          subtitle="We're committed to offering more than just products — we provide exceptional experiences."
+        />
+        <div className="mx-auto mt-12 max-w-3xl space-y-4">
+          {faqs.map((faq, i) => (
+            <Reveal key={i} delay={i * 60}>
+              <div className="overflow-hidden rounded-2xl border border-line bg-card">
+                <button
+                  type="button"
+                  onClick={() => setOpenIdx(openIdx === i ? null : i)}
+                  className="flex w-full items-center justify-between gap-4 px-6 py-5 text-left"
+                >
+                  <span className="font-display text-[15px] font-semibold text-title">{faq.q}</span>
+                  <ChevronDown
+                    className={`size-5 shrink-0 text-body transition-transform duration-300 ${
+                      openIdx === i ? "rotate-180" : ""
+                    }`}
+                  />
+                </button>
+                <div
+                  className={`overflow-hidden transition-all duration-300 ${
+                    openIdx === i ? "max-h-60 opacity-100" : "max-h-0 opacity-0"
+                  }`}
+                >
+                  <p className="px-6 pb-5 text-sm leading-relaxed text-body">{faq.a}</p>
                 </div>
-              ))}
-              <div className="flex items-center justify-center gap-3">
-                <span className="grid size-10 shrink-0 place-items-center rounded-full bg-brand/10 text-brand">
-                  <MessageCircle className="size-4" />
-                </span>
-                <p className="text-[15px] text-body">
-                  <span className="font-display font-semibold text-title">Instagram:</span>{" "}
-                  @gramofytravel
-                </p>
               </div>
-              <div className="flex items-center justify-center gap-3">
-                <span className="grid size-10 shrink-0 place-items-center rounded-full bg-brand/10 text-brand">
-                  <MapPin className="size-4" />
-                </span>
-                <p className="text-[15px] text-body">
-                  <span className="font-display font-semibold text-title">Website:</span>{" "}
-                  www.travelnest.pk
-                </p>
-              </div>
-              <div className="pt-2 text-center">
-                <a href="/contact" className="btn-primary inline-flex items-center gap-2">
-                  Contact Us <ArrowRight className="size-4" />
-                </a>
-              </div>
-            </div>
-          </div>
-        </Reveal>
+            </Reveal>
+          ))}
+        </div>
       </div>
     </section>
   );
@@ -527,7 +536,7 @@ export function AboutPage() {
       <CommitmentSection />
       <Counters />
       <VisionMission />
-      <AboutContact />
+      <FAQSection />
     </>
   );
 }

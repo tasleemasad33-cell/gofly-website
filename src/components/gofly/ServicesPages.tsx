@@ -802,8 +802,13 @@ export function CruisesPage() {
               </div>
             </div>
             <div className="mt-8 text-center">
-              <a href="/contact" className="btn-primary">
-                Send Enquiry <ArrowRight className="size-4" />
+              <a
+                href="https://wa.me/923229606256?text=Hi%20Travel%20Nest%2C%20I%27d%20like%20help%20finding%20the%20best%20air%20ticket%20options."
+                target="_blank"
+                rel="noopener noreferrer"
+                className="btn-primary"
+              >
+                Send Message <ArrowRight className="size-4" />
               </a>
             </div>
           </div>
