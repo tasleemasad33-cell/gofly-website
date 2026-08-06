@@ -495,7 +495,11 @@ export const groupTourPackages: Pkg[] = [
     reviews: 132,
   },
   {
-    images: ["/images/client/tours/Saudi-Arabia-Customized-Tour.png"],
+    images: [
+      "/images/client/umrah/1.png",
+      "/images/client/umrah/2.png",
+      "/images/client/umrah/3.png",
+    ],
     badge: "Umrah",
     title: "Umrah Economy Package",
     location: "Saudi Arabia",

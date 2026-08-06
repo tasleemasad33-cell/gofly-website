@@ -8,9 +8,18 @@ import {
   IMG,
 } from "@/lib/gofly-data";
 import { PageHero } from "./PageHero";
-import { InquiryStrip, PackageRowCard, parsePrice } from "./TourListing";
+import { InquiryStrip, PackageListingSection } from "./TourListing";
+import { PackageCard } from "./PackageCard";
+import { Reveal } from "./Reveal";
+import { SectionTitle } from "./SectionTitle";
 
 const groupCategories = ["International", "Domestic", "Umrah"] as const;
+
+const tabMap: Record<string, string> = {
+  International: "international",
+  Domestic: "domestic",
+  Umrah: "umrah",
+};
 
 function TourPageShell({
   heroTitle,
@@ -56,14 +65,10 @@ export function GroupToursPage() {
       />
       <section className="py-20">
         <div className="container-gofly">
-          <h2 className="text-center font-display text-2xl font-bold text-title sm:text-3xl">
-            Find Your Perfect Group Tour
-          </h2>
-          <p className="mx-auto mt-3 max-w-2xl text-center text-[15px] text-body">
-            Travel the world with expertly planned group tours designed for comfort, safety and
-            unforgettable memories. Voyage with like-minded explorers while our team manages your
-            flights, hotels, visas and guided experiences from start to finish.
-          </p>
+          <SectionTitle
+            title="Find Your Perfect Group Tour"
+            subtitle="Travel the world with expertly planned group tours designed for comfort, safety and unforgettable memories. Voyage with like-minded explorers while our team manages your flights, hotels, visas and guided experiences from start to finish."
+          />
 
           {/* Category tabs */}
           <div className="mt-10 flex justify-center gap-3">
@@ -85,7 +90,9 @@ export function GroupToursPage() {
           {/* Packages grid */}
           <div className="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
             {filtered.map((pkg, i) => (
-              <PackageRowCard key={pkg.slug} pkg={pkg} index={i} />
+              <Reveal key={pkg.slug} delay={(i % 3) * 80}>
+                <PackageCard pkg={pkg} />
+              </Reveal>
             ))}
           </div>
 
@@ -145,34 +152,42 @@ export function CorporatePage() {
   const destinations = [
     {
       name: "Dubai",
+      img: "/images/client/tours/Dubai.png",
       desc: "Luxury stays, business hubs, desert experiences, and premium networking opportunities.",
     },
     {
       name: "Bali",
+      img: "/images/client/tours/Bali--Indoneshia.png",
       desc: "Perfect for executive retreats, wellness experiences, and team rejuvenation.",
     },
     {
       name: "Baku",
+      img: "/images/client/tours/Baku--Azerbaijan.png",
       desc: "Affordable luxury with modern infrastructure and unique cultural experiences.",
     },
     {
       name: "Malaysia",
+      img: "/images/client/tours/Malaysia--Kuala-Lumpur-.png",
       desc: "Ideal for conferences, corporate networking, and multicultural experiences.",
     },
     {
       name: "Thailand",
+      img: "/images/client/tours/Thailand.png",
       desc: "Balance business and leisure with exciting team activities and premium hospitality.",
     },
     {
       name: "Turkey",
+      img: "/images/client/tours/Turkey.png",
       desc: "A blend of business, history, luxury, and unforgettable team experiences.",
     },
     {
       name: "China",
+      img: "/images/client/tours/China-Customized-Tour.png",
       desc: "A fusion of innovation, culture, luxury, and unforgettable group experiences.",
     },
     {
       name: "Japan",
+      img: "/images/client/tours/Japan-Customized-Tour.png",
       desc: "A blend of tradition, technology, elegance, and unforgettable team experiences.",
     },
   ];
@@ -251,7 +266,12 @@ export function CorporatePage() {
             with Travel Nest. From planning to execution, we handle every detail while your team
             focuses on growth, collaboration, and meaningful experiences.
           </p>
-          <a href="/contact" className="btn-primary mt-8 inline-flex">
+          <a
+            href="https://wa.me/923229606256?text=Hi%20Travel%20Nest%2C%20I%27m%20interested%20in%20a%20corporate%20tour%20proposal."
+            target="_blank"
+            rel="noopener noreferrer"
+            className="btn-primary mt-8 inline-flex"
+          >
             Request a Proposal
           </a>
         </div>
@@ -285,7 +305,7 @@ export function CorporatePage() {
               <div key={i} className="group overflow-hidden rounded-2xl border border-line bg-card">
                 <div className="relative h-44 overflow-hidden">
                   <img
-                    src={`/images/client/tours/${d.name}.png`}
+                    src={d.img}
                     alt={d.name}
                     className="size-full object-cover transition-transform duration-500 group-hover:scale-110"
                   />
@@ -366,7 +386,12 @@ export function CorporatePage() {
             Whether you're planning a small executive getaway or a large-scale corporate retreat,
             Travel Nest helps your company travel smarter, smoother, and better.
           </p>
-          <a href="/contact" className="btn-primary mt-8 inline-flex">
+          <a
+            href="https://wa.me/923229606256?text=Hi%20Travel%20Nest%2C%20I%27m%20interested%20in%20a%20customized%20corporate%20proposal."
+            target="_blank"
+            rel="noopener noreferrer"
+            className="btn-primary mt-8 inline-flex"
+          >
             Request a Customized Corporate Proposal
           </a>
         </div>
