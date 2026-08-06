@@ -50,7 +50,7 @@ export function AwardBanner() {
     <section
       className="relative overflow-hidden py-28"
       style={{
-        backgroundImage: `url(${IMG}/home2/home2-award-banner-bg.jpg)`,
+        backgroundImage: `url(/images/client/main-page-middle.jpg)`,
         backgroundAttachment: "fixed",
         backgroundPosition: "center",
         backgroundSize: "cover",
@@ -63,16 +63,6 @@ export function AwardBanner() {
 
       <div className="container-gofly relative text-center">
         <Reveal>
-          {/* Trophy icon */}
-          <div className="mx-auto mb-4 flex justify-center">
-            <img
-              src={`${IMG}/home2/travel-award.png`}
-              alt="World travel award"
-              loading="lazy"
-              className="w-28"
-            />
-          </div>
-
           {/* Title */}
           <h4 className="font-display text-2xl font-semibold italic text-white">
             Premium Travel Experiences

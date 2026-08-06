@@ -154,10 +154,10 @@ function Gallery() {
           onClick={() => setSelected(null)}
         >
           <div
-            className="max-h-[90vh] w-full max-w-3xl overflow-hidden rounded-2xl bg-background shadow-2xl"
+            className="flex max-h-[90vh] w-full max-w-3xl flex-col overflow-y-auto rounded-2xl bg-background shadow-2xl"
             onClick={(e) => e.stopPropagation()}
           >
-            <div className="flex items-center justify-between border-b border-line px-5 py-3">
+            <div className="sticky top-0 z-10 flex items-center justify-between border-b border-line bg-background px-5 py-3">
               <div>
                 <h3 className="font-display text-lg font-semibold text-title">
                   {galleryItems[selected].title}
@@ -177,7 +177,7 @@ function Gallery() {
             <img
               src={galleryItems[selected].img}
               alt={galleryItems[selected].title}
-              className="max-h-[70vh] w-full object-cover"
+              className="w-full object-cover"
             />
             <p className="px-5 py-4 text-sm leading-relaxed text-body">
               {galleryItems[selected].desc}

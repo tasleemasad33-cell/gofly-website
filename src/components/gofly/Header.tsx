@@ -81,15 +81,18 @@ export function Header() {
                     {item.label}
                     <ChevronDown className="size-3.5 transition-transform duration-200 group-hover:rotate-180" />
                   </a>
-                  {/* Dropdown with slide-down + fade animation */}
+                  {/* Transparent bridge so hover persists when moving mouse to dropdown */}
+                  <div className="absolute left-0 top-full h-3 w-full" />
+                  {/* Dropdown with scaleY reveal from top */}
                   <div className="pointer-events-none absolute left-1/2 top-full z-50 -translate-x-1/2 pt-2">
-                    <div className="min-w-[210px] rounded-xl border border-line bg-background p-2 shadow-[var(--shadow-float)] opacity-0 translate-y-[-8px] transition-all duration-500 delay-100 ease-out group-hover:pointer-events-auto group-hover:opacity-100 group-hover:translate-y-0">
-                      {item.children.map((c, idx) => (
+                    <div
+                      className="min-w-[210px] rounded-xl border border-line bg-background p-2 shadow-[var(--shadow-float)] opacity-0 scale-y-0 origin-top transition-all duration-300 ease-out group-hover:pointer-events-auto group-hover:opacity-100 group-hover:scale-y-100"
+                    >
+                      {item.children.map((c) => (
                         <a
                           key={c.label}
                           href={c.href}
                           className="block rounded-lg px-3 py-2 font-display text-sm text-title transition-colors hover:bg-soft hover:text-brand"
-                          style={{ transitionDelay: `${idx * 200}ms` }}
                         >
                           {c.label}
                         </a>

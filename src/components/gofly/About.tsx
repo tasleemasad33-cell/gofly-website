@@ -1,5 +1,4 @@
 import { Building2, Compass, MapPin, Mountain, Settings2, StampIcon } from "lucide-react";
-import { IMG } from "@/lib/gofly-data";
 import { Reveal } from "./Reveal";
 import { useCountUp } from "./useCountUp";
 
@@ -66,14 +65,14 @@ export function About() {
         <Reveal delay={150}>
           <div className="relative">
             <img
-              src={`${IMG}/home2/about-img1.jpg`}
-              alt="Travel experience"
+              src="/images/client/HallStatt.jpg.jpeg"
+              alt="Hallstatt Village"
               loading="lazy"
               className="ml-auto h-[400px] w-[85%] rounded-[200px_200px_24px_24px] object-cover"
             />
             <img
-              src={`${IMG}/home2/about-img2.jpg`}
-              alt="Travel experience"
+              src="/images/client/tours/Italy.avif"
+              alt="Rome Colosseum"
               loading="lazy"
               className="floaty absolute -left-2 bottom-6 h-[220px] w-[45%] rounded-[24px_120px_24px_120px] border-8 border-background object-cover"
             />
