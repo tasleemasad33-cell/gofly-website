@@ -57,50 +57,54 @@ export function Features() {
     <section className="py-16">
       <div className="container-gofly">
         <Reveal>
-          <div className="relative overflow-hidden rounded-[32px] bg-[#1a1f4e] px-6 py-12 sm:px-12">
-            {/* Decorative SVG vectors */}
+          <div className="relative overflow-hidden rounded-[32px] bg-[#fdf5ec] px-6 py-12 sm:px-12">
+            {/* Decorative concentric arches - top left */}
             <svg
-              className="absolute right-0 top-0 size-40 text-white/5"
-              viewBox="0 0 200 200"
-              fill="currentColor"
+              className="absolute -left-10 -top-6 size-[280px] text-[#f0dcc8]"
+              viewBox="0 0 300 200"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="1.5"
             >
-              <circle cx="100" cy="100" r="100" />
+              <path d="M60 200 a90 90 0 0 1 180 0" />
+              <path d="M35 200 a115 115 0 0 1 230 0" />
+              <path d="M10 200 a140 140 0 0 1 280 0" />
             </svg>
+            {/* Blue accent dot */}
+            <div className="absolute left-8 top-8 size-5 rounded-full bg-[#7eb8e6]" />
+            {/* Decorative concentric arches - bottom right */}
             <svg
-              className="absolute -bottom-10 -left-10 size-60 text-white/5"
-              viewBox="0 0 200 200"
-              fill="currentColor"
+              className="absolute -bottom-12 -right-10 size-[250px] text-[#f0dcc8]"
+              viewBox="0 0 300 200"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="1.5"
             >
-              <circle cx="100" cy="100" r="100" />
-            </svg>
-            <svg
-              className="absolute bottom-4 right-8 size-24 text-white/5"
-              viewBox="0 0 200 200"
-              fill="currentColor"
-            >
-              <circle cx="100" cy="100" r="100" />
+              <path d="M60 200 a90 90 0 0 1 180 0" />
+              <path d="M35 200 a115 115 0 0 1 230 0" />
+              <path d="M10 200 a140 140 0 0 1 280 0" />
             </svg>
 
-            <h2 className="relative text-center font-display text-2xl font-semibold text-white sm:text-[32px]">
+            <h2 className="relative text-center font-display text-2xl font-semibold sm:text-[32px]">
               Travel Nest – Your Journey, Our Priority!
             </h2>
             <div className="relative mt-10 grid gap-8 md:grid-cols-3">
               {features.map((f, i) => (
                 <Reveal key={f.title} delay={i * 120}>
                   <div className="flex gap-4">
-                    <span className="grid size-12 shrink-0 place-items-center rounded-full bg-white/10 text-xl">
+                    <span className="grid size-12 shrink-0 place-items-center rounded-full bg-background text-xl">
                       {f.icon}
                     </span>
                     <div>
-                      <h4 className="font-display text-lg font-semibold text-white">{f.title}</h4>
-                      <p className="mt-1 text-sm leading-relaxed text-white/70">{f.text}</p>
+                      <h4 className="font-display text-lg font-semibold">{f.title}</h4>
+                      <p className="mt-1 text-sm leading-relaxed text-body">{f.text}</p>
                     </div>
                   </div>
                 </Reveal>
               ))}
             </div>
             <div className="relative mt-10 flex flex-wrap items-center justify-center gap-4">
-              <span className="rounded-full bg-white/10 px-6 py-3 font-display text-sm font-medium text-white">
+              <span className="rounded-full bg-dark px-6 py-3 font-display text-sm font-medium text-white">
                 Find Your Favourite Travel Package!
               </span>
               <a href="/packages" className="btn-primary">
