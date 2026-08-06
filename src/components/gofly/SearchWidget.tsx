@@ -1,6 +1,16 @@
 import { useState } from "react";
 import { useNavigate } from "@tanstack/react-router";
-import { Building2, CalendarDays, MapPin, Plane, Search, StampIcon, Users } from "lucide-react";
+import {
+  Building2,
+  CalendarDays,
+  ChevronLeft,
+  ChevronRight,
+  MapPin,
+  Plane,
+  Search,
+  StampIcon,
+  Users,
+} from "lucide-react";
 import { searchDestinations, tourCategories } from "@/lib/gofly-data";
 
 const tabs = [
@@ -11,6 +21,38 @@ const tabs = [
 ] as const;
 
 type TabId = (typeof tabs)[number]["id"];
+
+const MONTHS = [
+  "January",
+  "February",
+  "March",
+  "April",
+  "May",
+  "June",
+  "July",
+  "August",
+  "September",
+  "October",
+  "November",
+  "December",
+];
+const DAYS = ["Su", "Mo", "Tu", "We", "Th", "Fr", "Sa"];
+
+function getDaysInMonth(year: number, month: number) {
+  return new Date(year, month + 1, 0).getDate();
+}
+
+function getFirstDayOfMonth(year: number, month: number) {
+  return new Date(year, month, 1).getDay();
+}
+
+function formatDate(d: Date) {
+  const day = d.getDate();
+  const month = MONTHS[d.getMonth()];
+  const year = d.getFullYear();
+  const dayName = DAYS[d.getDay()];
+  return { short: `${day} ${month.slice(0, 3)}`, full: `${dayName} ${day} ${month} ${year}` };
+}
 
 function Field({
   icon: Icon,
@@ -50,6 +92,36 @@ export function SearchWidget() {
   const [dropdown, setDropdown] = useState<string | null>(null);
   const [destination, setDestination] = useState(searchDestinations[0]);
   const [category, setCategory] = useState(tourCategories[0]);
+
+  const today = new Date();
+  const [calMonth, setCalMonth] = useState(today.getMonth());
+  const [calYear, setCalYear] = useState(today.getFullYear());
+  const [selectedDate, setSelectedDate] = useState<Date | null>(null);
+
+  const daysInMonth = getDaysInMonth(calYear, calMonth);
+  const firstDay = getFirstDayOfMonth(calYear, calMonth);
+
+  const prevMonth = () => {
+    if (calMonth === 0) {
+      setCalMonth(11);
+      setCalYear((y) => y - 1);
+    } else setCalMonth((m) => m - 1);
+  };
+
+  const nextMonth = () => {
+    if (calMonth === 11) {
+      setCalMonth(0);
+      setCalYear((y) => y + 1);
+    } else setCalMonth((m) => m + 1);
+  };
+
+  const selectDate = (day: number) => {
+    const d = new Date(calYear, calMonth, day);
+    setSelectedDate(d);
+    setDropdown(null);
+  };
+
+  const dateDisplay = selectedDate ? formatDate(selectedDate) : null;
 
   return (
     <div className="relative z-20 mx-auto max-w-[1120px]">
@@ -110,31 +182,112 @@ export function SearchWidget() {
           <div className="relative border-line lg:border-l">
             <Field
               icon={CalendarDays}
-              label={tab === "hotels" ? "Check-In" : "Thursday 2026"}
-              value="30 July"
+              label={tab === "hotels" ? "Check-In" : "Select Date"}
+              value={dateDisplay ? dateDisplay.short : "Pick a Date"}
               active={dropdown === "date"}
               onClick={() => setDropdown(dropdown === "date" ? null : "date")}
             />
             {dropdown === "date" && (
-              <div className="absolute left-0 top-full z-30 mt-2 w-full min-w-[260px] rounded-xl border border-line bg-background p-4 shadow-[var(--shadow-float)]">
-                <p className="mb-3 font-display text-sm font-medium text-title">July 2026</p>
+              <div className="absolute left-0 top-full z-30 mt-2 w-full min-w-[280px] rounded-xl border border-line bg-background p-4 shadow-[var(--shadow-float)]">
+                {/* Month nav */}
+                <div className="mb-3 flex items-center justify-between">
+                  <button
+                    onClick={prevMonth}
+                    className="grid size-7 place-items-center rounded-lg hover:bg-soft"
+                  >
+                    <ChevronLeft className="size-4 text-title" />
+                  </button>
+                  <p className="font-display text-sm font-medium text-title">
+                    {MONTHS[calMonth]} {calYear}
+                  </p>
+                  <button
+                    onClick={nextMonth}
+                    className="grid size-7 place-items-center rounded-lg hover:bg-soft"
+                  >
+                    <ChevronRight className="size-4 text-title" />
+                  </button>
+                </div>
+
+                {/* Day headers */}
                 <div className="grid grid-cols-7 gap-1 text-center text-xs">
-                  {["S", "M", "T", "W", "T", "F", "S"].map((d, i) => (
-                    <span key={i} className="py-1 text-body">
+                  {DAYS.map((d, i) => (
+                    <span key={i} className="py-1 font-medium text-body">
                       {d}
                     </span>
                   ))}
-                  {Array.from({ length: 31 }, (_, i) => i + 1).map((d) => (
-                    <button
-                      key={d}
-                      onClick={() => setDropdown(null)}
-                      className={`rounded-md py-1 transition-colors hover:bg-brand hover:text-primary-foreground ${
-                        d === 30 ? "bg-brand text-primary-foreground" : "text-title"
-                      }`}
-                    >
-                      {d}
-                    </button>
+
+                  {/* Empty cells before first day */}
+                  {Array.from({ length: firstDay }, (_, i) => (
+                    <span key={`empty-${i}`} />
                   ))}
+
+                  {/* Day numbers */}
+                  {Array.from({ length: daysInMonth }, (_, i) => i + 1).map((day) => {
+                    const isSelected =
+                      selectedDate &&
+                      selectedDate.getDate() === day &&
+                      selectedDate.getMonth() === calMonth &&
+                      selectedDate.getFullYear() === calYear;
+                    const isToday =
+                      today.getDate() === day &&
+                      today.getMonth() === calMonth &&
+                      today.getFullYear() === calYear;
+
+                    return (
+                      <button
+                        key={day}
+                        onClick={() => selectDate(day)}
+                        className={`rounded-md py-1.5 text-sm transition-colors hover:bg-brand hover:text-primary-foreground ${
+                          isSelected
+                            ? "bg-brand text-primary-foreground font-medium"
+                            : isToday
+                              ? "bg-brand/10 text-brand font-medium"
+                              : "text-title"
+                        }`}
+                      >
+                        {day}
+                      </button>
+                    );
+                  })}
+                </div>
+
+                {/* Quick select */}
+                <div className="mt-3 flex gap-2 border-t border-line pt-3">
+                  <button
+                    onClick={() => {
+                      const d = new Date();
+                      selectDate(d.getDate());
+                      setCalMonth(d.getMonth());
+                      setCalYear(d.getFullYear());
+                    }}
+                    className="flex-1 rounded-lg bg-soft px-2 py-1.5 text-xs font-medium text-title hover:bg-brand/10"
+                  >
+                    Today
+                  </button>
+                  <button
+                    onClick={() => {
+                      const d = new Date();
+                      d.setDate(d.getDate() + 7);
+                      setCalMonth(d.getMonth());
+                      setCalYear(d.getFullYear());
+                      setTimeout(() => selectDate(d.getDate()), 0);
+                    }}
+                    className="flex-1 rounded-lg bg-soft px-2 py-1.5 text-xs font-medium text-title hover:bg-brand/10"
+                  >
+                    Next Week
+                  </button>
+                  <button
+                    onClick={() => {
+                      const d = new Date();
+                      d.setMonth(d.getMonth() + 1);
+                      setCalMonth(d.getMonth());
+                      setCalYear(d.getFullYear());
+                      setTimeout(() => selectDate(d.getDate()), 0);
+                    }}
+                    className="flex-1 rounded-lg bg-soft px-2 py-1.5 text-xs font-medium text-title hover:bg-brand/10"
+                  >
+                    Next Month
+                  </button>
                 </div>
               </div>
             )}
