@@ -341,10 +341,7 @@ export function SearchWidget() {
 
         <p className="mt-3 border-t border-line pt-3 text-center text-sm text-body">
           Can't find what you're looking for? create your{" "}
-          <a
-            href="/customized-tours"
-            className="font-medium text-brand underline underline-offset-4"
-          >
+          <a href="/contact" className="font-medium text-brand underline underline-offset-4">
             Custom Itinerary
           </a>
         </p>

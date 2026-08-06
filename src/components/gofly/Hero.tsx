@@ -147,7 +147,7 @@ export function Hero() {
       </div>
 
       {/* Search widget overlapping hero bottom */}
-      <div className="relative -mt-20 -mb-10 z-20 px-4 sm:-mt-28 sm:px-6">
+      <div className="relative -mt-24 -mb-10 z-20 px-4 sm:-mt-36 sm:px-6">
         <SearchWidget />
       </div>
     </section>
