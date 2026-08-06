@@ -83,13 +83,13 @@ export function Header() {
                   </a>
                   {/* Dropdown with slide-down + fade animation */}
                   <div className="pointer-events-none absolute left-1/2 top-full z-50 -translate-x-1/2 pt-2">
-                    <div className="min-w-[210px] rounded-xl border border-line bg-background p-2 shadow-[var(--shadow-float)] opacity-0 translate-y-[-8px] transition-all duration-300 delay-150 ease-out group-hover:pointer-events-auto group-hover:opacity-100 group-hover:translate-y-0">
+                    <div className="min-w-[210px] rounded-xl border border-line bg-background p-2 shadow-[var(--shadow-float)] opacity-0 translate-y-[-8px] transition-all duration-1000 delay-300 ease-out group-hover:pointer-events-auto group-hover:opacity-100 group-hover:translate-y-0">
                       {item.children.map((c, idx) => (
                         <a
                           key={c.label}
                           href={c.href}
                           className="block rounded-lg px-3 py-2 font-display text-sm text-title transition-colors hover:bg-soft hover:text-brand"
-                          style={{ transitionDelay: `${idx * 40}ms` }}
+                          style={{ transitionDelay: `${idx * 80}ms` }}
                         >
                           {c.label}
                         </a>
