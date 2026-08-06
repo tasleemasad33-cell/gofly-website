@@ -65,7 +65,7 @@ export function Hero() {
         <div className="flex">
           {heroSlides.map((slide, i) => (
             <div key={slide.title} className="relative min-w-0 flex-[0_0_100%]">
-              <div className="relative h-[500px] w-full sm:h-[620px] lg:h-[680px]">
+              <div className="relative h-[320px] w-full sm:h-[400px] lg:h-[480px]">
                 {"video" in slide && slide.video ? (
                   <video
                     src={slide.video}
@@ -87,10 +87,10 @@ export function Hero() {
                   />
                 )}
                 <div className="absolute inset-0 bg-gradient-to-b from-dark/50 via-dark/20 to-dark/50" />
-                <div className="container-gofly relative flex h-full flex-col items-center justify-center text-center">
+                <div className="container-gofly relative flex h-full flex-col items-center justify-center px-4 text-center">
                   <h1
                     key={`t-${selected}-${i}`}
-                    className="max-w-4xl font-display text-4xl font-bold text-white sm:text-5xl lg:text-[68px] lg:leading-[1.1]"
+                    className="max-w-3xl font-display text-2xl font-bold text-white sm:text-3xl lg:text-5xl lg:leading-[1.1]"
                     style={
                       selected === i
                         ? { animation: "gofly-rise 0.9s cubic-bezier(.16,1,.3,1) both" }
@@ -100,7 +100,7 @@ export function Hero() {
                     {slide.title}
                   </h1>
                   <p
-                    className="mt-6 max-w-2xl text-base text-white/90 sm:text-lg"
+                    className="mt-3 max-w-xl text-sm text-white/90 sm:mt-4 sm:text-base"
                     style={
                       selected === i
                         ? { animation: "gofly-rise 0.9s .18s cubic-bezier(.16,1,.3,1) both" }
@@ -120,20 +120,20 @@ export function Hero() {
       <button
         aria-label="Previous slide"
         onClick={() => embla?.scrollPrev()}
-        className="absolute left-3 top-1/2 z-10 grid size-10 -translate-y-1/2 place-items-center rounded-full bg-white/20 text-white backdrop-blur-sm transition-all hover:bg-white/40 sm:left-6 sm:size-12"
+        className="absolute left-3 top-[40%] z-10 grid size-10 -translate-y-1/2 place-items-center rounded-full bg-white/20 text-white backdrop-blur-sm transition-all hover:bg-white/40 sm:left-6 sm:size-12"
       >
         <ChevronLeft className="size-5 sm:size-6" />
       </button>
       <button
         aria-label="Next slide"
         onClick={() => embla?.scrollNext()}
-        className="absolute right-3 top-1/2 z-10 grid size-10 -translate-y-1/2 place-items-center rounded-full bg-white/20 text-white backdrop-blur-sm transition-all hover:bg-white/40 sm:right-6 sm:size-12"
+        className="absolute right-3 top-[40%] z-10 grid size-10 -translate-y-1/2 place-items-center rounded-full bg-white/20 text-white backdrop-blur-sm transition-all hover:bg-white/40 sm:right-6 sm:size-12"
       >
         <ChevronRight className="size-5 sm:size-6" />
       </button>
 
       {/* Hero dots */}
-      <div className="absolute inset-x-0 bottom-8 flex justify-center gap-2">
+      <div className="absolute inset-x-0 bottom-[45%] flex justify-center gap-2 sm:bottom-[42%]">
         {heroSlides.map((s, i) => (
           <button
             key={s.title}
@@ -147,7 +147,7 @@ export function Hero() {
       </div>
 
       {/* Search widget overlapping hero bottom */}
-      <div className="relative -mt-24 -mb-10 z-20 px-4 sm:-mt-36 sm:px-6">
+      <div className="relative -mt-16 -mb-10 z-20 px-4 sm:-mt-24 sm:px-6">
         <SearchWidget />
       </div>
     </section>
