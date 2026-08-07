@@ -9,22 +9,27 @@ const supportChannels = [
   { icon: MapPin, label: "Location", value: "Gulberg Greens, Islamabad" },
 ];
 
-const helpLinks = [
-  { label: "Frequently Asked Questions", href: "/about" },
-  { label: "Terms & Conditions", href: "/contact" },
-  { label: "Privacy Policy", href: "/contact" },
-  { label: "Refund Policy", href: "/contact" },
-  { label: "Travel Guide", href: "/experiences" },
-];
-
-const moreLinks = ["About Us", "Contact Us"];
-
 export function ContactPage() {
   const [sent, setSent] = useState(false);
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [subject, setSubject] = useState("");
   const [message, setMessage] = useState("");
+  const [newsEmail, setNewsEmail] = useState("");
+  const [subscribed, setSubscribed] = useState(
+    () => typeof localStorage !== "undefined" && localStorage.getItem("tn-newsletter") === "1",
+  );
+
+  const onSubscribe = (e: FormEvent) => {
+    e.preventDefault();
+    try {
+      localStorage.setItem("tn-newsletter", "1");
+    } catch {
+      /* ignore storage errors */
+    }
+    setSubscribed(true);
+    setNewsEmail("");
+  };
 
   const onSubmit = (e: FormEvent) => {
     e.preventDefault();
@@ -35,7 +40,7 @@ export function ContactPage() {
 
   return (
     <div className="overflow-x-hidden">
-      <PageHero title="Contact Us" crumb="Contact Us" image={`${IMG}/home2/banner-img2.jpg`} />
+      <PageHero title="Contact" crumb="Contact" image={`${IMG}/home2/banner-img2.jpg`} />
 
       {/* Write To Us + Support Channels */}
       <section className="pb-16 pt-12">
@@ -206,67 +211,47 @@ export function ContactPage() {
         </div>
       </section>
 
-      {/* Help links */}
+      {/* Newsletter */}
       <section className="border-t border-line py-16">
-        <div className="container-gofly grid gap-10 sm:grid-cols-3">
-          <div>
-            <h5 className="font-display text-sm font-bold uppercase tracking-[0.15em] text-title">
-              Help
-            </h5>
-            <ul className="mt-4 space-y-2.5 text-sm">
-              {helpLinks.map((l) => (
-                <li key={l.label}>
-                  <a href={l.href} className="text-body transition-colors hover:text-brand">
-                    {l.label}
-                  </a>
-                </li>
-              ))}
-            </ul>
-          </div>
-          <div>
-            <h5 className="font-display text-sm font-bold uppercase tracking-[0.15em] text-title">
-              More From Travel Nest
-            </h5>
-            <ul className="mt-4 space-y-2.5 text-sm">
-              {moreLinks.map((l) => (
-                <li key={l}>
-                  <a
-                    href={l === "About Us" ? "/about" : "/contact"}
-                    className="text-body transition-colors hover:text-brand"
-                  >
-                    {l}
-                  </a>
-                </li>
-              ))}
-            </ul>
-          </div>
-          <div>
+        <div className="container-gofly">
+          <div className="mx-auto max-w-2xl text-center">
             <h5 className="font-display text-sm font-bold uppercase tracking-[0.15em] text-title">
               Get The Latest News
             </h5>
             <p className="mt-4 text-sm text-body">
               Subscribe to receive the latest tour packages and travel offers.
             </p>
-            <form
-              onSubmit={(e) => {
-                e.preventDefault();
-                setSent(true);
-              }}
-              className="mt-4 flex items-center gap-2"
-            >
-              <input
-                type="email"
-                placeholder="Email Address"
-                required
-                className="w-full flex-1 rounded-full border border-line bg-background px-4 py-2.5 text-sm outline-none transition-all placeholder:text-body/70 focus:border-title"
-              />
-              <button
-                type="submit"
-                className="shrink-0 cursor-pointer rounded-full bg-title px-5 py-2.5 text-[11px] font-bold uppercase tracking-[0.15em] text-white transition-colors hover:bg-brand"
+            {subscribed ? (
+              <div className="mt-6 rounded-2xl border border-brand/30 bg-brand/5 px-6 py-5">
+                <p className="font-display text-sm font-semibold text-brand">
+                  You're subscribed!
+                </p>
+                <p className="mt-1 text-sm text-body">
+                  Thank you for subscribing. We'll keep you posted on the latest packages and
+                  exclusive offers.
+                </p>
+              </div>
+            ) : (
+              <form
+                onSubmit={onSubscribe}
+                className="mx-auto mt-6 flex max-w-md items-center gap-2"
               >
-                Confirm
-              </button>
-            </form>
+                <input
+                  type="email"
+                  placeholder="Email Address"
+                  required
+                  value={newsEmail}
+                  onChange={(e) => setNewsEmail(e.target.value)}
+                  className="w-full flex-1 rounded-full border border-line bg-background px-4 py-2.5 text-sm outline-none transition-all placeholder:text-body/70 focus:border-title"
+                />
+                <button
+                  type="submit"
+                  className="shrink-0 cursor-pointer rounded-full bg-title px-5 py-2.5 text-[11px] font-bold uppercase tracking-[0.15em] text-white transition-colors hover:bg-brand"
+                >
+                  Confirm
+                </button>
+              </form>
+            )}
           </div>
         </div>
       </section>

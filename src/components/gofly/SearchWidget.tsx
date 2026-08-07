@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useNavigate } from "@tanstack/react-router";
 import {
   Building2,
@@ -8,10 +8,12 @@ import {
   MapPin,
   Plane,
   Search,
+  Sparkles,
   StampIcon,
   Users,
+  type LucideIcon,
 } from "lucide-react";
-import { searchDestinations, tourCategories } from "@/lib/gofly-data";
+import { allPackages, tourCategories } from "@/lib/gofly-data";
 
 const tabs = [
   { id: "tours", label: "Tours", icon: Plane },
@@ -21,6 +23,73 @@ const tabs = [
 ] as const;
 
 type TabId = (typeof tabs)[number]["id"];
+
+type DestOption = { value: string; sub: string };
+
+const tourDestOptions: DestOption[] = (() => {
+  const seen = new Set<string>();
+  const out: DestOption[] = [];
+  allPackages.forEach((p) => {
+    if (!p.location || seen.has(p.location)) return;
+    seen.add(p.location);
+    out.push({ value: p.location, sub: "Tours Available" });
+  });
+  return out;
+})();
+
+const visaCountries = [
+  "Azerbaijan",
+  "Bahrain",
+  "China",
+  "Canada",
+  "Cambodia",
+  "Egypt",
+  "Europe",
+  "Indonesia",
+  "Japan",
+  "Malaysia",
+  "Maldives",
+  "Philippines",
+  "Schengen",
+  "Singapore",
+  "Sri Lanka",
+  "Thailand",
+  "Turkey",
+  "Tajikistan",
+  "Umrah",
+  "Uzbekistan",
+  "United Kingdom",
+  "United States",
+];
+
+const destOptions: Record<TabId, DestOption[]> = {
+  tours: tourDestOptions,
+  hotels: tourDestOptions,
+  visa: visaCountries.map((c) => ({ value: c, sub: "Visa Country" })),
+  experience: [
+    { value: "Nepal", sub: "Adventures" },
+    { value: "Patagonia", sub: "Adventures" },
+    { value: "Hawaii, USA", sub: "Adventures" },
+    { value: "Swiss Alps", sub: "Adventures" },
+    { value: "Rome", sub: "Adventures" },
+    { value: "Maldives", sub: "Adventures" },
+    { value: "Indonesia", sub: "Adventures" },
+  ],
+};
+
+const categoryOptions: Record<TabId, string[]> = {
+  tours: [...tourCategories],
+  hotels: ["1 Adult", "2 Adults", "2 Adults, 1 Child", "3 Adults", "Family (4+)"],
+  visa: ["Tourist Visa", "Business Visa", "Student Visa", "Family Visa", "Umrah Visa"],
+  experience: ["Adventure Sports", "Water Sports", "Mountain", "Cultural", "Luxury"],
+};
+
+const fieldLabels: Record<TabId, { dest: string; date: string; cat: string }> = {
+  tours: { dest: "Destination", date: "Select Date", cat: "Category" },
+  hotels: { dest: "City / Destination", date: "Check-In", cat: "Guest & Room" },
+  visa: { dest: "Visa Country", date: "Select Date", cat: "Visa Type" },
+  experience: { dest: "Destination", date: "Select Date", cat: "Activity" },
+};
 
 const MONTHS = [
   "January",
@@ -61,7 +130,7 @@ function Field({
   onClick,
   active,
 }: {
-  icon: typeof MapPin;
+  icon: LucideIcon;
   label: string;
   value: string;
   onClick?: () => void;
@@ -77,7 +146,7 @@ function Field({
     >
       <Icon className="size-5 shrink-0 text-brand" />
       <span className="min-w-0">
-        <span className="block font-display text-[15px] font-medium leading-tight text-title">
+        <span className="block truncate font-display text-[15px] font-medium leading-tight text-title">
           {value}
         </span>
         <span className="block text-xs leading-tight text-body">{label}</span>
@@ -88,15 +157,34 @@ function Field({
 
 export function SearchWidget() {
   const navigate = useNavigate();
+  const widgetRef = useRef<HTMLDivElement>(null);
   const [tab, setTab] = useState<TabId>("tours");
   const [dropdown, setDropdown] = useState<string | null>(null);
-  const [destination, setDestination] = useState(searchDestinations[0]);
-  const [category, setCategory] = useState(tourCategories[0]);
+  const [destination, setDestination] = useState(destOptions.tours[0].value);
+  const [category, setCategory] = useState(categoryOptions.tours[0]);
 
   const today = new Date();
   const [calMonth, setCalMonth] = useState(today.getMonth());
   const [calYear, setCalYear] = useState(today.getFullYear());
   const [selectedDate, setSelectedDate] = useState<Date | null>(null);
+
+  useEffect(() => {
+    const handler = (e: MouseEvent) => {
+      if (widgetRef.current && !widgetRef.current.contains(e.target as Node)) {
+        setDropdown(null);
+      }
+    };
+    document.addEventListener("mousedown", handler);
+    return () => document.removeEventListener("mousedown", handler);
+  }, []);
+
+  const switchTab = (id: TabId) => {
+    setTab(id);
+    setDropdown(null);
+    setDestination(destOptions[id][0].value);
+    setCategory(categoryOptions[id][0]);
+    setSelectedDate(null);
+  };
 
   const daysInMonth = getDaysInMonth(calYear, calMonth);
   const firstDay = getFirstDayOfMonth(calYear, calMonth);
@@ -122,15 +210,16 @@ export function SearchWidget() {
   };
 
   const dateDisplay = selectedDate ? formatDate(selectedDate) : null;
+  const labels = fieldLabels[tab];
 
   return (
-    <div className="relative z-20 mx-auto max-w-[1120px]">
+    <div ref={widgetRef} className="relative z-20 mx-auto max-w-[1120px]">
       {/* tabs */}
       <div className="flex flex-wrap gap-2 rounded-t-2xl bg-background/95 p-3 backdrop-blur sm:gap-3">
         {tabs.map(({ id, label, icon: Icon }) => (
           <button
             key={id}
-            onClick={() => setTab(id)}
+            onClick={() => switchTab(id)}
             className={`inline-flex items-center gap-2 rounded-full px-5 py-2 font-display text-sm font-medium transition-all ${
               tab === id
                 ? "bg-brand text-primary-foreground shadow-[var(--shadow-card)]"
@@ -149,30 +238,26 @@ export function SearchWidget() {
           <div className="relative">
             <Field
               icon={MapPin}
-              label="Destination"
-              value={`${destination.name}, ${destination.country}`}
+              label={labels.dest}
+              value={destination}
               active={dropdown === "dest"}
               onClick={() => setDropdown(dropdown === "dest" ? null : "dest")}
             />
             {dropdown === "dest" && (
               <div className="absolute left-0 top-full z-30 mt-2 max-h-72 w-full min-w-[300px] overflow-y-auto rounded-xl border border-line bg-background p-2 shadow-[var(--shadow-float)]">
-                {searchDestinations.map((d) => (
+                {destOptions[tab].map((d) => (
                   <button
-                    key={d.name}
+                    key={d.value}
                     onClick={() => {
-                      setDestination(d);
+                      setDestination(d.value);
                       setDropdown(null);
                     }}
-                    className="flex w-full items-center gap-3 rounded-lg px-3 py-2 text-left transition-colors hover:bg-soft"
+                    className={`flex w-full items-center justify-between gap-3 rounded-lg px-3 py-2 text-left transition-colors hover:bg-soft ${
+                      destination === d.value ? "bg-soft" : ""
+                    }`}
                   >
-                    <img src={d.flag} alt="" className="size-6 rounded-full object-cover" />
-                    <span className="flex-1">
-                      <span className="block font-display text-sm font-medium text-title">
-                        {d.name}
-                      </span>
-                      <span className="block text-xs text-body">{d.country}</span>
-                    </span>
-                    <span className="text-xs text-brand">{d.tours} Tour</span>
+                    <span className="font-display text-sm font-medium text-title">{d.value}</span>
+                    <span className="shrink-0 text-xs text-brand">{d.sub}</span>
                   </button>
                 ))}
               </div>
@@ -182,7 +267,7 @@ export function SearchWidget() {
           <div className="relative border-line lg:border-l">
             <Field
               icon={CalendarDays}
-              label={tab === "hotels" ? "Check-In" : "Select Date"}
+              label={labels.date}
               value={dateDisplay ? dateDisplay.short : "Pick a Date"}
               active={dropdown === "date"}
               onClick={() => setDropdown(dropdown === "date" ? null : "date")}
@@ -295,22 +380,32 @@ export function SearchWidget() {
 
           <div className="relative border-line lg:border-l">
             <Field
-              icon={tab === "hotels" ? Users : Plane}
-              label={tab === "hotels" ? "Guest & Room" : "Category"}
-              value={tab === "hotels" ? "1 Adults, 0 Child" : category}
+              icon={
+                tab === "hotels"
+                  ? Users
+                  : tab === "visa"
+                    ? StampIcon
+                    : tab === "experience"
+                      ? Sparkles
+                      : Plane
+              }
+              label={labels.cat}
+              value={category}
               active={dropdown === "cat"}
               onClick={() => setDropdown(dropdown === "cat" ? null : "cat")}
             />
             {dropdown === "cat" && (
               <div className="absolute left-0 top-full z-30 mt-2 w-full min-w-[240px] rounded-xl border border-line bg-background p-2 shadow-[var(--shadow-float)]">
-                {tourCategories.map((c) => (
+                {categoryOptions[tab].map((c) => (
                   <button
                     key={c}
                     onClick={() => {
                       setCategory(c);
                       setDropdown(null);
                     }}
-                    className="block w-full rounded-lg px-3 py-2 text-left font-display text-sm text-title transition-colors hover:bg-soft hover:text-brand"
+                    className={`block w-full rounded-lg px-3 py-2 text-left font-display text-sm transition-colors hover:bg-soft hover:text-brand ${
+                      category === c ? "text-brand" : "text-title"
+                    }`}
                   >
                     {c}
                   </button>

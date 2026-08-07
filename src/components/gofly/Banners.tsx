@@ -63,22 +63,8 @@ export function AwardBanner() {
 
       <div className="container-gofly relative text-center">
         <Reveal>
-          {/* Title */}
-          <h4 className="font-display text-2xl font-semibold italic text-white">
-            Premium Travel Experiences
-          </h4>
-
-          {/* Stars */}
-          <div className="mt-3 flex items-center justify-center gap-1">
-            {[1, 2, 3, 4, 5].map((i) => (
-              <span key={i} className="text-xl text-white">
-                ★
-              </span>
-            ))}
-          </div>
-
           {/* Subtitle */}
-          <h3 className="mt-6 font-display text-2xl font-medium text-white sm:text-3xl">
+          <h3 className="font-display text-2xl font-medium text-white sm:text-3xl">
             Creating
           </h3>
 

@@ -8,6 +8,7 @@ import {
   Heart,
   Hotel,
   MapPin,
+  Plane,
   Ship,
   Sparkles,
   Users,
@@ -16,6 +17,8 @@ import { IMG } from "@/lib/gofly-data";
 import { PageHero } from "./PageHero";
 import { SectionTitle } from "./SectionTitle";
 import { Reveal } from "./Reveal";
+import { AirTicketsForm } from "./AirTicketsForm";
+import { CruiseForm } from "./CruiseForm";
 
 const WHATSAPP = "923229606256";
 
@@ -490,15 +493,31 @@ export function AirTicketsPage() {
             title="Book Your Flight with Ease"
             subtitle="At Travel Nest, we go beyond just booking your flight—we become your travel partner. With 24/7 support, timely reminders, and assistance in case of missed flights, changes, or refunds, we ensure you're never alone during your journey. We offer tickets across a wide range of trusted international and domestic airlines, giving you flexible options that suit your schedule and budget. From booking to boarding, our team is always there to make your travel smooth, reliable, and stress-free."
           />
+        </div>
+      </section>
 
-          <div className="mt-10 overflow-hidden rounded-2xl bg-brand px-6 py-4 text-center text-sm font-medium text-primary-foreground sm:text-base">
-            🕋 November Umrah Special! Fly with Kuwait Airways | ✈️ 15 Days Umrah Airfare Package
-            starting from <strong>PKR 120,000</strong> | 🎉 Limited promotional seats available –
-            Book in advance for exclusive discounts! | 📞 Contact Travel Nest today to reserve your
-            seat before fares increase.
+      {/* Full-width promo banner */}
+      <div className="w-full">
+        <div className="relative overflow-hidden bg-gradient-to-r from-brand via-brand to-brand2 py-4 text-primary-foreground">
+          <div className="pointer-events-none absolute -left-10 top-1/2 size-40 -translate-y-1/2 rounded-full bg-white/10 blur-3xl" />
+          <div className="pointer-events-none absolute -right-10 top-1/2 size-40 -translate-y-1/2 rounded-full bg-white/10 blur-3xl" />
+          <div className="container-gofly">
+            <p className="flex flex-wrap items-center justify-center gap-x-3 gap-y-1 text-center text-sm font-medium sm:text-base">
+              <Plane className="hidden size-4 shrink-0 sm:block" />
+              <span>
+                🕋 November Umrah Special! Fly with Kuwait Airways | ✈️ 15 Days Umrah Airfare
+                Package starting from <strong className="underline decoration-2 underline-offset-2">PKR 120,000</strong> |
+                🎉 Limited promotional seats available – Book in advance for exclusive discounts! |
+                📞 Contact Travel Nest today to reserve your seat before fares increase.
+              </span>
+            </p>
           </div>
+        </div>
+      </div>
 
-          <h2 className="mt-14 text-center font-display text-2xl font-semibold text-title sm:text-3xl">
+      <section className="py-20">
+        <div className="container-gofly">
+          <h2 className="text-center font-display text-2xl font-semibold text-title sm:text-3xl">
             Fly with the World's Leading Airlines
           </h2>
           <div className="mt-8 flex flex-wrap justify-center gap-3">
@@ -512,59 +531,8 @@ export function AirTicketsPage() {
             ))}
           </div>
 
-          <div className="mt-14 rounded-2xl border border-line bg-card p-8 sm:p-12">
-            <h2 className="text-center font-display text-2xl font-semibold text-title">
-              Let Our Team Find the Best Options
-            </h2>
-            <p className="mx-auto mt-3 max-w-xl text-center text-sm text-body">
-              Fill out the form below and let our team find the best options for you.
-            </p>
-            <div className="mx-auto mt-8 grid max-w-3xl gap-4 sm:grid-cols-2">
-              <div className="flex items-center justify-between rounded-xl border border-line px-4 py-3">
-                <span className="text-sm text-body">Trip Type</span>
-                <span className="font-display text-sm font-medium text-title">Round Trip</span>
-              </div>
-              <div className="flex items-center justify-between rounded-xl border border-line px-4 py-3">
-                <span className="text-sm text-body">Flexible Dates?</span>
-                <span className="font-display text-sm font-medium text-title">No</span>
-              </div>
-              <div className="flex items-center justify-between rounded-xl border border-line px-4 py-3">
-                <span className="text-sm text-body">Departure City</span>
-                <span className="font-display text-sm font-medium text-title">Islamabad (ISB)</span>
-              </div>
-              <div className="flex items-center justify-between rounded-xl border border-line px-4 py-3">
-                <span className="text-sm text-body">Destination City</span>
-                <span className="font-display text-sm font-medium text-title">Dubai (DXB)</span>
-              </div>
-              <div className="flex items-center justify-between rounded-xl border border-line px-4 py-3">
-                <span className="text-sm text-body">Cabin Class</span>
-                <span className="font-display text-sm font-medium text-title">Economy</span>
-              </div>
-              <div className="flex items-center justify-between rounded-xl border border-line px-4 py-3">
-                <span className="text-sm text-body">Direct Flight Preferred?</span>
-                <span className="font-display text-sm font-medium text-title">Yes</span>
-              </div>
-              <div className="flex items-center justify-between rounded-xl border border-line px-4 py-3">
-                <span className="text-sm text-body">Preferred Contact</span>
-                <span className="font-display text-sm font-medium text-title">WhatsApp</span>
-              </div>
-              <div className="flex items-center justify-between rounded-xl border border-line px-4 py-3">
-                <span className="text-sm text-body">Best Time to Contact</span>
-                <span className="font-display text-sm font-medium text-title">
-                  Evening (4pm – 8pm)
-                </span>
-              </div>
-            </div>
-            <div className="mt-8 text-center">
-              <a
-                href={`https://wa.me/${WHATSAPP}?text=${encodeURIComponent("Hi Travel Nest, I need help finding the best air ticket options.")}`}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="btn-primary"
-              >
-                Send Message <ArrowRight className="size-4" />
-              </a>
-            </div>
+          <div className="mt-14">
+            <AirTicketsForm />
           </div>
         </div>
       </section>
@@ -755,7 +723,7 @@ export function CruisesPage() {
   return (
     <div className="overflow-x-hidden">
       <PageHero
-        title="Set Sail on a Journey of Luxury & Adventure"
+        title="Journey Across Crystal Blue Waters"
         crumb="Services / Cruises"
         image={`${IMG}/home1/tour-package-img6.jpg`}
       />
@@ -791,58 +759,7 @@ export function CruisesPage() {
             ))}
           </div>
 
-          <div className="mt-14 rounded-2xl border border-line bg-background p-8 sm:p-12">
-            <h2 className="text-center font-display text-2xl font-semibold text-title">
-              Let's Set Sail on Your Dream Cruise
-            </h2>
-            <p className="mx-auto mt-3 max-w-xl text-center text-sm text-body">
-              Tell us where the ocean should take you and our team will craft the perfect voyage.
-            </p>
-            <div className="mx-auto mt-8 grid max-w-3xl gap-4 sm:grid-cols-2">
-              <div className="flex items-center justify-between rounded-xl border border-line px-4 py-3">
-                <span className="text-sm text-body">Preferred Destination</span>
-                <span className="font-display text-sm font-medium text-title">Mediterranean</span>
-              </div>
-              <div className="flex items-center justify-between rounded-xl border border-line px-4 py-3">
-                <span className="text-sm text-body">Cruise Duration</span>
-                <span className="font-display text-sm font-medium text-title">6–9 Days</span>
-              </div>
-              <div className="flex items-center justify-between rounded-xl border border-line px-4 py-3">
-                <span className="text-sm text-body">Cabin Type</span>
-                <span className="font-display text-sm font-medium text-title">Balcony</span>
-              </div>
-              <div className="flex items-center justify-between rounded-xl border border-line px-4 py-3">
-                <span className="text-sm text-body">Dining Preference</span>
-                <span className="font-display text-sm font-medium text-title">Standard Dining</span>
-              </div>
-              <div className="flex items-center justify-between rounded-xl border border-line px-4 py-3">
-                <span className="text-sm text-body">Special Occasion?</span>
-                <span className="font-display text-sm font-medium text-title">None</span>
-              </div>
-              <div className="flex items-center justify-between rounded-xl border border-line px-4 py-3">
-                <span className="text-sm text-body">Need Flights?</span>
-                <span className="font-display text-sm font-medium text-title">Yes</span>
-              </div>
-              <div className="flex items-center justify-between rounded-xl border border-line px-4 py-3">
-                <span className="text-sm text-body">Need Visa Assistance?</span>
-                <span className="font-display text-sm font-medium text-title">Yes</span>
-              </div>
-              <div className="flex items-center justify-between rounded-xl border border-line px-4 py-3">
-                <span className="text-sm text-body">Budget (Per Person)</span>
-                <span className="font-display text-sm font-medium text-title">400k – 700k PKR</span>
-              </div>
-            </div>
-            <div className="mt-8 text-center">
-              <a
-                href="https://wa.me/923229606256?text=Hi%20Travel%20Nest%2C%20I%27d%20like%20help%20finding%20the%20best%20air%20ticket%20options."
-                target="_blank"
-                rel="noopener noreferrer"
-                className="btn-primary"
-              >
-                Send Message <ArrowRight className="size-4" />
-              </a>
-            </div>
-          </div>
+          <CruiseForm />
         </div>
       </section>
     </div>

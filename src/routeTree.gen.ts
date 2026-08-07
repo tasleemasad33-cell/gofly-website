@@ -25,6 +25,8 @@ import { Route as GroupToursRouteImport } from './routes/group-tours'
 import { Route as HoneymoonTripsRouteImport } from './routes/honeymoon-trips'
 import { Route as HotelBookingsRouteImport } from './routes/hotel-bookings'
 import { Route as PackagesRouteImport } from './routes/packages'
+import { Route as PrivacyRouteImport } from './routes/privacy'
+import { Route as TermsRouteImport } from './routes/terms'
 import { Route as TransportationRouteImport } from './routes/transportation'
 import { Route as VisaFacilitationRouteImport } from './routes/visa-facilitation'
 import { Route as PackagesIndexRouteImport } from './routes/packages/index'
@@ -110,6 +112,16 @@ const PackagesRoute = PackagesRouteImport.update({
   path: '/packages',
   getParentRoute: () => rootRouteImport,
 } as any)
+const PrivacyRoute = PrivacyRouteImport.update({
+  id: '/privacy',
+  path: '/privacy',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const TermsRoute = TermsRouteImport.update({
+  id: '/terms',
+  path: '/terms',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const TransportationRoute = TransportationRouteImport.update({
   id: '/transportation',
   path: '/transportation',
@@ -148,6 +160,8 @@ export interface FileRoutesByFullPath {
   '/honeymoon-trips': typeof HoneymoonTripsRoute
   '/hotel-bookings': typeof HotelBookingsRoute
   '/packages': typeof PackagesRouteWithChildren
+  '/privacy': typeof PrivacyRoute
+  '/terms': typeof TermsRoute
   '/transportation': typeof TransportationRoute
   '/visa-facilitation': typeof VisaFacilitationRoute
   '/packages/$slug': typeof PackagesSlugRoute
@@ -169,6 +183,8 @@ export interface FileRoutesByTo {
   '/group-tours': typeof GroupToursRoute
   '/honeymoon-trips': typeof HoneymoonTripsRoute
   '/hotel-bookings': typeof HotelBookingsRoute
+  '/privacy': typeof PrivacyRoute
+  '/terms': typeof TermsRoute
   '/transportation': typeof TransportationRoute
   '/visa-facilitation': typeof VisaFacilitationRoute
   '/packages/$slug': typeof PackagesSlugRoute
@@ -192,6 +208,8 @@ export interface FileRoutesById {
   '/honeymoon-trips': typeof HoneymoonTripsRoute
   '/hotel-bookings': typeof HotelBookingsRoute
   '/packages': typeof PackagesRouteWithChildren
+  '/privacy': typeof PrivacyRoute
+  '/terms': typeof TermsRoute
   '/transportation': typeof TransportationRoute
   '/visa-facilitation': typeof VisaFacilitationRoute
   '/packages/$slug': typeof PackagesSlugRoute
@@ -216,6 +234,8 @@ export interface FileRouteTypes {
     | '/honeymoon-trips'
     | '/hotel-bookings'
     | '/packages'
+    | '/privacy'
+    | '/terms'
     | '/transportation'
     | '/visa-facilitation'
     | '/packages/$slug'
@@ -237,6 +257,8 @@ export interface FileRouteTypes {
     | '/group-tours'
     | '/honeymoon-trips'
     | '/hotel-bookings'
+    | '/privacy'
+    | '/terms'
     | '/transportation'
     | '/visa-facilitation'
     | '/packages/$slug'
@@ -259,6 +281,8 @@ export interface FileRouteTypes {
     | '/honeymoon-trips'
     | '/hotel-bookings'
     | '/packages'
+    | '/privacy'
+    | '/terms'
     | '/transportation'
     | '/visa-facilitation'
     | '/packages/$slug'
@@ -282,6 +306,8 @@ export interface RootRouteChildren {
   HoneymoonTripsRoute: typeof HoneymoonTripsRoute
   HotelBookingsRoute: typeof HotelBookingsRoute
   PackagesRoute: typeof PackagesRouteWithChildren
+  PrivacyRoute: typeof PrivacyRoute
+  TermsRoute: typeof TermsRoute
   TransportationRoute: typeof TransportationRoute
   VisaFacilitationRoute: typeof VisaFacilitationRoute
 }
@@ -400,6 +426,20 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof PackagesRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/privacy': {
+      id: '/privacy'
+      path: '/privacy'
+      fullPath: '/privacy'
+      preLoaderRoute: typeof PrivacyRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/terms': {
+      id: '/terms'
+      path: '/terms'
+      fullPath: '/terms'
+      preLoaderRoute: typeof TermsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/transportation': {
       id: '/transportation'
       path: '/transportation'
@@ -462,6 +502,8 @@ const rootRouteChildren: RootRouteChildren = {
   HoneymoonTripsRoute: HoneymoonTripsRoute,
   HotelBookingsRoute: HotelBookingsRoute,
   PackagesRoute: PackagesRouteWithChildren,
+  PrivacyRoute: PrivacyRoute,
+  TermsRoute: TermsRoute,
   TransportationRoute: TransportationRoute,
   VisaFacilitationRoute: VisaFacilitationRoute,
 }

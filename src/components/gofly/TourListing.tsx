@@ -43,8 +43,7 @@ export function PackageListingSection({
         <div className="mt-12">
           <div className="flex flex-wrap items-center justify-between gap-4">
             <p className="font-display text-sm font-medium text-title">
-              <span className="font-bold text-brand">{filtered.length}</span> Unforgettable Journeys
-              Await!
+              Unforgettable Journeys Await!
             </p>
             <div className="flex items-center gap-2 text-sm">
               <span className="text-body">Sort By:</span>
