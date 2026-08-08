@@ -76,7 +76,7 @@ function Gallery() {
         </section>
 
         {/* Grid */}
-        <section className="py-16 sm:py-20">
+        <section id="gallery-grid" className="py-16 sm:py-20">
           <div className="container-gofly">
             <div className="mx-auto max-w-2xl text-center">
               <h2 className="font-display text-3xl font-bold text-title sm:text-[40px]">
@@ -124,7 +124,7 @@ function Gallery() {
             {totalPages > 1 && (
               <div className="mt-10 flex items-center justify-center gap-2">
                 <button
-                  onClick={() => { setPage((p) => Math.max(1, p - 1)); window.scrollTo({ top: 0, behavior: "smooth" }); }}
+                  onClick={() => { setPage((p) => Math.max(1, p - 1)); document.getElementById("gallery-grid")?.scrollIntoView({ behavior: "smooth" }); }}
                   disabled={page === 1}
                   className="grid size-10 place-items-center rounded-full border border-line font-display text-sm text-title transition-colors hover:bg-brand hover:text-white disabled:opacity-40"
                 >
@@ -133,7 +133,7 @@ function Gallery() {
                 {Array.from({ length: totalPages }, (_, i) => i + 1).map((n) => (
                   <button
                     key={n}
-                    onClick={() => { setPage(n); window.scrollTo({ top: 0, behavior: "smooth" }); }}
+                    onClick={() => { setPage(n); document.getElementById("gallery-grid")?.scrollIntoView({ behavior: "smooth" }); }}
                     className={`size-10 rounded-full font-display text-sm font-medium transition-colors ${
                       page === n
                         ? "bg-brand text-white"
@@ -144,7 +144,7 @@ function Gallery() {
                   </button>
                 ))}
                 <button
-                  onClick={() => { setPage((p) => Math.min(totalPages, p + 1)); window.scrollTo({ top: 0, behavior: "smooth" }); }}
+                  onClick={() => { setPage((p) => Math.min(totalPages, p + 1)); document.getElementById("gallery-grid")?.scrollIntoView({ behavior: "smooth" }); }}
                   disabled={page === totalPages}
                   className="grid size-10 place-items-center rounded-full border border-line font-display text-sm text-title transition-colors hover:bg-brand hover:text-white disabled:opacity-40"
                 >
