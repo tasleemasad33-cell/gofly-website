@@ -34,7 +34,7 @@ export function Blog() {
                     <MapPin className="size-4" /> {post.location}
                   </p>
                   <h4 className="mt-2 font-display text-xl font-semibold leading-snug text-title transition-colors group-hover:text-brand">
-                    <a href="#">{post.title}</a>
+                    <a href="/experiences">{post.title}</a>
                   </h4>
                 </div>
               </article>
@@ -42,7 +42,7 @@ export function Blog() {
           ))}
         </div>
         <div className="mt-10 text-center">
-          <a href="#" className="btn-outline">
+          <a href="/experiences" className="btn-outline">
             View All Inspiration <ArrowRight className="size-4" />
           </a>
         </div>
@@ -97,7 +97,7 @@ export function Testimonials() {
           ].map((r) => (
             <a
               key={r.logo}
-              href="#"
+              href="/experiences"
               className="flex items-center gap-3 rounded-xl border border-line bg-background px-5 py-3"
             >
               <span className="font-display text-xl font-semibold text-title">4.5</span>
@@ -169,7 +169,7 @@ export function Gallery() {
         <Reveal delay={150}>
           <div className="grid grid-cols-2 gap-3 sm:gap-4 lg:hidden">
             <a
-              href="#"
+              href="/gallery"
               className="overflow-hidden rounded-2xl shadow-md transition-transform duration-500 hover:scale-105 hover:shadow-xl"
             >
               <img
@@ -180,7 +180,7 @@ export function Gallery() {
               />
             </a>
             <a
-              href="#"
+              href="/gallery"
               className="overflow-hidden rounded-2xl shadow-md transition-transform duration-500 hover:scale-105 hover:shadow-xl"
             >
               <img
@@ -191,7 +191,7 @@ export function Gallery() {
               />
             </a>
             <a
-              href="#"
+              href="/gallery"
               className="col-span-2 overflow-hidden rounded-2xl shadow-lg transition-transform duration-500 hover:scale-105 hover:shadow-xl"
             >
               <img
@@ -202,7 +202,7 @@ export function Gallery() {
               />
             </a>
             <a
-              href="#"
+              href="/gallery"
               className="overflow-hidden rounded-2xl shadow-md transition-transform duration-500 hover:scale-105 hover:shadow-xl"
             >
               <img
@@ -213,7 +213,7 @@ export function Gallery() {
               />
             </a>
             <a
-              href="#"
+              href="/gallery"
               className="overflow-hidden rounded-2xl shadow-md transition-transform duration-500 hover:scale-105 hover:shadow-xl"
             >
               <img
@@ -224,7 +224,7 @@ export function Gallery() {
               />
             </a>
             <a
-              href="#"
+              href="/gallery"
               className="col-span-2 overflow-hidden rounded-2xl shadow-md transition-transform duration-500 hover:scale-105 hover:shadow-xl"
             >
               <img
@@ -239,7 +239,7 @@ export function Gallery() {
           {/* Desktop: absolute collage */}
           <div className="relative hidden h-[580px] w-full lg:block">
             <a
-              href="#"
+              href="/gallery"
               className="absolute left-[0%] top-[0%] z-[3] w-[30%] overflow-hidden rounded-2xl border-4 border-white shadow-md transition-transform duration-500 hover:scale-105 hover:shadow-xl"
             >
               <img
@@ -250,7 +250,7 @@ export function Gallery() {
               />
             </a>
             <a
-              href="#"
+              href="/gallery"
               className="absolute left-[30%] top-[0%] z-[2] w-[30%] overflow-hidden rounded-2xl border-4 border-white shadow-md transition-transform duration-500 hover:scale-105 hover:shadow-xl"
             >
               <img
@@ -261,7 +261,7 @@ export function Gallery() {
               />
             </a>
             <a
-              href="#"
+              href="/gallery"
               className="absolute right-[0%] top-[0%] z-[2] w-[30%] overflow-hidden rounded-2xl border-4 border-white shadow-md transition-transform duration-500 hover:scale-105 hover:shadow-xl"
             >
               <img
@@ -272,7 +272,7 @@ export function Gallery() {
               />
             </a>
             <a
-              href="#"
+              href="/gallery"
               className="absolute left-[0%] top-[28%] z-[1] w-[60%] overflow-hidden rounded-2xl border-4 border-white shadow-lg transition-transform duration-500 hover:scale-105 hover:shadow-xl"
             >
               <img
@@ -283,7 +283,7 @@ export function Gallery() {
               />
             </a>
             <a
-              href="#"
+              href="/gallery"
               className="absolute right-[0%] top-[26%] z-[1] w-[40%] overflow-hidden rounded-2xl border-4 border-white shadow-lg transition-transform duration-500 hover:scale-105 hover:shadow-xl"
             >
               <img
@@ -294,7 +294,7 @@ export function Gallery() {
               />
             </a>
             <a
-              href="#"
+              href="/gallery"
               className="absolute left-[4%] bottom-[0%] z-[2] w-[40%] overflow-hidden rounded-2xl border-4 border-white shadow-md transition-transform duration-500 hover:scale-105 hover:shadow-xl"
             >
               <img

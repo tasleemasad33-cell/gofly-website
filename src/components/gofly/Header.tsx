@@ -1,17 +1,39 @@
 import { useEffect, useState } from "react";
-import { Menu, Phone, Search, User, X } from "lucide-react";
+import { useNavigate } from "@tanstack/react-router";
+import { ChevronDown, Menu, Phone, X } from "lucide-react";
 
 const navItems = [
   { label: "Home", href: "/" },
-  { label: "About", href: "/about" },
-  { label: "Travel Package", href: "/packages" },
-  { label: "Destinations", href: "/destinations" },
-  { label: "Experiences", href: "#" },
-  { label: "Visa", href: "#" },
-  { label: "Contact Us", href: "#" },
+  {
+    label: "Tours",
+    href: "/packages",
+    children: [
+      { label: "Group Tours", href: "/group-tours" },
+      { label: "Honeymoon Trips", href: "/honeymoon-trips" },
+      { label: "Corporate Tours", href: "/corporate-tours" },
+      { label: "Customized Tours", href: "/customized-tours" },
+      { label: "Educational Tours", href: "/educational-tours" },
+    ],
+  },
+  {
+    label: "Services",
+    href: "/experiences",
+    children: [
+      { label: "Visa Facilitation", href: "/visa-facilitation" },
+      { label: "Air Tickets", href: "/air-tickets" },
+      { label: "Hotel Bookings", href: "/hotel-bookings" },
+      { label: "Transportation", href: "/transportation" },
+      { label: "Cruises", href: "/cruises" },
+      { label: "Destination Wedding", href: "/destination-wedding" },
+    ],
+  },
+  { label: "Gallery", href: "/gallery" },
+  { label: "About Us", href: "/about" },
+  { label: "Contact", href: "/contact" },
 ];
 
 export function Header() {
+  const navigate = useNavigate();
   const [sticky, setSticky] = useState(false);
   const [open, setOpen] = useState(false);
 
@@ -36,28 +58,60 @@ export function Header() {
           <a
             href="/"
             aria-label="Travel Nest home"
-            className="flex h-[52px] w-[140px] shrink-0 items-center overflow-hidden sm:h-[68px] sm:w-[195px]"
+            className="flex h-[52px] w-[160px] shrink-0 items-center sm:h-[68px] sm:w-[210px]"
           >
             <img
-              src="/header-logo.png"
+              src="/logo.png"
               alt="Travel Nest"
-              className="h-full w-full object-cover object-center"
+              className="h-full w-full object-contain object-left"
             />
           </a>
 
           {/* Nav */}
           <nav className="hidden items-center gap-5 xl:flex">
-            {navItems.map((item, i) => (
-              <a
-                key={item.label}
-                href={item.href}
-                className={`font-display text-[14px] font-medium transition-colors ${
-                  i === 0 ? "text-brand" : "text-title hover:text-brand"
-                }`}
-              >
-                {item.label}
-              </a>
-            ))}
+            {navItems.map((item, i) =>
+              item.children ? (
+                <div key={item.label} className="group relative">
+                  <a
+                    href={item.href}
+                    className={`inline-flex items-center gap-1 font-display text-[14px] font-medium transition-colors ${
+                      i === 0 ? "text-brand" : "text-title hover:text-brand"
+                    }`}
+                  >
+                    {item.label}
+                    <ChevronDown className="size-3.5 transition-transform duration-200 group-hover:rotate-180" />
+                  </a>
+                  {/* Transparent bridge so hover persists when moving mouse to dropdown */}
+                  <div className="absolute left-0 top-full h-3 w-full" />
+                  {/* Dropdown with scaleY reveal from top */}
+                  <div className="pointer-events-none absolute left-1/2 top-full z-50 -translate-x-1/2 pt-2">
+                    <div
+                      className="min-w-[210px] rounded-xl border border-line bg-background p-2 shadow-[var(--shadow-float)] opacity-0 scale-y-0 origin-top transition-all duration-300 ease-out group-hover:pointer-events-auto group-hover:opacity-100 group-hover:scale-y-100"
+                    >
+                      {item.children.map((c) => (
+                        <a
+                          key={c.label}
+                          href={c.href}
+                          className="block rounded-lg px-3 py-2 font-display text-sm text-title transition-colors hover:bg-soft hover:text-brand"
+                        >
+                          {c.label}
+                        </a>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+              ) : (
+                <a
+                  key={item.label}
+                  href={item.href}
+                  className={`font-display text-[14px] font-medium transition-colors ${
+                    i === 0 ? "text-brand" : "text-title hover:text-brand"
+                  }`}
+                >
+                  {item.label}
+                </a>
+              ),
+            )}
           </nav>
 
           {/* Right side */}
@@ -69,26 +123,9 @@ export function Header() {
               </span>
               <div className="leading-tight">
                 <span className="text-xs text-body">Need Help?</span>
-                <p className="font-display text-sm font-bold text-title">+91 345 533 865</p>
+                <p className="font-display text-sm font-bold text-title">92 322 9606256</p>
               </div>
             </div>
-
-            {/* Search */}
-            <button
-              aria-label="Search"
-              className="grid size-10 place-items-center rounded-full border border-line text-title transition-colors hover:bg-soft"
-            >
-              <Search className="size-5" />
-            </button>
-
-            {/* Login */}
-            <a
-              href="#"
-              className="hidden items-center gap-2 rounded-full bg-title px-4 py-2 font-display text-sm font-medium text-white transition-colors hover:bg-brand sm:inline-flex"
-            >
-              <User className="size-4" />
-              Login
-            </a>
 
             {/* Mobile menu */}
             <button
@@ -116,23 +153,35 @@ export function Header() {
           onClick={(e) => e.stopPropagation()}
         >
           <div className="mb-6 flex items-center justify-between">
-            <img src="/header-logo.png" alt="Travel Nest" className="h-12 w-auto" />
+            <img src="/logo.png" alt="Travel Nest" className="h-12 w-auto" />
             <button aria-label="Close" onClick={() => setOpen(false)}>
               <X className="size-5 text-title" />
             </button>
           </div>
           {navItems.map((item) => (
-            <a
-              key={item.label}
-              href={item.href}
-              className="block border-b border-line py-3 font-display text-[15px] font-medium text-title"
-            >
-              {item.label}
-            </a>
+            <div key={item.label} className="border-b border-line py-3">
+              <a
+                href={item.href}
+                className="flex items-center justify-between font-display text-[15px] font-medium text-title"
+              >
+                {item.label}
+                {item.children && <ChevronDown className="size-4 text-body" />}
+              </a>
+              {item.children && (
+                <div className="mt-2 space-y-1">
+                  {item.children.map((c) => (
+                    <a
+                      key={c.label}
+                      href={c.href}
+                      className="block rounded-lg px-3 py-2 text-sm text-body transition-colors hover:bg-soft hover:text-brand"
+                    >
+                      {c.label}
+                    </a>
+                  ))}
+                </div>
+              )}
+            </div>
           ))}
-          <a href="#" className="btn-primary mt-6 w-full justify-center">
-            Login
-          </a>
         </aside>
       </div>
     </header>

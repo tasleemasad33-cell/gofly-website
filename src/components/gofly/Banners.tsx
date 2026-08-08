@@ -1,5 +1,6 @@
 import { ArrowRight } from "lucide-react";
 import { IMG, partners } from "@/lib/gofly-data";
+import { clientBannerImage } from "@/lib/client-images";
 import { Reveal } from "./Reveal";
 
 export function OfferBanner() {
@@ -26,15 +27,15 @@ export function OfferBanner() {
                 <h2 className="mt-4 font-display text-3xl font-semibold text-white sm:text-[38px]">
                   Flash 50% off all tour packages
                 </h2>
-                <a href="#" className="btn-primary mt-6 bg-dark hover:bg-brand">
+                <a href="/packages" className="btn-primary mt-6 bg-dark hover:bg-brand">
                   Grab the Deal Now <ArrowRight className="size-4" />
                 </a>
               </div>
               <img
-                src={`${IMG}/home2/home2-offer-banner-img.png`}
-                alt="Happy family travelling"
+                src={clientBannerImage}
+                alt="Travel destinations"
                 loading="lazy"
-                className="w-full max-w-md object-contain"
+                className="w-full max-w-md rounded-2xl object-cover"
               />
             </div>
           </div>
@@ -49,7 +50,7 @@ export function AwardBanner() {
     <section
       className="relative overflow-hidden py-28"
       style={{
-        backgroundImage: `url(${IMG}/home2/home2-award-banner-bg.jpg)`,
+        backgroundImage: `url(/images/client/main-page-middle.jpg)`,
         backgroundAttachment: "fixed",
         backgroundPosition: "center",
         backgroundSize: "cover",
@@ -62,47 +63,21 @@ export function AwardBanner() {
 
       <div className="container-gofly relative text-center">
         <Reveal>
-          {/* Trophy icon */}
-          <div className="mx-auto mb-4 flex justify-center">
-            <img
-              src={`${IMG}/home2/travel-award.png`}
-              alt="World travel award"
-              loading="lazy"
-              className="w-28"
-            />
-          </div>
-
-          {/* Title */}
-          <h4 className="font-display text-2xl font-semibold italic text-white">
-            The World Travel Award
-          </h4>
-
-          {/* Stars */}
-          <div className="mt-3 flex items-center justify-center gap-1">
-            <span className="text-white/70">(</span>
-            {[1, 2, 3, 4, 5].map((i) => (
-              <span key={i} className="text-xl text-white">★</span>
-            ))}
-            <span className="text-white/70">)</span>
-          </div>
-
           {/* Subtitle */}
-          <h3 className="mt-6 font-display text-2xl font-medium text-white sm:text-3xl">
-            World-Wide
+          <h3 className="font-display text-2xl font-medium text-white sm:text-3xl">
+            Creating
           </h3>
 
           {/* BEST */}
-          <h2 className="font-display text-7xl font-black tracking-tight text-white sm:text-[110px] lg:text-[130px]">
-            BEST
+          <h2 className="font-display text-5xl font-black tracking-tight text-white sm:text-[80px] lg:text-[100px]">
+            UNFORGETTABLE JOURNEYS
           </h2>
 
-          {/* Travel agency */}
-          <p className="font-display text-3xl font-semibold italic text-white sm:text-4xl">
-            Travel agency
-          </p>
-
           {/* Button */}
-          <a href="#" className="btn-primary mt-8 inline-flex items-center gap-2 rounded-full bg-brand px-8 py-4 font-display text-sm font-medium text-white shadow-lg transition-all hover:bg-brand/90 hover:shadow-xl">
+          <a
+            href="/packages"
+            className="btn-primary mt-8 inline-flex items-center gap-2 rounded-full bg-brand px-8 py-4 font-display text-sm font-medium text-white shadow-lg transition-all hover:bg-brand/90 hover:shadow-xl"
+          >
             View All Package <ArrowRight className="size-4" />
           </a>
         </Reveal>

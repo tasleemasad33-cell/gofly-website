@@ -1,9 +1,9 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { useState } from "react";
-import { MapPin, X } from "lucide-react";
+import { useState, useMemo } from "react";
+import { ChevronLeft, ChevronRight, MapPin, X } from "lucide-react";
 import { Header } from "@/components/gofly/Header";
 import { Footer } from "@/components/gofly/Footer";
-import { galleryItems } from "@/lib/gofly-data";
+import { galleryItems, getAdminGallery } from "@/lib/gofly-data";
 import { Reveal } from "@/components/gofly/Reveal";
 
 const title = "Gallery — Travel Nest";
@@ -24,8 +24,24 @@ export const Route = createFileRoute("/gallery")({
   component: Gallery,
 });
 
+const PER_PAGE = 12;
+
 function Gallery() {
   const [selected, setSelected] = useState<number | null>(null);
+  const [page, setPage] = useState(1);
+
+  const allGalleryItems = useMemo(() => {
+    const adminItems = getAdminGallery().map((item) => ({
+      img: item.src,
+      title: item.title,
+      location: item.location,
+      desc: "A stunning destination curated by Travel Nest for unforgettable journeys.",
+    }));
+    return [...adminItems, ...galleryItems];
+  }, []);
+
+  const totalPages = Math.ceil(allGalleryItems.length / PER_PAGE);
+  const pageItems = allGalleryItems.slice((page - 1) * PER_PAGE, page * PER_PAGE);
 
   return (
     <div className="overflow-x-hidden">
@@ -34,7 +50,7 @@ function Gallery() {
         {/* Hero */}
         <section className="relative h-[400px] w-full overflow-hidden">
           <img
-            src={galleryItems[0].img}
+            src={allGalleryItems[0]?.img || "/images/client/umrah/1.png"}
             alt="Gallery"
             className="absolute inset-0 h-full w-full object-cover"
           />
@@ -73,34 +89,69 @@ function Gallery() {
             </div>
 
             <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-              {galleryItems.map((item, i) => (
-                <Reveal key={item.title} delay={i * 100}>
-                  <button
-                    type="button"
-                    onClick={() => setSelected(i)}
-                    className="group block w-full overflow-hidden rounded-2xl border border-line bg-card text-left shadow-sm transition-all duration-500 hover:-translate-y-1 hover:shadow-[var(--shadow-float)]"
-                  >
-                    <div className="overflow-hidden">
-                      <img
-                        src={item.img}
-                        alt={item.title}
-                        loading="lazy"
-                        className="h-[240px] w-full object-cover transition-transform duration-700 group-hover:scale-110"
-                      />
-                    </div>
-                    <div className="p-5">
-                      <p className="inline-flex items-center gap-1.5 text-sm font-medium text-brand">
-                        <MapPin className="size-4" /> {item.location}
-                      </p>
-                      <h3 className="mt-1.5 font-display text-lg font-semibold text-title transition-colors group-hover:text-brand">
-                        {item.title}
-                      </h3>
-                      <p className="mt-2 text-sm leading-relaxed text-body">{item.desc}</p>
-                    </div>
-                  </button>
-                </Reveal>
-              ))}
+              {pageItems.map((item, i) => {
+                const globalIdx = (page - 1) * PER_PAGE + i;
+                return (
+                  <Reveal key={item.title} delay={i * 60}>
+                    <button
+                      type="button"
+                      onClick={() => setSelected(globalIdx)}
+                      className="group block w-full overflow-hidden rounded-2xl border border-line bg-card text-left shadow-sm transition-all duration-500 hover:-translate-y-1 hover:shadow-[var(--shadow-float)]"
+                    >
+                      <div className="overflow-hidden">
+                        <img
+                          src={item.img}
+                          alt={item.title}
+                          loading="lazy"
+                          className="h-[240px] w-full object-cover transition-transform duration-700 group-hover:scale-110"
+                        />
+                      </div>
+                      <div className="p-5">
+                        <p className="inline-flex items-center gap-1.5 text-sm font-medium text-brand">
+                          <MapPin className="size-4" /> {item.location}
+                        </p>
+                        <h3 className="mt-1.5 font-display text-lg font-semibold text-title transition-colors group-hover:text-brand">
+                          {item.title}
+                        </h3>
+                      </div>
+                    </button>
+                  </Reveal>
+                );
+              })}
             </div>
+
+            {/* Pagination */}
+            {totalPages > 1 && (
+              <div className="mt-10 flex items-center justify-center gap-2">
+                <button
+                  onClick={() => setPage((p) => Math.max(1, p - 1))}
+                  disabled={page === 1}
+                  className="grid size-10 place-items-center rounded-full border border-line font-display text-sm text-title transition-colors hover:bg-brand hover:text-white disabled:opacity-40"
+                >
+                  <ChevronLeft className="size-4" />
+                </button>
+                {Array.from({ length: totalPages }, (_, i) => i + 1).map((n) => (
+                  <button
+                    key={n}
+                    onClick={() => setPage(n)}
+                    className={`size-10 rounded-full font-display text-sm font-medium transition-colors ${
+                      page === n
+                        ? "bg-brand text-white"
+                        : "border border-line text-title hover:bg-soft"
+                    }`}
+                  >
+                    {String(n).padStart(2, "0")}
+                  </button>
+                ))}
+                <button
+                  onClick={() => setPage((p) => Math.min(totalPages, p + 1))}
+                  disabled={page === totalPages}
+                  className="grid size-10 place-items-center rounded-full border border-line font-display text-sm text-title transition-colors hover:bg-brand hover:text-white disabled:opacity-40"
+                >
+                  <ChevronRight className="size-4" />
+                </button>
+              </div>
+            )}
           </div>
         </section>
       </main>
@@ -113,16 +164,16 @@ function Gallery() {
           onClick={() => setSelected(null)}
         >
           <div
-            className="max-h-[90vh] w-full max-w-3xl overflow-hidden rounded-2xl bg-background shadow-2xl"
+            className="flex max-h-[90vh] w-full max-w-3xl flex-col overflow-y-auto rounded-2xl bg-background shadow-2xl"
             onClick={(e) => e.stopPropagation()}
           >
-            <div className="flex items-center justify-between border-b border-line px-5 py-3">
+            <div className="sticky top-0 z-10 flex items-center justify-between border-b border-line bg-background px-5 py-3">
               <div>
                 <h3 className="font-display text-lg font-semibold text-title">
-                  {galleryItems[selected].title}
+                  {allGalleryItems[selected].title}
                 </h3>
                 <p className="inline-flex items-center gap-1 text-xs text-body">
-                  <MapPin className="size-3.5 text-brand" /> {galleryItems[selected].location}
+                  <MapPin className="size-3.5 text-brand" /> {allGalleryItems[selected].location}
                 </p>
               </div>
               <button
@@ -134,12 +185,12 @@ function Gallery() {
               </button>
             </div>
             <img
-              src={galleryItems[selected].img}
-              alt={galleryItems[selected].title}
-              className="max-h-[70vh] w-full object-cover"
+              src={allGalleryItems[selected].img}
+              alt={allGalleryItems[selected].title}
+              className="w-full object-cover"
             />
             <p className="px-5 py-4 text-sm leading-relaxed text-body">
-              {galleryItems[selected].desc}
+              {allGalleryItems[selected].desc}
             </p>
           </div>
         </div>

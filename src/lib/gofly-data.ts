@@ -1,22 +1,10 @@
 export const IMG = "https://demo.egenslab.com/html/gofly/preview/assets/img";
 
-export const heroSlides = [
-  {
-    img: `${IMG}/home2/banner-img1.jpg`,
-    title: "All-in-one Travel Booking.",
-    text: "Highlights convenience and simplicity, Best for agencies with online & mobile-friendly services.",
-  },
-  {
-    img: `${IMG}/home2/banner-img2.jpg`,
-    title: "Plan Your Trip, Your Way.",
-    text: "Perfect for customized travel experiences — tailored flights, stays, and tours just for you.",
-  },
-  {
-    img: `${IMG}/home2/destination-img6.jpg`,
-    title: "Your Gateway To The World.",
-    text: "Ideal for explorers seeking seamless booking and expert travel support every step of the way.",
-  },
-];
+import { clientHeroSlides, clientGalleryImages, clientGalleryItems } from "@/lib/client-images";
+
+export const heroSlides = clientHeroSlides;
+
+export type PkgCategory = "group" | "honeymoon" | "corporate" | "customized" | "educational";
 
 export type Pkg = {
   images: string[];
@@ -29,15 +17,13 @@ export type Pkg = {
   slug: string;
   rating?: number;
   reviews?: number;
+  category?: PkgCategory;
+  subcategory?: string;
 };
 
 export const popularPackages: Pkg[] = [
   {
-    images: [
-      `${IMG}/home2/tour-package-img1.jpg`,
-      `${IMG}/home1/tour-package-img2.jpg`,
-      `${IMG}/home1/tour-package-img10.jpg`,
-    ],
+    images: ["/images/client/tours/Maldives.png"],
     badge: "Hot Sale!",
     title: "Maldives Beach Paradise",
     location: "Maldives",
@@ -48,11 +34,7 @@ export const popularPackages: Pkg[] = [
     reviews: 134,
   },
   {
-    images: [
-      `${IMG}/home1/tour-package-img11.jpg`,
-      `${IMG}/home2/tour-package-img2.jpg`,
-      `${IMG}/home1/tour-package-img6.jpg`,
-    ],
+    images: ["/images/client/tours/Bali--Indoneshia.png"],
     badge: "Hot Sale!",
     title: "Bali Paradise Tour",
     location: "Indonesia",
@@ -63,11 +45,7 @@ export const popularPackages: Pkg[] = [
     reviews: 98,
   },
   {
-    images: [
-      `${IMG}/home2/tour-package-img2.jpg`,
-      `${IMG}/home1/tour-package-img4.jpg`,
-      `${IMG}/home1/tour-package-img12.jpg`,
-    ],
+    images: ["/images/client/tours/Thailand.png"],
     title: "Phuket & Krabi Island",
     location: "Thailand",
     duration: "10 Days",
@@ -77,11 +55,7 @@ export const popularPackages: Pkg[] = [
     reviews: 76,
   },
   {
-    images: [
-      `${IMG}/home1/tour-package-img4.jpg`,
-      `${IMG}/home1/tour-package-img21.jpg`,
-      `${IMG}/home2/tour-package-img1.jpg`,
-    ],
+    images: ["/images/client/tours/Italy.avif"],
     title: "Rome, Florence & Venice",
     location: "Italy, France",
     duration: "08 Days/07 Nights",
@@ -91,11 +65,7 @@ export const popularPackages: Pkg[] = [
     reviews: 156,
   },
   {
-    images: [
-      `${IMG}/home1/tour-package-img6.jpg`,
-      `${IMG}/home1/tour-package-img12.jpg`,
-      `${IMG}/home1/tour-package-img10.jpg`,
-    ],
+    images: ["/images/client/tours/Egypt-Customized-Tour.jpg"],
     title: "Egypt & Nile Cruise Adventure",
     location: "Egypt",
     duration: "10 Days",
@@ -105,11 +75,7 @@ export const popularPackages: Pkg[] = [
     reviews: 64,
   },
   {
-    images: [
-      `${IMG}/home1/tour-package-img12.jpg`,
-      `${IMG}/home1/tour-package-img22.jpg`,
-      `${IMG}/home2/destination-img7.jpg`,
-    ],
+    images: ["/images/client/tours/Norway.jpg"],
     badge: "Hot Sale!",
     title: "Norway Northern Lights",
     location: "Norway",
@@ -123,11 +89,7 @@ export const popularPackages: Pkg[] = [
 
 export const oneDayTrips: Pkg[] = [
   {
-    images: [
-      `${IMG}/home1/tour-package-img10.jpg`,
-      `${IMG}/home1/tour-package-img19.jpg`,
-      `${IMG}/home1/tour-package-img20.jpg`,
-    ],
+    images: ["/images/client/tours/Vietnam-Customized-Tour.png"],
     badge: "Hot Sale!",
     title: "Hanoi Kiem Lake",
     location: "Hanoi, Vietnam",
@@ -135,18 +97,14 @@ export const oneDayTrips: Pkg[] = [
     slug: "hanoi-kiem-lake",
   },
   {
-    images: [`${IMG}/home1/tour-package-img11.jpg`, `${IMG}/home1/tour-package-img12.jpg`],
+    images: [`${IMG}/home1/tour-package-img11.jpg`],
     title: "Newlands Safari Forest",
     location: "South Africa",
     price: "$89",
     slug: "newlands-safari-forest",
   },
   {
-    images: [
-      `${IMG}/home1/tour-package-img12.jpg`,
-      `${IMG}/home1/tour-package-img21.jpg`,
-      `${IMG}/home1/tour-package-img22.jpg`,
-    ],
+    images: ["/images/client/tours/Vietnam-Customized-Tour.png"],
     badge: "Hot Sale!",
     title: "Ho Chi Minh City (Saigon)",
     location: "Saigon, Vietnam",
@@ -154,7 +112,7 @@ export const oneDayTrips: Pkg[] = [
     slug: "ho-chi-minh-city",
   },
   {
-    images: [`${IMG}/home1/tour-package-img19.jpg`, `${IMG}/home1/tour-package-img20.jpg`],
+    images: ["/images/client/tours/Vietnam-Customized-Tour.png"],
     title: "Halong Bay Cruise",
     location: "Quang Ninh, Vietnam",
     price: "$120",
@@ -164,11 +122,7 @@ export const oneDayTrips: Pkg[] = [
 
 export const lastMinuteDeals: Pkg[] = [
   {
-    images: [
-      `${IMG}/home1/tour-package-img7.jpg`,
-      `${IMG}/home1/tour-package-img17.jpg`,
-      `${IMG}/home1/tour-package-img18.jpg`,
-    ],
+    images: ["/images/client/tours/Japan-Customized-Tour.png"],
     badge: "Hot Sale!",
     title: "Japan Cherry Blossom",
     location: "Tokyeo, Japan",
@@ -180,7 +134,7 @@ export const lastMinuteDeals: Pkg[] = [
     reviews: 143,
   },
   {
-    images: [`${IMG}/home1/tour-package-img8.jpg`, `${IMG}/home1/tour-package-img17.jpg`],
+    images: ["/images/client/tours/Dubai.png"],
     badge: "20% off",
     title: "Abu Dhabi Luxury Escape",
     location: "UAE, Qatar",
@@ -192,7 +146,7 @@ export const lastMinuteDeals: Pkg[] = [
     reviews: 89,
   },
   {
-    images: [`${IMG}/home1/tour-package-img9.jpg`, `${IMG}/home1/tour-package-img18.jpg`],
+    images: [`${IMG}/home1/tour-package-img9.jpg`],
     badge: "15% off",
     title: "Morocco Desert & City Adventure",
     location: "Europe",
@@ -204,7 +158,7 @@ export const lastMinuteDeals: Pkg[] = [
     reviews: 57,
   },
   {
-    images: [`${IMG}/home1/tour-package-img17.jpg`, `${IMG}/home1/tour-package-img7.jpg`],
+    images: [`${IMG}/home1/tour-package-img17.jpg`],
     badge: "10% off",
     title: "Santorini Island Hopping",
     location: "Greece",
@@ -218,7 +172,11 @@ export const lastMinuteDeals: Pkg[] = [
 ];
 
 export const destinations = [
-  { img: `${IMG}/home2/destination-img1.jpg`, title: "Great Wall of China", tours: "Tours (12)" },
+  {
+    img: "/images/client/tours/China-Customized-Tour.png",
+    title: "Great Wall of China",
+    tours: "Tours (12)",
+  },
   { img: `${IMG}/home2/destination-img2.jpg`, title: "Rome, Italy", tours: "Tours (06)" },
   { img: `${IMG}/home2/destination-img3.jpg`, title: "Machu Picchu of Peru", tours: "Tours (16)" },
   { img: `${IMG}/home2/destination-img4.jpg`, title: "Great Temple Jordan", tours: "Tours (10)" },
@@ -293,53 +251,12 @@ export const counters = [
   { value: 98, suffix: "%", label: "Retention Rate" },
 ];
 
-export const galleryImages = [
-  `${IMG}/home2/gallery-img1.jpg`,
-  `${IMG}/home2/gallery-img2.jpg`,
-  `${IMG}/home2/gallery-img3.jpg`,
-  `${IMG}/home2/gallery-img4.jpg`,
-  `${IMG}/home2/gallery-img5.jpg`,
-  `${IMG}/home2/gallery-img6.jpg`,
-];
+export const galleryImages = clientGalleryImages;
 
-export const galleryItems = [
-  {
-    img: `${IMG}/home2/gallery-img1.jpg`,
-    title: "Maldives Beach Paradise",
-    location: "Maldives",
-    desc: "Crystal-clear lagoons and powdery white sands for the perfect island escape.",
-  },
-  {
-    img: `${IMG}/home2/gallery-img2.jpg`,
-    title: "Swiss Alps Adventure",
-    location: "Switzerland",
-    desc: "Snow-capped peaks, scenic train rides and alpine villages that take your breath away.",
-  },
-  {
-    img: `${IMG}/home2/gallery-img3.jpg`,
-    title: "Santorini Sunset",
-    location: "Greece",
-    desc: "White-washed villages and unforgettable sunsets over the Aegean Sea.",
-  },
-  {
-    img: `${IMG}/home2/gallery-img4.jpg`,
-    title: "African Safari",
-    location: "Kenya",
-    desc: "Spot the Big Five on an unforgettable safari across the wild savannah.",
-  },
-  {
-    img: `${IMG}/home2/gallery-img5.jpg`,
-    title: "Bali Rice Terraces",
-    location: "Indonesia",
-    desc: "Emerald-green terraces and the spiritual heart of the Island of the Gods.",
-  },
-  {
-    img: `${IMG}/home2/gallery-img6.jpg`,
-    title: "Northern Lights",
-    location: "Norway",
-    desc: "Chase the magical aurora borealis dancing across Arctic skies.",
-  },
-];
+export const galleryItems = clientGalleryItems.map((item) => ({
+  ...item,
+  desc: "A stunning destination curated by Travel Nest for unforgettable journeys.",
+}));
 
 export const partners = [1, 2, 3, 4, 5, 6].map((n) => `${IMG}/home1/partner-0${n}.png`);
 
@@ -387,7 +304,11 @@ export const destinationPageHero = `${IMG}/home2/banner-img2.jpg`;
 
 export const destinationCards = [
   { img: `${IMG}/home2/destination-img2.jpg`, title: "Rome, Italy", tours: "Tours (06)" },
-  { img: `${IMG}/home2/destination-img1.jpg`, title: "Great Wall of China", tours: "Tours (12)" },
+  {
+    img: "/images/client/tours/China-Customized-Tour.png",
+    title: "Great Wall of China",
+    tours: "Tours (12)",
+  },
   { img: `${IMG}/home2/destination-img4.jpg`, title: "Great Temple Jordan", tours: "Tours (18)" },
   { img: `${IMG}/home2/destination-img6.jpg`, title: "Switzerland", tours: "Tours (14)" },
   { img: `${IMG}/home2/destination-img5.jpg`, title: "Santorini, Greece", tours: "Tours (07)" },
@@ -396,11 +317,7 @@ export const destinationCards = [
 
 export const destinationPackages: Pkg[] = [
   {
-    images: [
-      `${IMG}/home2/tour-package-img2.jpg`,
-      `${IMG}/home1/tour-package-img4.jpg`,
-      `${IMG}/home1/tour-package-img12.jpg`,
-    ],
+    images: [`${IMG}/home2/tour-package-img2.jpg`],
     title: "Santorini Tour",
     location: "Latin Quarter",
     duration: "08 Days",
@@ -408,11 +325,7 @@ export const destinationPackages: Pkg[] = [
     slug: "santorini-tour",
   },
   {
-    images: [
-      `${IMG}/home1/tour-package-img11.jpg`,
-      `${IMG}/home2/tour-package-img2.jpg`,
-      `${IMG}/home1/tour-package-img6.jpg`,
-    ],
+    images: [`${IMG}/home1/tour-package-img11.jpg`],
     badge: "Hot Sale!",
     title: "Backwaters & Beaches",
     location: "Le Marais",
@@ -421,11 +334,7 @@ export const destinationPackages: Pkg[] = [
     slug: "backwaters-beaches",
   },
   {
-    images: [
-      `${IMG}/home2/tour-package-img1.jpg`,
-      `${IMG}/home1/tour-package-img2.jpg`,
-      `${IMG}/home1/tour-package-img10.jpg`,
-    ],
+    images: ["/images/client/tours/Maldives.png"],
     badge: "Hot Sale!",
     title: "Maldives Beach Paradise",
     location: "Maldives",
@@ -436,11 +345,7 @@ export const destinationPackages: Pkg[] = [
     reviews: 134,
   },
   {
-    images: [
-      `${IMG}/home1/tour-package-img4.jpg`,
-      `${IMG}/home1/tour-package-img21.jpg`,
-      `${IMG}/home2/tour-package-img1.jpg`,
-    ],
+    images: ["/images/client/tours/Italy.avif"],
     title: "Rome, Florence & Venice",
     location: "Italy, France",
     duration: "08 Days/07 Nights",
@@ -450,11 +355,7 @@ export const destinationPackages: Pkg[] = [
     reviews: 156,
   },
   {
-    images: [
-      `${IMG}/home1/tour-package-img6.jpg`,
-      `${IMG}/home1/tour-package-img12.jpg`,
-      `${IMG}/home1/tour-package-img10.jpg`,
-    ],
+    images: ["/images/client/tours/Egypt-Customized-Tour.jpg"],
     title: "Egypt & Nile Cruise Adventure",
     location: "Egypt",
     duration: "10 Days",
@@ -465,14 +366,529 @@ export const destinationPackages: Pkg[] = [
   },
 ];
 
-export const allPackages: Pkg[] = [
-  ...popularPackages,
-  ...oneDayTrips,
-  ...lastMinuteDeals,
-  ...destinationPackages.filter(
-    (p) => ![...popularPackages, ...oneDayTrips, ...lastMinuteDeals].some((x) => x.slug === p.slug),
-  ),
+export const groupTourPackages: Pkg[] = [
+  {
+    images: ["/images/client/tours/Baku--Azerbaijan.png"],
+    badge: "Group Tour",
+    title: "Baku, Azerbaijan",
+    location: "Azerbaijan",
+    duration: "05 Days / 04 Nights",
+    price: "PKR 235,000",
+    slug: "baku-azerbaijan-group-tour",
+    category: "group",
+    subcategory: "international",
+    rating: 4.6,
+    reviews: 87,
+  },
+  {
+    images: ["/images/client/tours/Dubai.png"],
+    badge: "Group Tour",
+    title: "Dubai",
+    location: "United Arab Emirates",
+    duration: "05 Days / 04 Nights",
+    price: "PKR 255,000",
+    slug: "dubai-group-tour",
+    category: "group",
+    subcategory: "international",
+    rating: 4.7,
+    reviews: 121,
+  },
+  {
+    images: ["/images/client/tours/Bali--Indoneshia.png"],
+    badge: "Group Tour",
+    title: "Bali, Indonesia",
+    location: "Indonesia",
+    duration: "06 Days / 05 Nights",
+    price: "PKR 395,000",
+    slug: "bali-indonesia-group-tour",
+    category: "group",
+    subcategory: "international",
+    rating: 4.8,
+    reviews: 96,
+  },
+  {
+    images: ["/images/client/tours/Malaysia--Kuala-Lumpur-.png"],
+    badge: "Group Tour",
+    title: "Malaysia (Kuala Lumpur)",
+    location: "Malaysia",
+    duration: "06 Days / 05 Nights",
+    price: "PKR 295,000",
+    slug: "kuala-lumpur-malaysia-group-tour",
+    category: "group",
+    subcategory: "international",
+    rating: 4.5,
+    reviews: 74,
+  },
+  {
+    images: ["/images/client/tours/Thailand.png"],
+    badge: "Group Tour",
+    title: "Thailand (Bangkok, Phuket & Krabi)",
+    location: "Thailand",
+    duration: "09 Days / 08 Nights",
+    price: "PKR 395,000",
+    slug: "thailand-bangkok-phuket-krabi-group-tour",
+    category: "group",
+    subcategory: "international",
+    rating: 4.6,
+    reviews: 89,
+  },
+  {
+    images: [
+      "/images/client/tours/Bali--Indoneshia.png",
+      "/images/client/tours/Malaysia--Kuala-Lumpur-.png",
+    ],
+    badge: "Group Tour",
+    title: "Bali & Malaysia",
+    location: "Indonesia & Malaysia",
+    duration: "08 Days / 07 Nights",
+    price: "PKR 449,000",
+    slug: "bali-malaysia-group-tour",
+    category: "group",
+    subcategory: "international",
+    rating: 4.7,
+    reviews: 68,
+  },
+  {
+    images: [
+      "/images/client/tours/Thailand.png",
+      "/images/client/tours/Malaysia--Kuala-Lumpur-.png",
+    ],
+    badge: "Group Tour",
+    title: "Thailand & Malaysia",
+    location: "Thailand & Malaysia",
+    duration: "08 Days / 07 Nights",
+    price: "PKR 385,000",
+    slug: "thailand-malaysia-group-tour",
+    category: "group",
+    subcategory: "international",
+    rating: 4.6,
+    reviews: 71,
+  },
+  {
+    images: [
+      "/images/client/tours/Sri-Lanka.png",
+      "/images/client/tours/Thailand.png",
+      "/images/client/tours/Malaysia--Kuala-Lumpur-.png",
+    ],
+    badge: "Group Tour",
+    title: "Sri Lanka, Thailand & Malaysia",
+    location: "Sri Lanka, Thailand & Malaysia",
+    duration: "09 Days / 08 Nights",
+    price: "PKR 385,000",
+    slug: "sri-lanka-thailand-malaysia-group-tour",
+    category: "group",
+    subcategory: "international",
+    rating: 4.5,
+    reviews: 63,
+  },
+  {
+    images: ["/images/client/tours/Skardu--Pakistan--2-.png"],
+    badge: "Group Tour",
+    title: "Skardu, Pakistan",
+    location: "Pakistan",
+    duration: "04 Days / 03 Nights",
+    price: "PKR 115,000",
+    slug: "skardu-pakistan-group-tour",
+    category: "group",
+    subcategory: "domestic",
+    rating: 4.9,
+    reviews: 132,
+  },
+  {
+    images: [
+      "/images/client/umrah/1.png",
+      "/images/client/umrah/2.png",
+      "/images/client/umrah/3.png",
+    ],
+    badge: "Umrah",
+    title: "Umrah Economy Package",
+    location: "Saudi Arabia",
+    duration: "20 Days & 22 Days",
+    price: "PKR 254,000",
+    slug: "umrah-economy-package",
+    category: "group",
+    subcategory: "umrah",
+    rating: 4.8,
+    reviews: 215,
+  },
 ];
+
+export const honeymoonPackages: Pkg[] = [
+  {
+    images: ["/images/client/tours/Bali--Indoneshia.png"],
+    badge: "Honeymoon",
+    title: "Bali Honeymoon",
+    location: "Indonesia",
+    duration: "06 Days / 05 Nights",
+    price: "PKR 350,000",
+    slug: "bali-honeymoon",
+    category: "honeymoon",
+    rating: 4.8,
+    reviews: 102,
+  },
+  {
+    images: ["/images/client/tours/Dubai.png"],
+    badge: "Honeymoon",
+    title: "Dubai Honeymoon",
+    location: "United Arab Emirates",
+    duration: "05 Days / 04 Nights",
+    price: "PKR 325,000",
+    slug: "dubai-honeymoon",
+    category: "honeymoon",
+    rating: 4.7,
+    reviews: 84,
+  },
+  {
+    images: ["/images/client/tours/Maldives.png"],
+    badge: "Honeymoon",
+    title: "Maldives Honeymoon",
+    location: "Maldives",
+    duration: "05 Days / 04 Nights",
+    price: "PKR 550,000",
+    slug: "maldives-honeymoon",
+    category: "honeymoon",
+    rating: 4.9,
+    reviews: 156,
+  },
+  {
+    images: ["/images/client/tours/Thailand.png"],
+    badge: "Honeymoon",
+    title: "Thailand Honeymoon",
+    location: "Thailand",
+    duration: "07 Days / 06 Nights",
+    price: "PKR 385,000",
+    slug: "thailand-honeymoon",
+    category: "honeymoon",
+    rating: 4.6,
+    reviews: 77,
+  },
+  {
+    images: ["/images/client/tours/Turkey.png"],
+    badge: "Honeymoon",
+    title: "Turkey Honeymoon",
+    location: "Turkey",
+    duration: "07 Days / 06 Nights",
+    price: "PKR 420,000",
+    slug: "turkey-honeymoon",
+    category: "honeymoon",
+    rating: 4.7,
+    reviews: 91,
+  },
+  {
+    images: ["/images/client/tours/Baku--Azerbaijan.png"],
+    badge: "Honeymoon",
+    title: "Baku Honeymoon",
+    location: "Azerbaijan",
+    duration: "05 Days / 04 Nights",
+    price: "PKR 295,000",
+    slug: "baku-honeymoon",
+    category: "honeymoon",
+    rating: 4.5,
+    reviews: 58,
+  },
+  {
+    images: ["/images/client/tours/Malaysia--Kuala-Lumpur-.png"],
+    badge: "Honeymoon",
+    title: "Malaysia Honeymoon",
+    location: "Malaysia",
+    duration: "06 Days / 05 Nights",
+    price: "PKR 315,000",
+    slug: "malaysia-honeymoon",
+    category: "honeymoon",
+    rating: 4.5,
+    reviews: 66,
+  },
+  {
+    images: ["/images/client/tours/Sri-Lanka.png"],
+    badge: "Honeymoon",
+    title: "Sri Lanka Honeymoon",
+    location: "Sri Lanka",
+    duration: "06 Days / 05 Nights",
+    price: "PKR 305,000",
+    slug: "sri-lanka-honeymoon",
+    category: "honeymoon",
+    rating: 4.6,
+    reviews: 59,
+  },
+];
+
+export const corporatePackages: Pkg[] = [
+  {
+    images: ["/images/client/tours/Dubai.png"],
+    badge: "Corporate",
+    title: "Dubai Corporate Retreat",
+    location: "United Arab Emirates",
+    duration: "05 Days / 04 Nights",
+    price: "PKR 285,000",
+    slug: "dubai-corporate-tour",
+    category: "corporate",
+    rating: 4.7,
+    reviews: 48,
+  },
+  {
+    images: ["/images/client/tours/Baku--Azerbaijan.png"],
+    badge: "Corporate",
+    title: "Baku Corporate Retreat",
+    location: "Azerbaijan",
+    duration: "05 Days / 04 Nights",
+    price: "PKR 265,000",
+    slug: "baku-corporate-tour",
+    category: "corporate",
+    rating: 4.5,
+    reviews: 39,
+  },
+  {
+    images: ["/images/client/tours/Bali--Indoneshia.png"],
+    badge: "Corporate",
+    title: "Bali Corporate Retreat",
+    location: "Indonesia",
+    duration: "06 Days / 05 Nights",
+    price: "PKR 395,000",
+    slug: "bali-corporate-tour",
+    category: "corporate",
+    rating: 4.6,
+    reviews: 44,
+  },
+  {
+    images: ["/images/client/tours/Malaysia--Kuala-Lumpur-.png"],
+    badge: "Corporate",
+    title: "Malaysia Corporate Tour",
+    location: "Malaysia",
+    duration: "06 Days / 05 Nights",
+    price: "PKR 305,000",
+    slug: "malaysia-corporate-tour",
+    category: "corporate",
+    rating: 4.5,
+    reviews: 36,
+  },
+  {
+    images: ["/images/client/tours/Thailand.png"],
+    badge: "Corporate",
+    title: "Thailand Corporate Tour",
+    location: "Thailand",
+    duration: "07 Days / 06 Nights",
+    price: "PKR 325,000",
+    slug: "thailand-corporate-tour",
+    category: "corporate",
+    rating: 4.6,
+    reviews: 41,
+  },
+  {
+    images: ["/images/client/tours/Turkey.png"],
+    badge: "Corporate",
+    title: "Turkey Corporate Retreat",
+    location: "Turkey",
+    duration: "07 Days / 06 Nights",
+    price: "PKR 385,000",
+    slug: "turkey-corporate-tour",
+    category: "corporate",
+    rating: 4.7,
+    reviews: 52,
+  },
+  {
+    images: ["/images/client/tours/Europe.png"],
+    badge: "Corporate",
+    title: "Europe Corporate Retreat",
+    location: "Europe",
+    duration: "09 Days / 08 Nights",
+    price: "PKR 795,000",
+    slug: "europe-corporate-tour",
+    category: "corporate",
+    rating: 4.8,
+    reviews: 60,
+  },
+];
+
+const tourImgMap: Record<string, string> = {
+  Thailand: "/images/client/tours/Thailand.png",
+  Malaysia: "/images/client/tours/Malaysia--Kuala-Lumpur-.png",
+  Azerbaijan: "/images/client/tours/Baku--Azerbaijan.png",
+  Turkey: "/images/client/tours/Turkey.png",
+  Pakistan: "/images/client/tours/Pakistan-Customized-Tour.jfif",
+  Indonesia: "/images/client/tours/Bali--Indoneshia.png",
+  "Sri Lanka": "/images/client/tours/Sri-Lanka.png",
+  Maldives: "/images/client/tours/Maldives.png",
+  China: "/images/client/tours/China-Customized-Tour.png",
+  Japan: "/images/client/tours/Japan-Customized-Tour.png",
+  Qatar: "/images/client/tours/Qatar-Customized-Tour.png",
+  Bahrain: "/images/client/tours/Bahrain-Customized-Tour.png",
+  Uzbekistan: "/images/client/tours/Uzbekistan-Customized-Tour.webp",
+  Egypt: "/images/client/tours/Egypt-Customized-Tour.jpg",
+  Singapore: "/images/client/tours/Singapore-Customized-Tour.png",
+  "Saudi Arabia": "/images/client/tours/Saudi-Arabia-Customized-Tour.png",
+  Dubai: "/images/client/tours/Dubai.png",
+  Cambodia: "/images/client/tours/Cambodia-Customized-Tour.jpg",
+  Philippines: "/images/client/tours/Philippines-Customized-Tour.png",
+  Vietnam: "/images/client/tours/Vietnam-Customized-Tour.png",
+};
+
+export const customizedPackages: Pkg[] = [
+  "Thailand",
+  "Malaysia",
+  "Azerbaijan",
+  "Turkey",
+  "Pakistan",
+  "Indonesia",
+  "Sri Lanka",
+  "Maldives",
+  "China",
+  "Japan",
+  "Qatar",
+  "Bahrain",
+  "Uzbekistan",
+  "Egypt",
+  "Singapore",
+  "Saudi Arabia",
+  "Dubai",
+  "Cambodia",
+  "Philippines",
+  "Vietnam",
+].map((name, i): Pkg => ({
+  images: [
+    tourImgMap[name] ??
+      `${IMG}/home1/tour-package-img${[6, 1, 11, 14, 13, 2, 4, 10, 7, 7, 8, 9, 15, 12, 3, 16, 8, 5, 17, 18][i]}.jpg`,
+  ],
+  badge: "Customized",
+  title: `${name} Customized Tour`,
+  location: name,
+  duration: "06 Days / 05 Nights",
+  price: `PKR ${[265, 245, 235, 385, 145, 395, 255, 495, 465, 625, 285, 275, 325, 425, 335, 355, 295, 315, 375, 365][i]},000`,
+  slug: `customized-tour-${name.toLowerCase().replace(/[^a-z0-9]+/g, "-")}`,
+  category: "customized",
+  rating: 4.5,
+  reviews: 30 + i,
+}));
+
+export const educationalPackages: Pkg[] = [
+  {
+    images: ["/images/client/tours/Spain.png"],
+    badge: "Educational",
+    title: "Spain Educational Tour",
+    location: "Spain",
+    duration: "07 Days / 06 Nights",
+    price: "PKR 485,000",
+    slug: "educational-tour-spain",
+    category: "educational",
+    rating: 4.7,
+    reviews: 55,
+  },
+  {
+    images: ["/images/client/tours/Thailand.png"],
+    badge: "Educational",
+    title: "Thailand Educational Tour",
+    location: "Thailand",
+    duration: "06 Days / 05 Nights",
+    price: "PKR 295,000",
+    slug: "educational-tour-thailand",
+    category: "educational",
+    rating: 4.5,
+    reviews: 47,
+  },
+  {
+    images: ["/images/client/tours/Australia.webp"],
+    badge: "Educational",
+    title: "Australia Educational Tour",
+    location: "Australia",
+    duration: "09 Days / 08 Nights",
+    price: "PKR 645,000",
+    slug: "educational-tour-australia",
+    category: "educational",
+    rating: 4.8,
+    reviews: 62,
+  },
+  {
+    images: ["/images/client/tours/Italy.avif"],
+    badge: "Educational",
+    title: "Italy Educational Tour",
+    location: "Italy",
+    duration: "07 Days / 06 Nights",
+    price: "PKR 525,000",
+    slug: "educational-tour-italy",
+    category: "educational",
+    rating: 4.6,
+    reviews: 44,
+  },
+  {
+    images: ["/images/client/tours/Egypt-Customized-Tour.jpg"],
+    badge: "Educational",
+    title: "Egypt Educational Tour",
+    location: "Egypt",
+    duration: "06 Days / 05 Nights",
+    price: "PKR 385,000",
+    slug: "educational-tour-egypt",
+    category: "educational",
+    rating: 4.4,
+    reviews: 38,
+  },
+  {
+    images: ["/images/client/tours/England.avif"],
+    badge: "Educational",
+    title: "England Educational Tour",
+    location: "United Kingdom",
+    duration: "07 Days / 06 Nights",
+    price: "PKR 585,000",
+    slug: "educational-tour-england",
+    category: "educational",
+    rating: 4.6,
+    reviews: 51,
+  },
+  {
+    images: ["/images/client/tours/Swedan.png"],
+    badge: "Educational",
+    title: "Sweden Educational Tour",
+    location: "Sweden",
+    duration: "07 Days / 06 Nights",
+    price: "PKR 595,000",
+    slug: "educational-tour-sweden",
+    category: "educational",
+    rating: 4.7,
+    reviews: 40,
+  },
+  {
+    images: ["/images/client/tours/Norway.jpg"],
+    badge: "Educational",
+    title: "Norway Educational Tour",
+    location: "Norway",
+    duration: "07 Days / 06 Nights",
+    price: "PKR 615,000",
+    slug: "educational-tour-norway",
+    category: "educational",
+    rating: 4.8,
+    reviews: 57,
+  },
+];
+
+export function getTourPackages(): Pkg[] {
+  return [
+    ...groupTourPackages,
+    ...honeymoonPackages,
+    ...corporatePackages,
+    ...customizedPackages,
+    ...educationalPackages,
+    ...getAdminPackages(),
+  ];
+}
+
+export function getAllPackages(): Pkg[] {
+  const tourPkgs = getTourPackages();
+  return [
+    ...popularPackages,
+    ...oneDayTrips,
+    ...lastMinuteDeals,
+    ...destinationPackages.filter(
+      (p) => ![...popularPackages, ...oneDayTrips, ...lastMinuteDeals].some((x) => x.slug === p.slug),
+    ),
+    ...tourPkgs.filter(
+      (p) =>
+        ![...popularPackages, ...oneDayTrips, ...lastMinuteDeals, ...destinationPackages].some(
+          (x) => x.slug === p.slug,
+        ),
+    ),
+  ];
+}
+
+// Keep a const for backwards compatibility, but prefer getAllPackages() for fresh data
+export const allPackages: Pkg[] = getAllPackages();
 
 export type PackageDetail = {
   slug: string;
@@ -2365,9 +2781,251 @@ export const packageDetails: Record<string, PackageDetail> = {
 };
 
 export function getPackageBySlug(slug: string): Pkg | undefined {
-  return allPackages.find((p) => p.slug === slug);
+  return getAllPackages().find((p) => p.slug === slug);
+}
+
+const TOUR_TYPE_BY_CATEGORY: Record<string, string> = {
+  group: "Group Tour",
+  honeymoon: "Honeymoon Tour",
+  corporate: "Corporate Tour",
+  customized: "Customized Tour",
+  educational: "Educational Tour",
+};
+
+function parseDays(duration?: string): number {
+  if (!duration) return 5;
+  const m = duration.match(/(\d+)\s*Days?/i);
+  const n = m ? Number(m[1]) : 5;
+  return Math.min(Math.max(n, 1), 9);
+}
+
+function buildPackageDetail(pkg: Pkg): PackageDetail {
+  const days = parseDays(pkg.duration);
+  const type = TOUR_TYPE_BY_CATEGORY[pkg.category ?? "group"] ?? "Group Tour";
+  const dest = pkg.location.split(",").map((s) => s.trim());
+  const itinerary: PackageDetail["itinerary"] = Array.from({ length: days }, (_, i) => ({
+    day: `Day-0${i + 1}`,
+    title:
+      i === 0
+        ? `Arrival & Welcome to ${dest[0]}`
+        : i === days - 1
+          ? "Leisure & Departure"
+          : `Explore ${dest[0]} Highlights`,
+    desc:
+      i === 0
+        ? `Arrive in ${dest[0]}, complete your transfer and check-in, then enjoy a welcome orientation and first evening at leisure.`
+        : i === days - 1
+          ? "A relaxed morning before your departure transfer. Optional shopping and souvenir time before your flight home."
+          : `A full day of guided sightseeing across the top attractions of ${dest[0]}, with photo stops, local cuisine and free time to explore.`,
+    transport: "Private AC Vehicle",
+    activities:
+      i === 0
+        ? "Arrival transfer, Welcome orientation"
+        : i === days - 1
+          ? "Leisure, Departure transfer"
+          : "Guided sightseeing, Photo stops",
+    meals: "Breakfast, Dinner",
+    accommodation: "4 Star Hotel",
+  }));
+
+  return {
+    slug: pkg.slug,
+    rating: pkg.rating ?? 4.5,
+    reviews: pkg.reviews ?? 40,
+    destinations: dest,
+    description: `${pkg.title} — a hand-crafted ${type.toLowerCase()} package from Travel Nest. Enjoy ${pkg.duration ?? "a memorable journey"} of curated sightseeing, comfortable stays, seamless transfers and 24/7 support so you can focus on making unforgettable memories in ${pkg.location}.`,
+    tourType: type,
+    groupSize: "02-15",
+    info: [
+      { label: "Accommodation", value: "4 Star Hotel" },
+      { label: "Meals", value: "Daily Breakfast" },
+      { label: "Transportation", value: "Private AC Vehicle" },
+      { label: "Group Size", value: "02-15" },
+      { label: "Language", value: "English" },
+      { label: "Age Range", value: "All Ages" },
+      { label: "Season", value: "All Season" },
+      { label: "Category", value: type },
+    ],
+    locations: Array.from({ length: Math.min(3, dest.length) }, (_, i) => ({
+      img: pkg.images[i % pkg.images.length],
+      title: dest[i],
+      days: i === 0 ? "01 Days" : "02 Days",
+    })),
+    highlights: [
+      `Curated itinerary covering the best of ${pkg.location}.`,
+      "4 star accommodation with daily breakfast.",
+      "Comfortable private transfers throughout.",
+      "Guided sightseeing at every major highlight.",
+      "Visa facilitation and 24/7 Travel Nest support.",
+    ],
+    itinerary,
+    includes: [
+      "Return air tickets.",
+      "4 star hotel accommodation.",
+      "Daily breakfast.",
+      "Tours & transfers.",
+      "Visa facilitation.",
+      "24/7 support.",
+    ],
+    excludes: [
+      "Travel insurance.",
+      "Personal expenses (shopping, tips).",
+      "Lunches & dinners unless stated.",
+      "Optional activities not listed.",
+    ],
+    additionalInfo: [
+      "Free cancellation – up to 5 days before departure.",
+      "Group discounts available for 6+ travellers.",
+    ],
+    faqs: [
+      {
+        q: `Is the ${pkg.title} package customizable?`,
+        a: "Yes — our team can tailor dates, hotels and activities to your preferences.",
+      },
+      {
+        q: "How do I confirm my booking?",
+        a: "Contact Travel Nest on WhatsApp or phone and our team will guide you through the process.",
+      },
+    ],
+  };
 }
 
 export function getPackageDetail(slug: string): PackageDetail | undefined {
-  return packageDetails[slug];
+  const detail = packageDetails[slug];
+  if (detail) return detail;
+  const pkg = getPackageBySlug(slug);
+  if (!pkg) return undefined;
+  return buildPackageDetail(pkg);
+}
+
+const categoryMap: Record<string, PkgCategory | undefined> = {
+  "Group Tour": "group",
+  Honeymoon: "honeymoon",
+  Corporate: "corporate",
+  Customized: "customized",
+  Educational: "educational",
+};
+
+export function getAdminPackages(): Pkg[] {
+  try {
+    const raw = localStorage.getItem("tn-admin-packages");
+    if (!raw) return [];
+    const packages = JSON.parse(raw) as {
+      id: string;
+      title: string;
+      slug: string;
+      price: string;
+      location: string;
+      category: string;
+      subcategory?: string;
+      duration?: string;
+      groupSize?: string;
+      image: string;
+      description?: string;
+    }[];
+    return packages.map((p) => ({
+      images: p.image ? [p.image] : [],
+      title: p.title,
+      location: p.location,
+      duration: p.duration || "",
+      price: p.price,
+      slug: p.slug,
+      category: categoryMap[p.category],
+      subcategory: p.subcategory || undefined,
+    }));
+  } catch {
+    return [];
+  }
+}
+
+export interface AdminGalleryItem {
+  id: string;
+  src: string;
+  title: string;
+  location: string;
+}
+
+export function getAdminGallery(): AdminGalleryItem[] {
+  try {
+    const raw = localStorage.getItem("tn-admin-gallery");
+    if (!raw) return [];
+    return JSON.parse(raw);
+  } catch {
+    return [];
+  }
+}
+
+export interface AdminVisaCountry {
+  country: string;
+  requirements: string[];
+}
+
+export function getAdminVisa(): AdminVisaCountry[] {
+  try {
+    const raw = localStorage.getItem("tn-admin-visa");
+    if (!raw) return [];
+    return JSON.parse(raw);
+  } catch {
+    return [];
+  }
+}
+
+export interface AdminBannerContent {
+  subtitle: string;
+  title: string;
+  description: string;
+}
+
+export interface AdminBanners {
+  airTickets: AdminBannerContent;
+  home: string[];
+}
+
+const DEFAULT_BANNERS: AdminBanners = {
+  airTickets: {
+    subtitle: "",
+    title: "",
+    description: "",
+  },
+  home: [
+    "Enjoy Family Holiday Packages",
+    "Book Your Dream Vacation at Unbeatable Prices Today",
+    "Explore 500+ Destinations with Expert Guided Tours",
+  ],
+};
+
+export function getAdminBanners(): AdminBanners {
+  const defaults: AdminBanners = {
+    airTickets: {
+      subtitle: "",
+      title: "🕋 November Umrah Special! Fly with Kuwait Airways | ✈️ 15 Days Umrah Airfare Package starting from PKR 120,000 | 🎉 Limited promotional seats available – Book in advance for exclusive discounts! | 📞 Contact Travel Nest today to reserve your seat before fares increase.",
+      description: "",
+    },
+    home: [
+      "Enjoy Family Holiday Packages",
+      "Book Your Dream Vacation at Unbeatable Prices Today",
+      "Explore 500+ Destinations with Expert Guided Tours",
+    ],
+  };
+  try {
+    const raw = localStorage.getItem("tn-admin-banners");
+    if (!raw) return defaults;
+    const parsed = JSON.parse(raw);
+    if (!parsed || typeof parsed !== "object") return defaults;
+    const air = parsed.airTickets ?? defaults.airTickets;
+    let home: string[];
+    if (Array.isArray(parsed.home)) {
+      home = parsed.home.length > 0 ? parsed.home : defaults.home;
+    } else if (parsed.home && typeof parsed.home === "object" && parsed.home.title) {
+      home = [parsed.home.title];
+    } else {
+      home = defaults.home;
+    }
+    return {
+      airTickets: { subtitle: air.subtitle || "", title: air.title || defaults.airTickets.title, description: air.description || "" },
+      home,
+    };
+  } catch {
+    return defaults;
+  }
 }
