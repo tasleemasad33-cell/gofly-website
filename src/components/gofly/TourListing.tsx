@@ -70,7 +70,7 @@ export function PackageListingSection({
           {totalPages > 1 && (
             <div className="mt-10 flex items-center justify-center gap-2">
               <button
-                onClick={() => setPage((p) => Math.max(1, p - 1))}
+                onClick={() => { setPage((p) => Math.max(1, p - 1)); window.scrollTo({ top: 0, behavior: "smooth" }); }}
                 disabled={page === 1}
                 className="grid size-10 place-items-center rounded-full border border-line font-display text-sm text-title transition-colors hover:bg-brand hover:text-white disabled:opacity-40"
               >
@@ -79,7 +79,7 @@ export function PackageListingSection({
               {Array.from({ length: totalPages }, (_, i) => i + 1).map((n) => (
                 <button
                   key={n}
-                  onClick={() => setPage(n)}
+                  onClick={() => { setPage(n); window.scrollTo({ top: 0, behavior: "smooth" }); }}
                   className={`size-10 rounded-full font-display text-sm font-medium transition-colors ${
                     page === n
                       ? "bg-brand text-white"
@@ -90,7 +90,7 @@ export function PackageListingSection({
                 </button>
               ))}
               <button
-                onClick={() => setPage((p) => Math.min(totalPages, p + 1))}
+                onClick={() => { setPage((p) => Math.min(totalPages, p + 1)); window.scrollTo({ top: 0, behavior: "smooth" }); }}
                 disabled={page === totalPages}
                 className="grid size-10 place-items-center rounded-full border border-line font-display text-sm text-title transition-colors hover:bg-brand hover:text-white disabled:opacity-40"
               >
