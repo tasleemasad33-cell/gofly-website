@@ -1,10 +1,75 @@
-import { useState, useEffect } from "react";
-import { Plus, Trash2, Save } from "lucide-react";
+import { useState, useEffect, useRef } from "react";
+import { Plus, Trash2, Save, Upload } from "lucide-react";
 import { getAdminSiteContent } from "@/lib/gofly-data";
 import type { ExperienceDestination, PopularActivity, PageStat, SiteContent } from "@/lib/admin-types";
 
 function uid() {
   return Math.random().toString(36).slice(2, 9);
+}
+
+function fileToDataURL(file: File): Promise<string> {
+  return new Promise((resolve, reject) => {
+    const reader = new FileReader();
+    reader.onload = () => resolve(reader.result as string);
+    reader.onerror = reject;
+    reader.readAsDataURL(file);
+  });
+}
+
+function ImageField({
+  value,
+  onChange,
+  label,
+}: {
+  value: string;
+  onChange: (val: string) => void;
+  label: string;
+}) {
+  const fileRef = useRef<HTMLInputElement>(null);
+
+  const handleFile = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+    if (file.size > 2 * 1024 * 1024) {
+      alert("Image must be under 2MB");
+      return;
+    }
+    const dataURL = await fileToDataURL(file);
+    onChange(dataURL);
+  };
+
+  return (
+    <div className="flex items-center gap-2">
+      <input
+        value={value.startsWith("data:") ? "" : value}
+        onChange={(e) => onChange(e.target.value)}
+        className="w-full rounded-lg border border-slate-200 px-3 py-2 text-sm"
+        placeholder={`${label} URL or upload below`}
+      />
+      <input
+        ref={fileRef}
+        type="file"
+        accept="image/*"
+        onChange={handleFile}
+        className="hidden"
+      />
+      <button
+        type="button"
+        onClick={() => fileRef.current?.click()}
+        className="shrink-0 rounded-lg border border-slate-200 px-3 py-2 text-sm text-slate-600 hover:bg-slate-50"
+        title="Upload from device"
+      >
+        <Upload className="size-4" />
+      </button>
+      {value && (
+        <img
+          src={value}
+          alt="Preview"
+          className="size-10 shrink-0 rounded-lg object-cover"
+        />
+      )}
+    </div>
+  );
 }
 
 export default function SiteContentPage() {
@@ -121,29 +186,30 @@ export default function SiteContentPage() {
         </div>
         <div className="space-y-3">
           {content.destinations.map((d) => (
-            <div key={d.id} className="flex items-center gap-3 rounded-lg border border-slate-100 bg-slate-50 p-3">
-              <input
-                value={d.title}
-                onChange={(e) => updateDest(d.id, "title", e.target.value)}
-                className="flex-1 rounded-lg border border-slate-200 px-3 py-2 text-sm"
-                placeholder="Destination"
-              />
-              <input
-                type="number"
-                value={d.activityCount}
-                onChange={(e) => updateDest(d.id, "activityCount", Number(e.target.value))}
-                className="w-24 rounded-lg border border-slate-200 px-3 py-2 text-sm"
-                placeholder="Count"
-              />
-              <input
+            <div key={d.id} className="rounded-lg border border-slate-100 bg-slate-50 p-3 space-y-2">
+              <div className="flex items-center gap-3">
+                <input
+                  value={d.title}
+                  onChange={(e) => updateDest(d.id, "title", e.target.value)}
+                  className="flex-1 rounded-lg border border-slate-200 px-3 py-2 text-sm"
+                  placeholder="Destination"
+                />
+                <input
+                  type="number"
+                  value={d.activityCount}
+                  onChange={(e) => updateDest(d.id, "activityCount", Number(e.target.value))}
+                  className="w-24 rounded-lg border border-slate-200 px-3 py-2 text-sm"
+                  placeholder="Count"
+                />
+                <button onClick={() => removeDest(d.id)} className="text-red-400 hover:text-red-600">
+                  <Trash2 className="size-4" />
+                </button>
+              </div>
+              <ImageField
                 value={d.image}
-                onChange={(e) => updateDest(d.id, "image", e.target.value)}
-                className="flex-1 rounded-lg border border-slate-200 px-3 py-2 text-sm"
-                placeholder="Image URL"
+                onChange={(val) => updateDest(d.id, "image", val)}
+                label="Image"
               />
-              <button onClick={() => removeDest(d.id)} className="text-red-400 hover:text-red-600">
-                <Trash2 className="size-4" />
-              </button>
             </div>
           ))}
         </div>
@@ -159,40 +225,41 @@ export default function SiteContentPage() {
         </div>
         <div className="space-y-3">
           {content.activities.map((a) => (
-            <div key={a.id} className="flex items-center gap-3 rounded-lg border border-slate-100 bg-slate-50 p-3">
-              <input
-                value={a.title}
-                onChange={(e) => updateActivity(a.id, "title", e.target.value)}
-                className="w-48 rounded-lg border border-slate-200 px-3 py-2 text-sm"
-                placeholder="Title"
-              />
-              <input
-                value={a.location}
-                onChange={(e) => updateActivity(a.id, "location", e.target.value)}
-                className="w-40 rounded-lg border border-slate-200 px-3 py-2 text-sm"
-                placeholder="Location"
-              />
-              <input
-                value={a.duration}
-                onChange={(e) => updateActivity(a.id, "duration", e.target.value)}
-                className="w-28 rounded-lg border border-slate-200 px-3 py-2 text-sm"
-                placeholder="Duration"
-              />
-              <input
-                value={a.price}
-                onChange={(e) => updateActivity(a.id, "price", e.target.value)}
-                className="w-36 rounded-lg border border-slate-200 px-3 py-2 text-sm"
-                placeholder="PKR 0"
-              />
-              <input
+            <div key={a.id} className="rounded-lg border border-slate-100 bg-slate-50 p-3 space-y-2">
+              <div className="flex items-center gap-3">
+                <input
+                  value={a.title}
+                  onChange={(e) => updateActivity(a.id, "title", e.target.value)}
+                  className="w-48 rounded-lg border border-slate-200 px-3 py-2 text-sm"
+                  placeholder="Title"
+                />
+                <input
+                  value={a.location}
+                  onChange={(e) => updateActivity(a.id, "location", e.target.value)}
+                  className="w-40 rounded-lg border border-slate-200 px-3 py-2 text-sm"
+                  placeholder="Location"
+                />
+                <input
+                  value={a.duration}
+                  onChange={(e) => updateActivity(a.id, "duration", e.target.value)}
+                  className="w-28 rounded-lg border border-slate-200 px-3 py-2 text-sm"
+                  placeholder="Duration"
+                />
+                <input
+                  value={a.price}
+                  onChange={(e) => updateActivity(a.id, "price", e.target.value)}
+                  className="w-36 rounded-lg border border-slate-200 px-3 py-2 text-sm"
+                  placeholder="PKR 0"
+                />
+                <button onClick={() => removeActivity(a.id)} className="text-red-400 hover:text-red-600">
+                  <Trash2 className="size-4" />
+                </button>
+              </div>
+              <ImageField
                 value={a.image}
-                onChange={(e) => updateActivity(a.id, "image", e.target.value)}
-                className="flex-1 rounded-lg border border-slate-200 px-3 py-2 text-sm"
-                placeholder="Image URL"
+                onChange={(val) => updateActivity(a.id, "image", val)}
+                label="Image"
               />
-              <button onClick={() => removeActivity(a.id)} className="text-red-400 hover:text-red-600">
-                <Trash2 className="size-4" />
-              </button>
             </div>
           ))}
         </div>
