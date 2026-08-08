@@ -133,7 +133,7 @@ function AboutIntro() {
               {/* Signature */}
               <div className="mt-8 flex items-center gap-4 border-t border-line pt-6">
                 <div className="flex h-14 w-14 items-center justify-center rounded-full bg-brand font-display text-lg font-bold text-white">
-                  AM
+                  SA
                 </div>
                 <div>
                   <p className="font-display text-xl font-semibold text-title">Saadia Amer</p>
