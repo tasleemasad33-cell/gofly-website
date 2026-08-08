@@ -136,7 +136,7 @@ function AboutIntro() {
                   AM
                 </div>
                 <div>
-                  <p className="font-display text-xl font-semibold text-title">Amer Manzoor</p>
+                  <p className="font-display text-xl font-semibold text-title">Saadia Amer</p>
                   <p className="text-sm text-body">Founder at Travel Nest</p>
                 </div>
               </div>
