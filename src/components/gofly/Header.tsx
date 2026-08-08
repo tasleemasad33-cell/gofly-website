@@ -73,15 +73,12 @@ export function Header() {
             {navItems.map((item, i) =>
               item.children ? (
                 <div key={item.label} className="group relative">
-                  <a
-                    href={item.href}
-                    className={`inline-flex items-center gap-1 font-display text-[14px] font-medium transition-colors ${
-                      i === 0 ? "text-brand" : "text-title hover:text-brand"
-                    }`}
+                  <span
+                    className="inline-flex cursor-default items-center gap-1 font-display text-[14px] font-medium text-title"
                   >
                     {item.label}
                     <ChevronDown className="size-3.5 transition-transform duration-200 group-hover:rotate-180" />
-                  </a>
+                  </span>
                   {/* Transparent bridge so hover persists when moving mouse to dropdown */}
                   <div className="absolute left-0 top-full h-3 w-full" />
                   {/* Dropdown with scaleY reveal from top */}

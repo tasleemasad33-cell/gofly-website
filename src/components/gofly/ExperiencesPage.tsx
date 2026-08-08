@@ -2,6 +2,7 @@ import { useState } from "react";
 import Autoplay from "embla-carousel-autoplay";
 import { ArrowRight, Calendar, Clock, MapPin, Minus, Plus, Users, X } from "lucide-react";
 import { IMG } from "@/lib/gofly-data";
+import { clientStrasbourgCanal } from "@/lib/client-images";
 import { PageHero } from "./PageHero";
 import { SectionTitle } from "./SectionTitle";
 import { Carousel } from "./Carousel";
@@ -43,7 +44,6 @@ const activities = [
     location: "Himachal Pradesh, India",
     duration: "01 Hour",
     price: "$99",
-    badge: "Sale on!",
   },
   {
     img: `${IMG}/home6/tour-package-img2.jpg`,
@@ -51,7 +51,6 @@ const activities = [
     location: "Maldives",
     duration: "30 Minute",
     price: "$49",
-    badge: "Sale on!",
   },
   {
     img: `${IMG}/home6/tour-package-img13.jpg`,
@@ -59,7 +58,6 @@ const activities = [
     location: "Nepal",
     duration: "45 Minute",
     price: "$89",
-    badge: "Sale on!",
   },
   {
     img: `${IMG}/home6/tour-package-img6.jpg`,
@@ -67,7 +65,6 @@ const activities = [
     location: "Goa, India",
     duration: "20 Minute",
     price: "$39",
-    badge: "Sale on!",
   },
   {
     img: `${IMG}/home6/tour-package-img5.jpg`,
@@ -75,17 +72,7 @@ const activities = [
     location: "Nepal",
     duration: "40 Minute",
     price: "$129",
-    badge: "Sale on!",
   },
-];
-
-const guides = [
-  { img: `${IMG}/home7/tour-guide-img1.png`, name: "Oliver Liam", role: "Skydiving Expert" },
-  { img: `${IMG}/home7/tour-guide-img2.png`, name: "Mrs. Emelia Jong", role: "Paragliding Expert" },
-  { img: `${IMG}/home7/tour-guide-img3.png`, name: "Alexander Benju", role: "Skydiving Expert" },
-  { img: `${IMG}/home7/tour-guide-img4.png`, name: "Samuel Henry", role: "Rock Climbing Expert" },
-  { img: `${IMG}/home7/tour-guide-img5.png`, name: "David Reynolds", role: "Zip-lining Expert" },
-  { img: `${IMG}/home7/tour-guide-img6.png`, name: "Thomas Mitchell", role: "Scuba Expert" },
 ];
 
 type Activity = {
@@ -353,26 +340,6 @@ export function ExperiencesPage() {
               </Reveal>
             ))}
           </div>
-
-          {/* Rating + customize */}
-          <div className="mt-12 flex flex-col items-center justify-between gap-6 rounded-2xl bg-soft px-6 py-8 sm:flex-row sm:px-10">
-            <div className="flex flex-col items-center gap-3 text-center sm:flex-row sm:gap-4 sm:text-left">
-              <span className="flex gap-1 text-[oklch(0.75_0.16_140)]">
-                {[...Array(5)].map((_, i) => (
-                  <svg key={i} viewBox="0 0 20 20" className="size-6 fill-current">
-                    <path d="M10 1l2.6 5.3 5.9.9-4.2 4.1 1 5.8L10 14.8l-5.3 2.8 1-5.8L1.5 7.2l5.9-.9z" />
-                  </svg>
-                ))}
-              </span>
-              <p className="text-sm text-body">5.0 Rating out of 5.0 based on 24,000 reviews</p>
-            </div>
-            <a
-              href="/customized-tours"
-              className="inline-flex items-center gap-2 rounded-full bg-title px-7 py-3.5 font-display text-sm font-medium text-white transition-colors hover:bg-brand"
-            >
-              Customize Package <ArrowRight className="size-4" />
-            </a>
-          </div>
         </div>
       </section>
 
@@ -403,8 +370,8 @@ export function ExperiencesPage() {
           <Reveal delay={150}>
             <div className="relative">
               <img
-                src={`${IMG}/home7/about-img.jpg`}
-                alt="Adventure"
+                src={clientStrasbourgCanal}
+                alt="Strasbourg Canal"
                 loading="lazy"
                 className="w-full rounded-[32px] object-cover"
               />
@@ -435,9 +402,6 @@ export function ExperiencesPage() {
                       loading="lazy"
                       className="h-[240px] w-full object-cover transition-transform duration-700 group-hover:scale-110"
                     />
-                    <span className="absolute left-4 top-4 rounded-full bg-title px-3 py-1 font-display text-xs font-semibold text-white">
-                      {a.badge}
-                    </span>
                   </div>
                   <div className="p-5">
                     <h4 className="font-display text-xl font-semibold text-title transition-colors group-hover:text-brand">
@@ -520,38 +484,6 @@ export function ExperiencesPage() {
               </div>
             ))}
           </Carousel>
-        </div>
-      </section>
-
-      {/* Activities Guider */}
-      <section className="bg-soft py-20">
-        <div className="container-gofly">
-          <SectionTitle
-            title="Activities Guider"
-            subtitle="Meet our certified experts who make every adventure safe, fun and unforgettable."
-          />
-          <div className="mt-12">
-            <Carousel
-              dots
-              slideClass="flex-[0_0_80%] sm:flex-[0_0_45%] lg:flex-[0_0_33.333%]"
-              plugins={[Autoplay({ delay: 4000, stopOnInteraction: false })]}
-            >
-              {guides.map((g) => (
-                <div key={g.name} className="group text-center">
-                  <div className="relative mx-auto w-56 overflow-hidden rounded-[24px] bg-background shadow-sm transition-shadow duration-500 group-hover:shadow-[var(--shadow-float)]">
-                    <img
-                      src={g.img}
-                      alt={g.name}
-                      loading="lazy"
-                      className="aspect-[4/5] w-full object-cover"
-                    />
-                  </div>
-                  <h5 className="mt-5 font-display text-lg font-semibold text-title">{g.name}</h5>
-                  <p className="mt-1 text-sm font-medium text-brand">{g.role}</p>
-                </div>
-              ))}
-            </Carousel>
-          </div>
         </div>
       </section>
 
