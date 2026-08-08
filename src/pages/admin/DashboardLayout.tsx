@@ -4,6 +4,7 @@ import {
   BarChart3,
   Camera,
   FileText,
+  Globe,
   Image,
   LayoutDashboard,
   LogOut,
@@ -19,6 +20,7 @@ const nav = [
   { id: "gallery", label: "Gallery", icon: Camera, path: "/admin/gallery" },
   { id: "visa", label: "Visa Requirements", icon: FileText, path: "/admin/visa" },
   { id: "banners", label: "Banners", icon: Image, path: "/admin/banners" },
+  { id: "content", label: "Site Content", icon: Globe, path: "/admin/content" },
   { id: "settings", label: "Settings", icon: Settings, path: "/admin/settings" },
 ];
 

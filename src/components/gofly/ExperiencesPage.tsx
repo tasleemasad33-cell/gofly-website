@@ -1,7 +1,7 @@
 import { useState } from "react";
 import Autoplay from "embla-carousel-autoplay";
 import { ArrowRight, Calendar, Clock, MapPin, Minus, Plus, Users, X } from "lucide-react";
-import { IMG } from "@/lib/gofly-data";
+import { IMG, getAdminSiteContent } from "@/lib/gofly-data";
 import { clientStrasbourgCanal } from "@/lib/client-images";
 import { PageHero } from "./PageHero";
 import { SectionTitle } from "./SectionTitle";
@@ -9,7 +9,7 @@ import { Carousel } from "./Carousel";
 import { Reveal } from "./Reveal";
 import { useCountUp } from "./useCountUp";
 
-const experienceDestinations = [
+const defaultDestinations = [
   { img: `${IMG}/home7/destination-img1.jpg`, title: "Nepal", count: "Activities (08)" },
   { img: `${IMG}/home7/destination-img2.jpg`, title: "Patagonia", count: "Activities (34)" },
   { img: `${IMG}/home7/destination-img3.jpg`, title: "Hawaii, USA", count: "Activities (10)" },
@@ -18,6 +18,18 @@ const experienceDestinations = [
   { img: `${IMG}/home7/destination-img6.jpg`, title: "Maldives", count: "Activities (21)" },
   { img: `${IMG}/home7/destination-img7.jpg`, title: "Indonesia", count: "Activities (12)" },
 ];
+
+function getDestinations() {
+  const content = getAdminSiteContent();
+  if (content.destinations.length > 0) {
+    return content.destinations.map((d) => ({
+      img: d.image || `${IMG}/home7/destination-img1.jpg`,
+      title: d.title,
+      count: `Activities (${String(d.activityCount).padStart(2, "0")})`,
+    }));
+  }
+  return defaultDestinations;
+}
 
 const trustFeatures = [
   {
@@ -37,43 +49,57 @@ const trustFeatures = [
   },
 ];
 
-const activities = [
+const defaultActivities = [
   {
     img: `${IMG}/home6/tour-package-img1.jpg`,
     title: "Zip-lining & Canopy",
     location: "Himachal Pradesh, India",
     duration: "01 Hour",
-    price: "$99",
+    price: "PKR 27,000",
   },
   {
     img: `${IMG}/home6/tour-package-img2.jpg`,
     title: "Snowboarding & Ice Thrills",
     location: "Maldives",
     duration: "30 Minute",
-    price: "$49",
+    price: "PKR 13,500",
   },
   {
     img: `${IMG}/home6/tour-package-img13.jpg`,
     title: "Climbing & Mountaineering",
     location: "Nepal",
     duration: "45 Minute",
-    price: "$89",
+    price: "PKR 24,500",
   },
   {
     img: `${IMG}/home6/tour-package-img6.jpg`,
     title: "Surfing & Waterfalls",
     location: "Goa, India",
     duration: "20 Minute",
-    price: "$39",
+    price: "PKR 10,700",
   },
   {
     img: `${IMG}/home6/tour-package-img5.jpg`,
     title: "Skydiving & Paragliding",
     location: "Nepal",
     duration: "40 Minute",
-    price: "$129",
+    price: "PKR 35,200",
   },
 ];
+
+function getActivities() {
+  const content = getAdminSiteContent();
+  if (content.activities.length > 0) {
+    return content.activities.map((a) => ({
+      img: a.image || `${IMG}/home6/tour-package-img1.jpg`,
+      title: a.title,
+      location: a.location,
+      duration: a.duration,
+      price: a.price,
+    }));
+  }
+  return defaultActivities;
+}
 
 type Activity = {
   title: string;
@@ -288,6 +314,8 @@ function ActivityBookingModal({
 export function ExperiencesPage() {
   const [active, setActive] = useState(activityTabs[0].id);
   const [booking, setBooking] = useState<{ activity: Activity; image: string } | null>(null);
+  const experienceDestinations = getDestinations();
+  const activities = getActivities();
 
   return (
     <div className="overflow-x-hidden">

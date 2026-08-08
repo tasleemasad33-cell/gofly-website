@@ -46,4 +46,34 @@ export type AdminTab =
   | "gallery"
   | "visa"
   | "banners"
+  | "content"
   | "settings";
+
+export interface ExperienceDestination {
+  id: string;
+  title: string;
+  activityCount: number;
+  image: string;
+}
+
+export interface PopularActivity {
+  id: string;
+  title: string;
+  location: string;
+  duration: string;
+  price: string;
+  image: string;
+}
+
+export interface PageStat {
+  id: string;
+  value: string;
+  label: string;
+}
+
+export interface SiteContent {
+  destinations: ExperienceDestination[];
+  activities: PopularActivity[];
+  weddingStats: PageStat[];
+  homeStats: PageStat[];
+}

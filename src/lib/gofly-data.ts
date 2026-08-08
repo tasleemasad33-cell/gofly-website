@@ -1,6 +1,7 @@
 export const IMG = "https://demo.egenslab.com/html/gofly/preview/assets/img";
 
 import { clientHeroSlides, clientGalleryImages, clientGalleryItems } from "@/lib/client-images";
+import type { ExperienceDestination, PopularActivity, PageStat, SiteContent } from "./admin-types";
 
 export const heroSlides = clientHeroSlides;
 
@@ -250,6 +251,23 @@ export const counters = [
   { value: 20, suffix: "+", label: "Happy Traveler" },
   { value: 98, suffix: "%", label: "Retention Rate" },
 ];
+
+export function getCounters() {
+  const content = getAdminSiteContent();
+  if (content.homeStats.length > 0) {
+    return content.homeStats.map((s) => ({
+      value: parseInt(s.value) || 0,
+      suffix: s.value.replace(/[0-9]/g, ""),
+      label: s.label,
+    }));
+  }
+  return [
+    { value: 26, suffix: "K+", label: "Tour Completed" },
+    { value: 12, suffix: "+", label: "Travel Experience" },
+    { value: 20, suffix: "+", label: "Happy Traveler" },
+    { value: 98, suffix: "%", label: "Retention Rate" },
+  ];
+}
 
 export const galleryImages = clientGalleryImages;
 
@@ -3027,5 +3045,54 @@ export function getAdminBanners(): AdminBanners {
     };
   } catch {
     return defaults;
+  }
+}
+
+/* ── Site Content (destinations, activities, stats) ── */
+
+const defaultSiteContent: SiteContent = {
+  destinations: [
+    { id: "d1", title: "Nepal", activityCount: 8, image: `${IMG}/home7/destination-img1.jpg` },
+    { id: "d2", title: "Patagonia", activityCount: 34, image: `${IMG}/home7/destination-img2.jpg` },
+    { id: "d3", title: "Hawaii, USA", activityCount: 10, image: `${IMG}/home7/destination-img3.jpg` },
+    { id: "d4", title: "Swiss Alps", activityCount: 13, image: `${IMG}/home7/destination-img4.jpg` },
+    { id: "d5", title: "Rome", activityCount: 15, image: `${IMG}/home7/destination-img5.jpg` },
+    { id: "d6", title: "Maldives", activityCount: 21, image: `${IMG}/home7/destination-img6.jpg` },
+    { id: "d7", title: "Indonesia", activityCount: 12, image: `${IMG}/home7/destination-img7.jpg` },
+  ],
+  activities: [
+    { id: "a1", title: "Zip-lining & Canopy", location: "Himachal Pradesh, India", duration: "01 Hour", price: "PKR 27,000", image: `${IMG}/home6/tour-package-img1.jpg` },
+    { id: "a2", title: "Snowboarding & Ice Thrills", location: "Maldives", duration: "30 Minute", price: "PKR 13,500", image: `${IMG}/home6/tour-package-img2.jpg` },
+    { id: "a3", title: "Climbing & Mountaineering", location: "Nepal", duration: "45 Minute", price: "PKR 24,500", image: `${IMG}/home6/tour-package-img13.jpg` },
+    { id: "a4", title: "Surfing & Waterfalls", location: "Goa, India", duration: "20 Minute", price: "PKR 10,700", image: `${IMG}/home6/tour-package-img6.jpg` },
+    { id: "a5", title: "Skydiving & Paragliding", location: "Nepal", duration: "40 Minute", price: "PKR 35,200", image: `${IMG}/home6/tour-package-img5.jpg` },
+  ],
+  weddingStats: [
+    { id: "ws1", value: "500+", label: "Happy Guests" },
+    { id: "ws2", value: "100+", label: "Wedding Events" },
+    { id: "ws3", value: "20+", label: "Destinations" },
+    { id: "ws4", value: "98%", label: "Client Satisfaction" },
+  ],
+  homeStats: [
+    { id: "hs1", value: "26K+", label: "Tour Completed" },
+    { id: "hs2", value: "12+", label: "Travel Experience" },
+    { id: "hs3", value: "20+", label: "Happy Traveler" },
+    { id: "hs4", value: "98%", label: "Retention Rate" },
+  ],
+};
+
+export function getAdminSiteContent(): SiteContent {
+  try {
+    const raw = localStorage.getItem("tn-admin-site-content");
+    if (!raw) return defaultSiteContent;
+    const parsed = JSON.parse(raw) as Partial<SiteContent>;
+    return {
+      destinations: parsed.destinations || defaultSiteContent.destinations,
+      activities: parsed.activities || defaultSiteContent.activities,
+      weddingStats: parsed.weddingStats || defaultSiteContent.weddingStats,
+      homeStats: parsed.homeStats || defaultSiteContent.homeStats,
+    };
+  } catch {
+    return defaultSiteContent;
   }
 }

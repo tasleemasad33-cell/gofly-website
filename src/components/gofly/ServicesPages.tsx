@@ -13,7 +13,7 @@ import {
   Sparkles,
   Users,
 } from "lucide-react";
-import { IMG, getAdminVisa, getAdminBanners } from "@/lib/gofly-data";
+import { IMG, getAdminVisa, getAdminBanners, getAdminSiteContent } from "@/lib/gofly-data";
 import { clientWeddingImage, clientWeddingImage2 } from "@/lib/client-images";
 import { PageHero } from "./PageHero";
 import { SectionTitle } from "./SectionTitle";
@@ -811,6 +811,13 @@ const weddingServices = [
 ];
 
 export function DestinationWeddingPage() {
+  const content = getAdminSiteContent();
+  const stats = content.weddingStats.length > 0 ? content.weddingStats : [
+    { id: "ws1", value: "500+", label: "Happy Guests" },
+    { id: "ws2", value: "100+", label: "Wedding Events" },
+    { id: "ws3", value: "20+", label: "Destinations" },
+    { id: "ws4", value: "98%", label: "Client Satisfaction" },
+  ];
   return (
     <div className="overflow-x-hidden">
       <PageHero
@@ -826,15 +833,10 @@ export function DestinationWeddingPage() {
           />
 
           <div className="mt-12 grid grid-cols-2 gap-4 lg:grid-cols-4">
-            {[
-              { label: "500+", sub: "Happy Guests" },
-              { label: "100+", sub: "Wedding Events" },
-              { label: "20+", sub: "Destinations" },
-              { label: "98%", sub: "Client Satisfaction" },
-            ].map((s) => (
-              <div key={s.sub} className="rounded-2xl bg-soft px-6 py-8 text-center">
-                <p className="font-display text-4xl font-bold text-brand">{s.label}</p>
-                <p className="mt-2 font-display text-sm font-medium text-title">{s.sub}</p>
+            {stats.map((s) => (
+              <div key={s.id} className="rounded-2xl bg-soft px-6 py-8 text-center">
+                <p className="font-display text-4xl font-bold text-brand">{s.value}</p>
+                <p className="mt-2 font-display text-sm font-medium text-title">{s.label}</p>
               </div>
             ))}
           </div>

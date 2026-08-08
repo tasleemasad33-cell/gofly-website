@@ -1,6 +1,6 @@
 import Autoplay from "embla-carousel-autoplay";
 import { ArrowRight, MapPin, Star } from "lucide-react";
-import { IMG, blogPosts, counters, galleryImages, testimonials } from "@/lib/gofly-data";
+import { IMG, blogPosts, getCounters, galleryImages, testimonials } from "@/lib/gofly-data";
 import { Carousel } from "./Carousel";
 import { SectionTitle } from "./SectionTitle";
 import { Reveal } from "./Reveal";
@@ -125,6 +125,7 @@ function Counter({ value, suffix, label }: { value: number; suffix: string; labe
 }
 
 export function Counters() {
+  const counters = getCounters();
   return (
     <section className="border-y border-line py-14">
       <div className="container-gofly grid grid-cols-2 gap-8 lg:grid-cols-4">

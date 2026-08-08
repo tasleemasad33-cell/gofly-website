@@ -31,6 +31,7 @@ import { Route as TermsRouteImport } from './routes/terms'
 import { Route as TransportationRouteImport } from './routes/transportation'
 import { Route as VisaFacilitationRouteImport } from './routes/visa-facilitation'
 import { Route as AdminBannersRouteImport } from './routes/admin.banners'
+import { Route as AdminContentRouteImport } from './routes/admin.content'
 import { Route as AdminDashboardRouteImport } from './routes/admin.dashboard'
 import { Route as AdminGalleryRouteImport } from './routes/admin.gallery'
 import { Route as AdminLoginRouteImport } from './routes/admin.login'
@@ -214,6 +215,7 @@ export interface FileRoutesByFullPath {
   '/transportation': typeof TransportationRoute
   '/visa-facilitation': typeof VisaFacilitationRoute
   '/admin/banners': typeof AdminBannersRoute
+  '/admin/content': typeof AdminContentRoute
   '/admin/dashboard': typeof AdminDashboardRoute
   '/admin/gallery': typeof AdminGalleryRoute
   '/admin/login': typeof AdminLoginRoute
@@ -245,6 +247,7 @@ export interface FileRoutesByTo {
   '/transportation': typeof TransportationRoute
   '/visa-facilitation': typeof VisaFacilitationRoute
   '/admin/banners': typeof AdminBannersRoute
+  '/admin/content': typeof AdminContentRoute
   '/admin/dashboard': typeof AdminDashboardRoute
   '/admin/gallery': typeof AdminGalleryRoute
   '/admin/login': typeof AdminLoginRoute
@@ -278,6 +281,7 @@ export interface FileRoutesById {
   '/transportation': typeof TransportationRoute
   '/visa-facilitation': typeof VisaFacilitationRoute
   '/admin/banners': typeof AdminBannersRoute
+  '/admin/content': typeof AdminContentRoute
   '/admin/dashboard': typeof AdminDashboardRoute
   '/admin/gallery': typeof AdminGalleryRoute
   '/admin/login': typeof AdminLoginRoute
@@ -312,6 +316,7 @@ export interface FileRouteTypes {
     | '/transportation'
     | '/visa-facilitation'
     | '/admin/banners'
+    | '/admin/content'
     | '/admin/dashboard'
     | '/admin/gallery'
     | '/admin/login'
@@ -343,6 +348,7 @@ export interface FileRouteTypes {
     | '/transportation'
     | '/visa-facilitation'
     | '/admin/banners'
+    | '/admin/content'
     | '/admin/dashboard'
     | '/admin/gallery'
     | '/admin/login'
@@ -375,6 +381,7 @@ export interface FileRouteTypes {
     | '/transportation'
     | '/visa-facilitation'
     | '/admin/banners'
+    | '/admin/content'
     | '/admin/dashboard'
     | '/admin/gallery'
     | '/admin/login'
@@ -565,6 +572,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AdminBannersRouteImport
       parentRoute: typeof AdminRoute
     }
+    '/admin/content': {
+      id: '/admin/content'
+      path: '/content'
+      fullPath: '/admin/content'
+      preLoaderRoute: typeof AdminContentRouteImport
+      parentRoute: typeof AdminRoute
+    }
     '/admin/dashboard': {
       id: '/admin/dashboard'
       path: '/dashboard'
@@ -626,6 +640,7 @@ declare module '@tanstack/react-router' {
 
 interface AdminRouteChildren {
   AdminBannersRoute: typeof AdminBannersRoute
+  AdminContentRoute: typeof AdminContentRoute
   AdminDashboardRoute: typeof AdminDashboardRoute
   AdminGalleryRoute: typeof AdminGalleryRoute
   AdminLoginRoute: typeof AdminLoginRoute
@@ -636,6 +651,7 @@ interface AdminRouteChildren {
 
 const AdminRouteChildren: AdminRouteChildren = {
   AdminBannersRoute: AdminBannersRoute,
+  AdminContentRoute: AdminContentRoute,
   AdminDashboardRoute: AdminDashboardRoute,
   AdminGalleryRoute: AdminGalleryRoute,
   AdminLoginRoute: AdminLoginRoute,
