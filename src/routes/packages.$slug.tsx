@@ -1,6 +1,7 @@
+import { useState, useEffect } from "react";
 import { createFileRoute } from "@tanstack/react-router";
 import { PackageDetailsPage } from "@/components/gofly/PackageDetailsPage";
-import { getPackageBySlug } from "@/lib/gofly-data";
+import { getPackageBySlug, type Pkg } from "@/lib/gofly-data";
 
 const title = "Package Details — Travel Nest";
 const description =
@@ -22,7 +23,30 @@ export const Route = createFileRoute("/packages/$slug")({
 
 function PackageDetails() {
   const { slug } = Route.useParams();
-  const pkg = getPackageBySlug(slug);
+  const [pkg, setPkg] = useState<Pkg | undefined>(() => {
+    try {
+      return getPackageBySlug(slug);
+    } catch {
+      return undefined;
+    }
+  });
+  const [loading, setLoading] = useState(!pkg);
+
+  useEffect(() => {
+    if (!pkg) {
+      const found = getPackageBySlug(slug);
+      if (found) setPkg(found);
+      setLoading(false);
+    }
+  }, [slug, pkg]);
+
+  if (loading) {
+    return (
+      <section className="flex min-h-[60vh] items-center justify-center px-4 text-center">
+        <div className="animate-pulse text-body">Loading package...</div>
+      </section>
+    );
+  }
 
   if (!pkg) {
     return (
