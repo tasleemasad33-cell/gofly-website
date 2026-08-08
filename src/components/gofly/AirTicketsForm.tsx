@@ -753,7 +753,7 @@ export function AirTicketsForm() {
   const whatsappUrl = `https://wa.me/${WHATSAPP}?text=${encodeURIComponent(message)}`;
 
   return (
-    <div className="rounded-2xl border border-line bg-card p-8 sm:p-12">
+    <div className="rounded-2xl border border-line bg-card p-5 sm:p-8 md:p-12">
       <h2 className="text-center font-display text-2xl font-semibold text-title">
         Book Your Flight with Ease
       </h2>

@@ -77,7 +77,7 @@ export function CruiseForm() {
   const whatsappUrl = `https://wa.me/${WHATSAPP}?text=${encodeURIComponent(message)}`;
 
   return (
-    <div className="mt-14 rounded-2xl border border-line bg-background p-8 sm:p-12">
+    <div className="mt-14 rounded-2xl border border-line bg-background p-5 sm:p-8 md:p-12">
       <p className="text-center font-display text-sm font-semibold uppercase tracking-wider text-brand">
         Let's Set Sail on Your Dream Cruise
       </p>

@@ -10,7 +10,7 @@ export function PageHero({
   image?: string;
 }) {
   return (
-    <section className="relative h-[400px] w-full overflow-hidden">
+    <section className="relative h-[280px] w-full overflow-hidden sm:h-[400px]">
       <img src={image} alt={title} className="absolute inset-0 h-full w-full object-cover" />
       <div className="absolute inset-0 bg-gradient-to-b from-black/50 via-black/40 to-black/60" />
       <div className="relative z-10 flex h-full flex-col items-center justify-center text-center">

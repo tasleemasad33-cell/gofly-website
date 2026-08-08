@@ -246,7 +246,7 @@ export function SearchWidget() {
               onClick={() => setDropdown(dropdown === "dest" ? null : "dest")}
             />
             {dropdown === "dest" && (
-              <div className="absolute left-0 top-full z-30 mt-2 max-h-72 w-full min-w-[300px] overflow-y-auto rounded-xl border border-line bg-background p-2 shadow-[var(--shadow-float)]">
+              <div className="absolute left-0 top-full z-30 mt-2 max-h-72 w-full min-w-[200px] sm:min-w-[300px] overflow-y-auto rounded-xl border border-line bg-background p-2 shadow-[var(--shadow-float)]">
                 {destOptions[tab].map((d) => (
                   <button
                     key={d.value}
@@ -275,7 +275,7 @@ export function SearchWidget() {
               onClick={() => setDropdown(dropdown === "date" ? null : "date")}
             />
             {dropdown === "date" && (
-              <div className="absolute left-0 top-full z-30 mt-2 w-full min-w-[280px] rounded-xl border border-line bg-background p-4 shadow-[var(--shadow-float)]">
+              <div className="absolute left-0 top-full z-30 mt-2 w-full min-w-[200px] sm:min-w-[280px] rounded-xl border border-line bg-background p-4 shadow-[var(--shadow-float)]">
                 {/* Month nav */}
                 <div className="mb-3 flex items-center justify-between">
                   <button
@@ -397,7 +397,7 @@ export function SearchWidget() {
               onClick={() => setDropdown(dropdown === "cat" ? null : "cat")}
             />
             {dropdown === "cat" && (
-              <div className="absolute left-0 top-full z-30 mt-2 w-full min-w-[240px] rounded-xl border border-line bg-background p-2 shadow-[var(--shadow-float)]">
+              <div className="absolute left-0 top-full z-30 mt-2 w-full min-w-[180px] sm:min-w-[240px] rounded-xl border border-line bg-background p-2 shadow-[var(--shadow-float)]">
                 {categoryOptions[tab].map((c) => (
                   <button
                     key={c}

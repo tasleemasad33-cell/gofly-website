@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "@tanstack/react-router";
-import { ChevronDown, Menu, Phone, X } from "lucide-react";
+import { ChevronDown, ChevronRight, Menu, Phone, X } from "lucide-react";
 
 const navItems = [
   { label: "Home", href: "/" },
@@ -36,6 +36,7 @@ export function Header() {
   const navigate = useNavigate();
   const [sticky, setSticky] = useState(false);
   const [open, setOpen] = useState(false);
+  const [expanded, setExpanded] = useState<string | null>(null);
 
   useEffect(() => {
     const onScroll = () => setSticky(window.scrollY > 100);
@@ -160,25 +161,36 @@ export function Header() {
           </div>
           {navItems.map((item) => (
             <div key={item.label} className="border-b border-line py-3">
-              <a
-                href={item.href}
-                className="flex items-center justify-between font-display text-[15px] font-medium text-title"
-              >
-                {item.label}
-                {item.children && <ChevronDown className="size-4 text-body" />}
-              </a>
-              {item.children && (
-                <div className="mt-2 space-y-1">
-                  {item.children.map((c) => (
-                    <a
-                      key={c.label}
-                      href={c.href}
-                      className="block rounded-lg px-3 py-2 text-sm text-body transition-colors hover:bg-soft hover:text-brand"
-                    >
-                      {c.label}
-                    </a>
-                  ))}
-                </div>
+              {item.children ? (
+                <>
+                  <button
+                    onClick={() => setExpanded(expanded === item.label ? null : item.label)}
+                    className="flex w-full items-center justify-between font-display text-[15px] font-medium text-title"
+                  >
+                    {item.label}
+                    <ChevronDown className={`size-4 text-body transition-transform ${expanded === item.label ? "rotate-180" : ""}`} />
+                  </button>
+                  {expanded === item.label && (
+                    <div className="mt-2 space-y-1">
+                      {item.children.map((c) => (
+                        <a
+                          key={c.label}
+                          href={c.href}
+                          className="block rounded-lg px-3 py-2 text-sm text-body transition-colors hover:bg-soft hover:text-brand"
+                        >
+                          {c.label}
+                        </a>
+                      ))}
+                    </div>
+                  )}
+                </>
+              ) : (
+                <a
+                  href={item.href}
+                  className="block font-display text-[15px] font-medium text-title"
+                >
+                  {item.label}
+                </a>
               )}
             </div>
           ))}

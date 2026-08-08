@@ -242,7 +242,7 @@ export function PackageRowCard({ pkg, index }: { pkg: Pkg; index: number }) {
                 Inclusion
               </button>
               {open && (
-                <span className="hidden text-xs text-body sm:inline">
+                <span className="mt-1 block text-xs text-body sm:mt-0 sm:inline">
                   {open === "Experience"
                     ? "Including Activities Scuba Diving, Zip-lining, Rafting & Rock Climbing with this premium package."
                     : "This package covers Accommodation, Daily Meals, Entry Fees & Local Transfers to ensure a worry-free trip."}

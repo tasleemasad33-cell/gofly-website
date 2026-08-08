@@ -48,7 +48,7 @@ function Gallery() {
       <Header />
       <main>
         {/* Hero */}
-        <section className="relative h-[400px] w-full overflow-hidden">
+        <section className="relative h-[280px] w-full overflow-hidden sm:h-[400px]">
           <img
             src={allGalleryItems[0]?.img || "/images/client/umrah/1.png"}
             alt="Gallery"
