@@ -3,8 +3,16 @@ import { Check, Edit, Plus, Save, Trash2 } from "lucide-react";
 import { useAdminState } from "@/contexts/AdminState";
 
 export function BannersPage() {
-  const { banners, setBanners } = useAdminState();
+  const { banners, setBanners, loading } = useAdminState();
   const [activeTab, setActiveTab] = useState<"airtickets" | "home">("airtickets");
+
+  if (loading) {
+    return (
+      <div className="flex items-center justify-center py-20">
+        <div className="size-8 animate-spin rounded-full border-4 border-brand border-t-transparent" />
+      </div>
+    );
+  }
 
   return (
     <div>

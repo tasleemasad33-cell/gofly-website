@@ -3,7 +3,7 @@ import { Camera, Plus, Trash2, Upload } from "lucide-react";
 import { useAdminState } from "@/contexts/AdminState";
 
 export function GalleryPage() {
-  const { gallery, setGallery } = useAdminState();
+  const { gallery, setGallery, loading } = useAdminState();
   const [title, setTitle] = useState("");
   const [location, setLocation] = useState("");
 
@@ -34,6 +34,14 @@ export function GalleryPage() {
     if (!confirm("Delete this image?")) return;
     setGallery(gallery.filter((img) => img.id !== id));
   };
+
+  if (loading) {
+    return (
+      <div className="flex items-center justify-center py-20">
+        <div className="size-8 animate-spin rounded-full border-4 border-brand border-t-transparent" />
+      </div>
+    );
+  }
 
   return (
     <div>

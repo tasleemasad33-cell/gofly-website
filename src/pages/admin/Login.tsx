@@ -11,10 +11,11 @@ export function LoginPage() {
   const [showPw, setShowPw] = useState(false);
   const [error, setError] = useState("");
 
-  const handleSubmit = (e: FormEvent) => {
+  const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
     setError("");
-    if (login(email, password)) {
+    const ok = await login(email, password);
+    if (ok) {
       navigate({ to: "/admin/dashboard" });
     } else {
       setError("Invalid email or password. Please try again.");

@@ -1,12 +1,24 @@
 import { createContext, useContext, useState, useEffect, type ReactNode } from "react";
 import type { TourPackage, GalleryImage, VisaCountry, AdminBanners } from "@/lib/admin-types";
-import { initialPackages, initialGallery, initialVisa } from "@/lib/admin-data";
+import {
+  getAllData,
+  savePackages,
+  addPackage,
+  updateSinglePackage,
+  removePackage,
+  saveGallery,
+  addGalleryImage,
+  removeGalleryImage,
+  saveVisa,
+  saveBanners,
+} from "@/lib/server-fns";
 
 interface AdminState {
   packages: TourPackage[];
   gallery: GalleryImage[];
   visa: VisaCountry[];
   banners: AdminBanners;
+  loading: boolean;
   setPackages: React.Dispatch<React.SetStateAction<TourPackage[]>>;
   setGallery: React.Dispatch<React.SetStateAction<GalleryImage[]>>;
   setVisa: React.Dispatch<React.SetStateAction<VisaCountry[]>>;
@@ -18,82 +30,106 @@ const Ctx = createContext<AdminState>({
   gallery: [],
   visa: [],
   banners: { airTickets: { subtitle: "", title: "", description: "" }, home: ["", "", ""] },
+  loading: true,
   setPackages: () => {},
   setGallery: () => {},
   setVisa: () => {},
   setBanners: () => {},
 });
 
-function load<T>(key: string, fallback: T): T {
-  try {
-    const raw = localStorage.getItem(key);
-    if (!raw) return fallback;
-    const parsed = JSON.parse(raw);
-    return parsed ?? fallback;
-  } catch {
-    return fallback;
-  }
-}
-
-function migrateBanners(raw: any): AdminBanners {
-  const defaults: AdminBanners = {
-    airTickets: {
-      subtitle: "",
-      title: "🕋 November Umrah Special! Fly with Kuwait Airways | ✈️ 15 Days Umrah Airfare Package starting from PKR 120,000 | 🎉 Limited promotional seats available – Book in advance for exclusive discounts! | 📞 Contact Travel Nest today to reserve your seat before fares increase.",
-      description: "",
-    },
-    home: [
-      "Enjoy Family Holiday Packages",
-      "Book Your Dream Vacation at Unbeatable Prices Today",
-      "Explore 500+ Destinations with Expert Guided Tours",
-    ],
-  };
-  if (!raw || typeof raw !== "object") return defaults;
-  const air = raw.airTickets ?? defaults.airTickets;
-  let home: string[];
-  if (Array.isArray(raw.home)) {
-    home = raw.home.length > 0 ? raw.home : defaults.home;
-  } else if (raw.home && typeof raw.home === "object" && raw.home.title) {
-    home = [raw.home.title];
-  } else {
-    home = defaults.home;
-  }
-  return {
-    airTickets: { subtitle: air.subtitle || "", title: air.title || defaults.airTickets.title, description: air.description || "" },
-    home,
-  };
-}
-
-function save(key: string, value: unknown) {
-  try {
-    localStorage.setItem(key, JSON.stringify(value));
-  } catch {
-    /* ignore */
-  }
-}
-
 export function AdminStateProvider({ children }: { children: ReactNode }) {
-  const [packages, setPackages] = useState<TourPackage[]>(() =>
-    load("tn-admin-packages", initialPackages),
-  );
-  const [gallery, setGallery] = useState<GalleryImage[]>(() =>
-    load("tn-admin-gallery", initialGallery),
-  );
-  const [visa, setVisa] = useState<VisaCountry[]>(() =>
-    load("tn-admin-visa", initialVisa),
-  );
-  const [banners, setBanners] = useState<AdminBanners>(() =>
-    migrateBanners(load("tn-admin-banners", null)),
-  );
+  const [packages, setPackages] = useState<TourPackage[]>([]);
+  const [gallery, setGallery] = useState<GalleryImage[]>([]);
+  const [visa, setVisa] = useState<VisaCountry[]>([]);
+  const [banners, setBanners] = useState<AdminBanners>({
+    airTickets: { subtitle: "", title: "", description: "" },
+    home: [],
+  });
+  const [loading, setLoading] = useState(true);
 
-  useEffect(() => save("tn-admin-packages", packages), [packages]);
-  useEffect(() => save("tn-admin-gallery", gallery), [gallery]);
-  useEffect(() => save("tn-admin-visa", visa), [visa]);
-  useEffect(() => save("tn-admin-banners", banners), [banners]);
+  useEffect(() => {
+    async function load() {
+      try {
+        const data = await getAllData();
+        setPackages(data.packages || []);
+        setGallery(data.gallery || []);
+        setVisa(data.visa || []);
+        setBanners(
+          data.banners || {
+            airTickets: { subtitle: "", title: "", description: "" },
+            home: [],
+          }
+        );
+      } catch (err) {
+        console.error("Failed to load data from MongoDB:", err);
+      } finally {
+        setLoading(false);
+      }
+    }
+    load();
+  }, []);
+
+  const handleSetPackages: typeof setPackages = (action) => {
+    setPackages((prev) => {
+      const next = typeof action === "function" ? action(prev) : action;
+      const added = next.filter((p) => !prev.find((x) => x.id === p.id));
+      const updated = next.filter((p) => prev.find((x) => x.id === p.id));
+      const removed = prev.filter((p) => !next.find((x) => x.id === p.id));
+
+      added.forEach((pkg) => addPackage({ data: pkg }).catch(console.error));
+      updated.forEach((pkg) =>
+        updateSinglePackage({ data: { id: pkg.id, pkg } }).catch(console.error)
+      );
+      removed.forEach((pkg) => removePackage({ data: { id: pkg.id } }).catch(console.error));
+
+      return next;
+    });
+  };
+
+  const handleSetGallery: typeof setGallery = (action) => {
+    setGallery((prev) => {
+      const next = typeof action === "function" ? action(prev) : action;
+      const added = next.filter((img) => !prev.find((x) => x.id === img.id));
+      const removed = prev.filter((img) => !next.find((x) => x.id === img.id));
+
+      added.forEach((img) => addGalleryImage({ data: img }).catch(console.error));
+      removed.forEach((img) =>
+        removeGalleryImage({ data: { id: img.id } }).catch(console.error)
+      );
+
+      return next;
+    });
+  };
+
+  const handleSetVisa: typeof setVisa = (action) => {
+    setVisa((prev) => {
+      const next = typeof action === "function" ? action(prev) : action;
+      saveVisa({ data: next }).catch(console.error);
+      return next;
+    });
+  };
+
+  const handleSetBanners: typeof setBanners = (action) => {
+    setBanners((prev) => {
+      const next = typeof action === "function" ? action(prev) : action;
+      saveBanners({ data: next }).catch(console.error);
+      return next;
+    });
+  };
 
   return (
     <Ctx.Provider
-      value={{ packages, gallery, visa, banners, setPackages, setGallery, setVisa, setBanners }}
+      value={{
+        packages,
+        gallery,
+        visa,
+        banners,
+        loading,
+        setPackages: handleSetPackages,
+        setGallery: handleSetGallery,
+        setVisa: handleSetVisa,
+        setBanners: handleSetBanners,
+      }}
     >
       {children}
     </Ctx.Provider>

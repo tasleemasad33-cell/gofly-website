@@ -31,7 +31,7 @@ const emptyPackage: Omit<TourPackage, "id"> = {
 };
 
 export function ToursPage() {
-  const { packages, setPackages } = useAdminState();
+  const { packages, setPackages, loading } = useAdminState();
   const [editing, setEditing] = useState<TourPackage | null>(null);
   const [adding, setAdding] = useState(false);
   const [form, setForm] = useState<Omit<TourPackage, "id">>(emptyPackage);
@@ -43,6 +43,14 @@ export function ToursPage() {
       p.location.toLowerCase().includes(search.toLowerCase()) ||
       p.category.toLowerCase().includes(search.toLowerCase()),
   );
+
+  if (loading) {
+    return (
+      <div className="flex items-center justify-center py-20">
+        <div className="size-8 animate-spin rounded-full border-4 border-brand border-t-transparent" />
+      </div>
+    );
+  }
 
   const openAdd = () => {
     setForm(emptyPackage);
@@ -76,7 +84,8 @@ export function ToursPage() {
     if (editing) {
       setPackages(packages.map((p) => (p.id === editing.id ? { ...form, id: editing.id, slug } : p)));
     } else {
-      setPackages([...packages, { ...form, id: Date.now().toString(), slug }]);
+      const newId = "pkg-" + Date.now().toString(36) + Math.random().toString(36).slice(2, 6);
+      setPackages([...packages, { ...form, id: newId, slug }]);
     }
     close();
   };

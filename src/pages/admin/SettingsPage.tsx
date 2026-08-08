@@ -1,35 +1,37 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Check, Eye, EyeOff, Save, AlertCircle } from "lucide-react";
-import { getCredentials, saveCredentials } from "@/lib/admin-auth";
+import { getCredsEmail, updateCreds } from "@/lib/server-fns";
 
 export function SettingsPage() {
-  const [email, setEmail] = useState(() => getCredentials().email);
+  const [email, setEmail] = useState("");
   const [currentPw, setCurrentPw] = useState("");
   const [newPw, setNewPw] = useState("");
   const [showCurrent, setShowCurrent] = useState(false);
   const [showNew, setShowNew] = useState(false);
   const [saved, setSaved] = useState(false);
   const [error, setError] = useState("");
+  const [loading, setLoading] = useState(true);
 
-  const handleSave = () => {
+  useEffect(() => {
+    getCredsEmail()
+      .then((res) => setEmail(res.email))
+      .catch(() => setEmail("admin@travelnest.com"))
+      .finally(() => setLoading(false));
+  }, []);
+
+  const handleSave = async () => {
     setError("");
-    const current = getCredentials();
-
-    if (currentPw && currentPw !== current.password) {
-      setError("Current password is incorrect.");
-      return;
-    }
-
-    const passwordToSave = newPw || current.password;
-
-    saveCredentials({
-      email: email || current.email,
-      password: passwordToSave,
+    const result = await updateCreds({
+      data: { email, password: newPw || currentPw, currentPassword: currentPw },
     });
-    setCurrentPw("");
-    setNewPw("");
-    setSaved(true);
-    setTimeout(() => setSaved(false), 2500);
+    if (result.success) {
+      setCurrentPw("");
+      setNewPw("");
+      setSaved(true);
+      setTimeout(() => setSaved(false), 2500);
+    } else {
+      setError(result.error || "Failed to update credentials.");
+    }
   };
 
   return (
@@ -101,7 +103,8 @@ export function SettingsPage() {
 
         <button
           onClick={handleSave}
-          className="mt-6 inline-flex items-center gap-2 rounded-xl bg-brand px-5 py-2.5 text-sm font-semibold text-white transition-colors hover:bg-brand/90"
+          disabled={loading}
+          className="mt-6 inline-flex items-center gap-2 rounded-xl bg-brand px-5 py-2.5 text-sm font-semibold text-white transition-colors hover:bg-brand/90 disabled:opacity-50"
         >
           {saved ? <><Check className="size-4" /> Saved!</> : <><Save className="size-4" /> Save Changes</>}
         </button>

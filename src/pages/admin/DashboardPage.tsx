@@ -2,7 +2,15 @@ import { Camera, FileText, Image, Plane, TrendingUp, Users } from "lucide-react"
 import { useAdminState } from "@/contexts/AdminState";
 
 export function DashboardPage() {
-  const { packages, gallery, visa } = useAdminState();
+  const { packages, gallery, visa, loading } = useAdminState();
+
+  if (loading) {
+    return (
+      <div className="flex items-center justify-center py-20">
+        <div className="size-8 animate-spin rounded-full border-4 border-brand border-t-transparent" />
+      </div>
+    );
+  }
 
   const stats = [
     { label: "Tour Packages", value: packages.length, icon: Plane, color: "bg-blue-500/15 text-blue-500" },

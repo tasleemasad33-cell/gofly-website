@@ -3,7 +3,7 @@ import { Pencil, Plus, Trash2, X, Check } from "lucide-react";
 import { useAdminState } from "@/contexts/AdminState";
 
 export function VisaPage() {
-  const { visa, setVisa } = useAdminState();
+  const { visa, setVisa, loading } = useAdminState();
   const [selected, setSelected] = useState(0);
   const [newReq, setNewReq] = useState("");
   const [editingCountry, setEditingCountry] = useState<string | null>(null);
@@ -15,6 +15,14 @@ export function VisaPage() {
   );
 
   const current = visa[selected];
+
+  if (loading) {
+    return (
+      <div className="flex items-center justify-center py-20">
+        <div className="size-8 animate-spin rounded-full border-4 border-brand border-t-transparent" />
+      </div>
+    );
+  }
 
   const addRequirement = () => {
     if (!newReq.trim() || !current) return;
