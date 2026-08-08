@@ -60,8 +60,24 @@ export function AdminStateProvider({ children }: { children: ReactNode }) {
             home: [],
           }
         );
+        // Sync to localStorage so frontend pages can read
+        if (data.packages?.length) localStorage.setItem("tn-admin-packages", JSON.stringify(data.packages));
+        if (data.gallery?.length) localStorage.setItem("tn-admin-gallery", JSON.stringify(data.gallery));
+        if (data.visa?.length) localStorage.setItem("tn-admin-visa", JSON.stringify(data.visa));
+        if (data.banners) localStorage.setItem("tn-admin-banners", JSON.stringify(data.banners));
       } catch (err) {
-        console.error("Failed to load data from MongoDB:", err);
+        console.error("Failed to load from MongoDB, falling back to localStorage:", err);
+        // Fallback: load from localStorage
+        try {
+          const pkgRaw = localStorage.getItem("tn-admin-packages");
+          const galRaw = localStorage.getItem("tn-admin-gallery");
+          const visaRaw = localStorage.getItem("tn-admin-visa");
+          const banRaw = localStorage.getItem("tn-admin-banners");
+          if (pkgRaw) setPackages(JSON.parse(pkgRaw));
+          if (galRaw) setGallery(JSON.parse(galRaw));
+          if (visaRaw) setVisa(JSON.parse(visaRaw));
+          if (banRaw) setBanners(JSON.parse(banRaw));
+        } catch { /* ignore */ }
       } finally {
         setLoading(false);
       }
@@ -82,6 +98,9 @@ export function AdminStateProvider({ children }: { children: ReactNode }) {
       );
       removed.forEach((pkg) => removePackage({ data: { id: pkg.id } }).catch(console.error));
 
+      // Sync to localStorage for frontend
+      localStorage.setItem("tn-admin-packages", JSON.stringify(next));
+
       return next;
     });
   };
@@ -97,6 +116,9 @@ export function AdminStateProvider({ children }: { children: ReactNode }) {
         removeGalleryImage({ data: { id: img.id } }).catch(console.error)
       );
 
+      // Sync to localStorage for frontend
+      localStorage.setItem("tn-admin-gallery", JSON.stringify(next));
+
       return next;
     });
   };
@@ -105,6 +127,10 @@ export function AdminStateProvider({ children }: { children: ReactNode }) {
     setVisa((prev) => {
       const next = typeof action === "function" ? action(prev) : action;
       saveVisa({ data: next }).catch(console.error);
+
+      // Sync to localStorage for frontend
+      localStorage.setItem("tn-admin-visa", JSON.stringify(next));
+
       return next;
     });
   };
@@ -113,6 +139,10 @@ export function AdminStateProvider({ children }: { children: ReactNode }) {
     setBanners((prev) => {
       const next = typeof action === "function" ? action(prev) : action;
       saveBanners({ data: next }).catch(console.error);
+
+      // Sync to localStorage for frontend
+      localStorage.setItem("tn-admin-banners", JSON.stringify(next));
+
       return next;
     });
   };
