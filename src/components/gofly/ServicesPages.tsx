@@ -14,7 +14,7 @@ import {
   Users,
 } from "lucide-react";
 import { IMG, getAdminVisa, getAdminBanners } from "@/lib/gofly-data";
-import { clientWeddingImage } from "@/lib/client-images";
+import { clientWeddingImage, clientWeddingImage2 } from "@/lib/client-images";
 import { PageHero } from "./PageHero";
 import { SectionTitle } from "./SectionTitle";
 import { Reveal } from "./Reveal";
@@ -885,7 +885,7 @@ export function DestinationWeddingPage() {
               <div className="grid grid-cols-2 gap-4">
                 {[
                   clientWeddingImage,
-                  `${IMG}/home2/destination-img1.jpg`,
+                  clientWeddingImage2,
                   `${IMG}/home2/destination-img2.jpg`,
                   `${IMG}/home2/destination-img3.jpg`,
                 ].map((src) => (

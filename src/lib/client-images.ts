@@ -39,6 +39,7 @@ export const clientAboutHero = `${C}/HallStatt.jpg.jpeg`;
 export const clientStoryImage = `${C}/WhatsApp Image 2026-08-04 at 9.49.15 PM (1).jpeg`;
 export const clientStrasbourgCanal = `${C}/WhatsApp Image 2026-08-04 at 9.49.03 PM (1).jpeg`;
 export const clientWeddingImage = `${C}/tours/Europe.png`;
+export const clientWeddingImage2 = `${C}/HallStatt.jpg.jpeg`;
 export const clientCollageImages = [
   `${C}/WhatsApp Image 2026-08-04 at 9.49.13 PM.jpeg`, // Swiss clock tower (vertical)
   `${C}/WhatsApp Image 2026-08-04 at 9.49.03 PM (1).jpeg`, // Strasbourg canal
