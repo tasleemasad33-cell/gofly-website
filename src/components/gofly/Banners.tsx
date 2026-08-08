@@ -48,7 +48,7 @@ export function OfferBanner() {
 export function AwardBanner() {
   return (
     <section
-      className="relative overflow-hidden py-28"
+      className="relative overflow-hidden py-16 sm:py-28"
       style={{
         backgroundImage: `url(/images/client/main-page-middle.jpg)`,
         backgroundAttachment: "fixed",
@@ -59,24 +59,24 @@ export function AwardBanner() {
       <div className="absolute inset-0 bg-dark/50" />
 
       {/* Dashed border frame */}
-      <div className="absolute inset-6 rounded-3xl border-2 border-dashed border-white/30 sm:inset-10 lg:inset-16" />
+      <div className="absolute inset-4 rounded-3xl border-2 border-dashed border-white/30 sm:inset-10 lg:inset-16" />
 
-      <div className="container-gofly relative text-center">
+      <div className="container-gofly relative text-center px-4">
         <Reveal>
           {/* Subtitle */}
-          <h3 className="font-display text-2xl font-medium text-white sm:text-3xl">
+          <h3 className="font-display text-xl font-medium text-white sm:text-3xl">
             Creating
           </h3>
 
           {/* BEST */}
-          <h2 className="font-display text-5xl font-black tracking-tight text-white sm:text-[80px] lg:text-[100px]">
+          <h2 className="font-display text-[11vw] font-black tracking-tight text-white sm:text-[80px] lg:text-[100px] leading-[0.95]">
             UNFORGETTABLE JOURNEYS
           </h2>
 
           {/* Button */}
           <a
             href="/packages"
-            className="btn-primary mt-8 inline-flex items-center gap-2 rounded-full bg-brand px-8 py-4 font-display text-sm font-medium text-white shadow-lg transition-all hover:bg-brand/90 hover:shadow-xl"
+            className="btn-primary mt-6 inline-flex items-center gap-2 rounded-full bg-brand px-6 py-3 sm:px-8 sm:py-4 font-display text-xs sm:text-sm font-medium text-white shadow-lg transition-all hover:bg-brand/90 hover:shadow-xl"
           >
             View All Package <ArrowRight className="size-4" />
           </a>
