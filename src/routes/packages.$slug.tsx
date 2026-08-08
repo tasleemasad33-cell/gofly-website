@@ -1,11 +1,16 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, Suspense, lazy } from "react";
 import { createFileRoute } from "@tanstack/react-router";
-import { PackageDetailsPage } from "@/components/gofly/PackageDetailsPage";
 import { getPackageBySlug, type Pkg } from "@/lib/gofly-data";
 
 const title = "Package Details — Travel Nest";
 const description =
   "Discover detailed itineraries, inclusions and pricing for your favourite Travel Nest tour package.";
+
+const LazyPackageDetailsPage = lazy(() =>
+  import("@/components/gofly/PackageDetailsPage").then((m) => ({
+    default: m.PackageDetailsPage,
+  }))
+);
 
 export const Route = createFileRoute("/packages/$slug")({
   head: () => ({
@@ -18,32 +23,32 @@ export const Route = createFileRoute("/packages/$slug")({
       { name: "twitter:card", content: "summary_large_image" },
     ],
   }),
-  component: PackageDetails,
+  component: PackageDetailsRoute,
 });
 
-function PackageDetails() {
+function PackageDetailsRoute() {
   const { slug } = Route.useParams();
-  const [pkg, setPkg] = useState<Pkg | undefined>(() => {
-    try {
-      return getPackageBySlug(slug);
-    } catch {
-      return undefined;
-    }
-  });
-  const [loading, setLoading] = useState(!pkg);
+  const [pkg, setPkg] = useState<Pkg | undefined>(undefined);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    if (!pkg) {
+    try {
       const found = getPackageBySlug(slug);
-      if (found) setPkg(found);
+      setPkg(found);
+    } catch {
+      setPkg(undefined);
+    } finally {
       setLoading(false);
     }
-  }, [slug, pkg]);
+  }, [slug]);
 
   if (loading) {
     return (
       <section className="flex min-h-[60vh] items-center justify-center px-4 text-center">
-        <div className="animate-pulse text-body">Loading package...</div>
+        <div className="flex flex-col items-center gap-3">
+          <div className="size-8 animate-spin rounded-full border-4 border-brand border-t-transparent" />
+          <p className="text-body">Loading package...</p>
+        </div>
       </section>
     );
   }
@@ -62,5 +67,18 @@ function PackageDetails() {
     );
   }
 
-  return <PackageDetailsPage pkg={pkg} />;
+  return (
+    <Suspense
+      fallback={
+        <section className="flex min-h-[60vh] items-center justify-center px-4 text-center">
+          <div className="flex flex-col items-center gap-3">
+            <div className="size-8 animate-spin rounded-full border-4 border-brand border-t-transparent" />
+            <p className="text-body">Loading package details...</p>
+          </div>
+        </section>
+      }
+    >
+      <LazyPackageDetailsPage pkg={pkg} />
+    </Suspense>
+  );
 }
