@@ -43,7 +43,7 @@ export function PopularPackages() {
 const features = [
   {
     title: "One Click Booking",
-    text: "You can hassle-free and fast tour & travel package booking by GoFly.",
+    text: "You can hassle-free and fast tour & travel package booking by Travel Nest.",
     icon: "⚡",
   },
   {

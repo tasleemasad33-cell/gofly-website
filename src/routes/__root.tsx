@@ -78,13 +78,13 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "GoFly — Travel Agency & Tour Booking" },
+      { title: "Travel Nest — Travel Agency & Tour Booking" },
       {
         name: "description",
         content: "Curated tour packages, hotels, visas and unforgettable travel experiences.",
       },
-      { name: "author", content: "GoFly" },
-      { property: "og:title", content: "GoFly — Travel Agency & Tour Booking" },
+      { name: "author", content: "Travel Nest" },
+      { property: "og:title", content: "Travel Nest — Travel Agency & Tour Booking" },
       {
         property: "og:description",
         content: "Curated tour packages, hotels, visas and unforgettable travel experiences.",
