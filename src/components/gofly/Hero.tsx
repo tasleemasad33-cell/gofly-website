@@ -60,7 +60,7 @@ export function Hero() {
   return (
     <section className="relative mt-[64px] sm:mt-[80px]">
       {/* Blue promotional banner */}
-      <div className="bg-brand py-2 sm:py-3">
+      <div className="py-2 sm:py-3" style={{ backgroundColor: "oklch(0.546 0.245 262)" }}>
         <div className="container-gofly flex items-center justify-center gap-2 sm:gap-4">
           <button
             aria-label="Previous"

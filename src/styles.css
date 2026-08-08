@@ -70,7 +70,7 @@
   /* #1a2744 - Navy Blue (primary) */
   --primary: oklch(0.27 0.05 260);
   --primary-foreground: oklch(1 0 0);
-  --brand: oklch(0.546 0.245 262);
+  --brand: oklch(0.27 0.05 260);
   /* #b8860b - Golden (secondary accent) */
   --brand2: oklch(0.65 0.14 80);
   /* #285340 */
