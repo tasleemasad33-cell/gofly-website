@@ -341,7 +341,9 @@ export function VisaFacilitationPage() {
     const adminVisa = getAdminVisa();
     const merged = { ...visaRequirements };
     for (const v of adminVisa) {
-      merged[v.country] = v.requirements;
+      if (v.requirements.length > 0) {
+        merged[v.country] = v.requirements;
+      }
     }
     return merged;
   }, []);
