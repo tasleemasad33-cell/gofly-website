@@ -13,7 +13,7 @@ import {
   Users,
   type LucideIcon,
 } from "lucide-react";
-import { allPackages, tourCategories } from "@/lib/gofly-data";
+import { getAllPackages, tourCategories } from "@/lib/gofly-data";
 
 const tabs = [
   { id: "tours", label: "Tours", icon: Plane },
@@ -26,16 +26,18 @@ type TabId = (typeof tabs)[number]["id"];
 
 type DestOption = { value: string; sub: string };
 
-const tourDestOptions: DestOption[] = (() => {
+function buildTourDestOptions(): DestOption[] {
   const seen = new Set<string>();
   const out: DestOption[] = [];
-  allPackages.forEach((p) => {
+  getAllPackages().forEach((p) => {
     if (!p.location || seen.has(p.location)) return;
     seen.add(p.location);
     out.push({ value: p.location, sub: "Tours Available" });
   });
   return out;
-})();
+}
+
+const tourDestOptions: DestOption[] = buildTourDestOptions();
 
 const visaCountries = [
   "Azerbaijan",

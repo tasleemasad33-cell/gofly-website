@@ -1,12 +1,18 @@
+import { useMemo } from "react";
 import Autoplay from "embla-carousel-autoplay";
 import { ArrowRight, MapPin } from "lucide-react";
-import { destinations, popularPackages } from "@/lib/gofly-data";
+import { destinations, popularPackages, getAdminPackages } from "@/lib/gofly-data";
 import { Carousel } from "./Carousel";
 import { PackageCard } from "./PackageCard";
 import { SectionTitle } from "./SectionTitle";
 import { Reveal } from "./Reveal";
 
 export function PopularPackages() {
+  const allPopular = useMemo(() => {
+    const adminPkgs = getAdminPackages().filter((p) => !p.category || p.category === "group" || p.category === "honeymoon");
+    return [...popularPackages, ...adminPkgs];
+  }, []);
+
   return (
     <section
       className="relative overflow-hidden py-20"
@@ -23,7 +29,7 @@ export function PopularPackages() {
           subtitle="A curated list of the most popular travel packages based on different destinations."
         />
         <div className="mt-12 grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
-          {popularPackages.map((p) => (
+          {allPopular.map((p) => (
             <Reveal key={p.title}>
               <PackageCard pkg={p} />
             </Reveal>

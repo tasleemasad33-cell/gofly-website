@@ -1,13 +1,7 @@
-import { useCallback, useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { ChevronLeft, ChevronRight } from "lucide-react";
-import { heroSlides } from "@/lib/gofly-data";
+import { heroSlides, getAdminBanners } from "@/lib/gofly-data";
 import { SearchWidget } from "./SearchWidget";
-
-const bannerTexts = [
-  "Enjoy Family Holiday Packages",
-  "Book Your Dream Vacation at Unbeatable Prices Today",
-  "Explore 500+ Destinations with Expert Guided Tours",
-];
 
 const AUTO_DELAY = 6000;
 
@@ -15,6 +9,17 @@ export function Hero() {
   const [selected, setSelected] = useState(0);
   const [bannerIdx, setBannerIdx] = useState(0);
   const videoRefs = useRef<(HTMLVideoElement | null)[]>([]);
+
+  const bannerTexts = useMemo(() => {
+    const banners = getAdminBanners();
+    const defaults = [
+      "Enjoy Family Holiday Packages",
+      "Book Your Dream Vacation at Unbeatable Prices Today",
+      "Explore 500+ Destinations with Expert Guided Tours",
+    ];
+    const custom = banners.home.filter((t: string) => t.trim());
+    return custom.length > 0 ? custom : defaults;
+  }, []);
 
   const goTo = useCallback((i: number) => {
     setSelected((current) => {

@@ -1,10 +1,14 @@
 import { useState } from "react";
+import { useRouter } from "@tanstack/react-router";
 import { MessageCircle, X } from "lucide-react";
 
 const WHATSAPP_NUMBER = "923229606256";
 
 export function FloatingWhatsApp() {
   const [open, setOpen] = useState(false);
+  const router = useRouter();
+
+  if (router.state.location.pathname.startsWith("/admin")) return null;
 
   const openChat = () => {
     const msg = encodeURIComponent(

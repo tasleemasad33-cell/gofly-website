@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useMemo } from "react";
 import {
   ArrowRight,
   Building2,
@@ -13,7 +13,7 @@ import {
   Sparkles,
   Users,
 } from "lucide-react";
-import { IMG } from "@/lib/gofly-data";
+import { IMG, getAdminVisa, getAdminBanners } from "@/lib/gofly-data";
 import { PageHero } from "./PageHero";
 import { SectionTitle } from "./SectionTitle";
 import { Reveal } from "./Reveal";
@@ -326,6 +326,27 @@ export function VisaFacilitationPage() {
   const [departureCity, setDepartureCity] = useState("");
   const [visaCountry, setVisaCountry] = useState("");
 
+  const allVisaCountries = useMemo(() => {
+    const adminVisa = getAdminVisa();
+    const adminCountryNames = adminVisa.map((v) => v.country);
+    const merged = [...visaCountries];
+    for (const name of adminCountryNames) {
+      if (!merged.includes(name)) merged.push(name);
+    }
+    return merged;
+  }, []);
+
+  const allVisaRequirements = useMemo(() => {
+    const adminVisa = getAdminVisa();
+    const merged = { ...visaRequirements };
+    for (const v of adminVisa) {
+      if (v.requirements.length > 0) {
+        merged[v.country] = v.requirements;
+      }
+    }
+    return merged;
+  }, []);
+
   const visaWhatsappUrl = `https://wa.me/${WHATSAPP}?text=${encodeURIComponent(
     `Hi Travel Nest, I need help with visa facilitation.\n\nDeparture City: ${departureCity || "Not selected"}\nVisa Country: ${visaCountry || "Not selected"}`
   )}`;
@@ -352,7 +373,7 @@ export function VisaFacilitationPage() {
             Select a country to view the documents required for your visa application.
           </p>
           <div className="mt-8 flex flex-wrap justify-center gap-3">
-            {visaCountries.map((c) => (
+            {allVisaCountries.map((c) => (
               <button
                 key={c}
                 onClick={() => setActiveCountry(c)}
@@ -372,7 +393,7 @@ export function VisaFacilitationPage() {
               Requirements for {activeCountry}
             </h3>
             <ul className="mt-5 space-y-3">
-              {(visaRequirements[activeCountry] ?? []).map((req) => (
+              {(allVisaRequirements[activeCountry] ?? []).map((req) => (
                 <li key={req} className="flex items-start gap-3">
                   <span className="mt-0.5 grid size-6 shrink-0 place-items-center rounded-full bg-brand/10 text-brand">
                     <Check className="size-3.5" />
@@ -438,7 +459,7 @@ export function VisaFacilitationPage() {
                     className="w-full rounded-xl border border-line bg-background px-4 py-3 text-sm text-title outline-none transition-colors focus:border-brand"
                   >
                     <option value="">--- Select Country ---</option>
-                    {visaCountries.map((c) => (
+                    {allVisaCountries.map((c) => (
                       <option key={c} value={c}>
                         {c}
                       </option>
@@ -497,23 +518,25 @@ export function AirTicketsPage() {
       </section>
 
       {/* Full-width promo banner */}
-      <div className="w-full">
-        <div className="relative overflow-hidden bg-gradient-to-r from-brand via-brand to-brand2 py-4 text-primary-foreground">
-          <div className="pointer-events-none absolute -left-10 top-1/2 size-40 -translate-y-1/2 rounded-full bg-white/10 blur-3xl" />
-          <div className="pointer-events-none absolute -right-10 top-1/2 size-40 -translate-y-1/2 rounded-full bg-white/10 blur-3xl" />
-          <div className="container-gofly">
-            <p className="flex flex-wrap items-center justify-center gap-x-3 gap-y-1 text-center text-sm font-medium sm:text-base">
-              <Plane className="hidden size-4 shrink-0 sm:block" />
-              <span>
-                🕋 November Umrah Special! Fly with Kuwait Airways | ✈️ 15 Days Umrah Airfare
-                Package starting from <strong className="underline decoration-2 underline-offset-2">PKR 120,000</strong> |
-                🎉 Limited promotional seats available – Book in advance for exclusive discounts! |
-                📞 Contact Travel Nest today to reserve your seat before fares increase.
-              </span>
-            </p>
+      {(() => {
+        const banners = getAdminBanners();
+        const t = banners.airTickets;
+        const text = t.title || "🕋 November Umrah Special! Fly with Kuwait Airways | ✈️ 15 Days Umrah Airfare Package starting from PKR 120,000 | 🎉 Limited promotional seats available – Book in advance for exclusive discounts! | 📞 Contact Travel Nest today to reserve your seat before fares increase.";
+        return (
+          <div className="w-full">
+            <div className="relative overflow-hidden bg-gradient-to-r from-brand via-brand to-brand2 py-4 text-primary-foreground">
+              <div className="pointer-events-none absolute -left-10 top-1/2 size-40 -translate-y-1/2 rounded-full bg-white/10 blur-3xl" />
+              <div className="pointer-events-none absolute -right-10 top-1/2 size-40 -translate-y-1/2 rounded-full bg-white/10 blur-3xl" />
+              <div className="container-gofly">
+                <p className="flex flex-wrap items-center justify-center gap-x-3 gap-y-1 text-center text-sm font-medium sm:text-base">
+                  <Plane className="hidden size-4 shrink-0 sm:block" />
+                  <span>{text}</span>
+                </p>
+              </div>
+            </div>
           </div>
-        </div>
-      </div>
+        );
+      })()}
 
       <section className="py-20">
         <div className="container-gofly">

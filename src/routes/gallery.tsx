@@ -1,9 +1,9 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { useState } from "react";
+import { useState, useMemo } from "react";
 import { ChevronLeft, ChevronRight, MapPin, X } from "lucide-react";
 import { Header } from "@/components/gofly/Header";
 import { Footer } from "@/components/gofly/Footer";
-import { galleryItems } from "@/lib/gofly-data";
+import { galleryItems, getAdminGallery } from "@/lib/gofly-data";
 import { Reveal } from "@/components/gofly/Reveal";
 
 const title = "Gallery — Travel Nest";
@@ -30,8 +30,18 @@ function Gallery() {
   const [selected, setSelected] = useState<number | null>(null);
   const [page, setPage] = useState(1);
 
-  const totalPages = Math.ceil(galleryItems.length / PER_PAGE);
-  const pageItems = galleryItems.slice((page - 1) * PER_PAGE, page * PER_PAGE);
+  const allGalleryItems = useMemo(() => {
+    const adminItems = getAdminGallery().map((item) => ({
+      img: item.src,
+      title: item.title,
+      location: item.location,
+      desc: "A stunning destination curated by Travel Nest for unforgettable journeys.",
+    }));
+    return [...adminItems, ...galleryItems];
+  }, []);
+
+  const totalPages = Math.ceil(allGalleryItems.length / PER_PAGE);
+  const pageItems = allGalleryItems.slice((page - 1) * PER_PAGE, page * PER_PAGE);
 
   return (
     <div className="overflow-x-hidden">
@@ -40,7 +50,7 @@ function Gallery() {
         {/* Hero */}
         <section className="relative h-[400px] w-full overflow-hidden">
           <img
-            src={galleryItems[0].img}
+            src={allGalleryItems[0]?.img || "/images/client/umrah/1.png"}
             alt="Gallery"
             className="absolute inset-0 h-full w-full object-cover"
           />
@@ -160,10 +170,10 @@ function Gallery() {
             <div className="sticky top-0 z-10 flex items-center justify-between border-b border-line bg-background px-5 py-3">
               <div>
                 <h3 className="font-display text-lg font-semibold text-title">
-                  {galleryItems[selected].title}
+                  {allGalleryItems[selected].title}
                 </h3>
                 <p className="inline-flex items-center gap-1 text-xs text-body">
-                  <MapPin className="size-3.5 text-brand" /> {galleryItems[selected].location}
+                  <MapPin className="size-3.5 text-brand" /> {allGalleryItems[selected].location}
                 </p>
               </div>
               <button
@@ -175,12 +185,12 @@ function Gallery() {
               </button>
             </div>
             <img
-              src={galleryItems[selected].img}
-              alt={galleryItems[selected].title}
+              src={allGalleryItems[selected].img}
+              alt={allGalleryItems[selected].title}
               className="w-full object-cover"
             />
             <p className="px-5 py-4 text-sm leading-relaxed text-body">
-              {galleryItems[selected].desc}
+              {allGalleryItems[selected].desc}
             </p>
           </div>
         </div>

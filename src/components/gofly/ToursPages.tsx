@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useMemo } from "react";
 import {
   corporatePackages,
   customizedPackages,
@@ -6,6 +6,7 @@ import {
   groupTourPackages,
   honeymoonPackages,
   IMG,
+  getAdminPackages,
 } from "@/lib/gofly-data";
 import { PageHero } from "./PageHero";
 import { InquiryStrip, PackageListingSection } from "./TourListing";
@@ -54,7 +55,12 @@ export function GroupToursPage() {
     Umrah: "umrah",
   };
 
-  const filtered = groupTourPackages.filter((p) => p.subcategory === tabMap[activeTab]);
+  const allGroupPackages = useMemo(() => {
+    const adminPkgs = getAdminPackages().filter((p) => p.category === "group");
+    return [...groupTourPackages, ...adminPkgs];
+  }, []);
+
+  const filtered = allGroupPackages.filter((p) => p.subcategory === tabMap[activeTab]);
 
   return (
     <div className="overflow-x-hidden">
@@ -109,6 +115,11 @@ export function GroupToursPage() {
 }
 
 export function HoneymoonPage() {
+  const allHoneymoonPackages = useMemo(() => {
+    const adminPkgs = getAdminPackages().filter((p) => p.category === "honeymoon");
+    return [...honeymoonPackages, ...adminPkgs];
+  }, []);
+
   return (
     <TourPageShell
       heroTitle="Honeymoon Trips"
@@ -116,7 +127,7 @@ export function HoneymoonPage() {
       heroImage={`${IMG}/home2/destination-img6.jpg`}
       listingTitle="Most Loved Honeymoon Destinations"
       subtitle="Choose the perfect backdrop for your love story — from tropical islands to romantic city escapes, every honeymoon is planned with special touches for you both."
-      packages={honeymoonPackages}
+      packages={allHoneymoonPackages}
     />
   );
 }
@@ -404,6 +415,11 @@ export function CorporatePage() {
 }
 
 export function CustomizedPage() {
+  const allCustomizedPackages = useMemo(() => {
+    const adminPkgs = getAdminPackages().filter((p) => p.category === "customized");
+    return [...customizedPackages, ...adminPkgs];
+  }, []);
+
   return (
     <TourPageShell
       heroTitle="Customized Tours"
@@ -411,12 +427,17 @@ export function CustomizedPage() {
       heroImage={`${IMG}/home2/destination-img2.jpg`}
       listingTitle="Explore The World Your Way"
       subtitle="At Travel Nest, we create personalized travel experiences designed around your budget, interests, and travel style. Our team handles everything from flights and visas to hotels, transportation, and complete itinerary planning."
-      packages={customizedPackages}
+      packages={allCustomizedPackages}
     />
   );
 }
 
 export function EducationalPage() {
+  const allEducationalPackages = useMemo(() => {
+    const adminPkgs = getAdminPackages().filter((p) => p.category === "educational");
+    return [...educationalPackages, ...adminPkgs];
+  }, []);
+
   return (
     <TourPageShell
       heroTitle="Educational Tours"
@@ -424,7 +445,7 @@ export function EducationalPage() {
       heroImage={`${IMG}/home2/banner-img1.jpg`}
       listingTitle="Learning Beyond the Classroom"
       subtitle="Inspiring educational journeys that combine culture, history and discovery — perfect for schools, colleges and study groups. Every destination is planned with safety, learning outcomes and comfort in mind."
-      packages={educationalPackages}
+      packages={allEducationalPackages}
     />
   );
 }

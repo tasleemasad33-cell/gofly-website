@@ -17,7 +17,7 @@ import {
   Users,
   X,
 } from "lucide-react";
-import { IMG, allPackages, getPackageDetail, type Pkg } from "@/lib/gofly-data";
+import { IMG, getAllPackages, getPackageDetail, type Pkg } from "@/lib/gofly-data";
 import { PackageCard } from "./PackageCard";
 import { Carousel } from "./Carousel";
 import { SectionTitle } from "./SectionTitle";
@@ -724,7 +724,7 @@ function BookingSidebar({ pkg }: { pkg: Pkg }) {
 /* ───────────── Relevant packages ───────────── */
 
 function RelevantPackages({ current }: { current: Pkg }) {
-  const related = allPackages.filter((p) => p.slug !== current.slug).slice(0, 6);
+  const related = getAllPackages().filter((p) => p.slug !== current.slug).slice(0, 6);
   return (
     <section className="bg-soft py-16 sm:py-20">
       <div className="container-gofly">

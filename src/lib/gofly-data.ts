@@ -858,28 +858,37 @@ export const educationalPackages: Pkg[] = [
   },
 ];
 
-export const tourPackages: Pkg[] = [
-  ...groupTourPackages,
-  ...honeymoonPackages,
-  ...corporatePackages,
-  ...customizedPackages,
-  ...educationalPackages,
-];
+export function getTourPackages(): Pkg[] {
+  return [
+    ...groupTourPackages,
+    ...honeymoonPackages,
+    ...corporatePackages,
+    ...customizedPackages,
+    ...educationalPackages,
+    ...getAdminPackages(),
+  ];
+}
 
-export const allPackages: Pkg[] = [
-  ...popularPackages,
-  ...oneDayTrips,
-  ...lastMinuteDeals,
-  ...destinationPackages.filter(
-    (p) => ![...popularPackages, ...oneDayTrips, ...lastMinuteDeals].some((x) => x.slug === p.slug),
-  ),
-  ...tourPackages.filter(
-    (p) =>
-      ![...popularPackages, ...oneDayTrips, ...lastMinuteDeals, ...destinationPackages].some(
-        (x) => x.slug === p.slug,
-      ),
-  ),
-];
+export function getAllPackages(): Pkg[] {
+  const tourPkgs = getTourPackages();
+  return [
+    ...popularPackages,
+    ...oneDayTrips,
+    ...lastMinuteDeals,
+    ...destinationPackages.filter(
+      (p) => ![...popularPackages, ...oneDayTrips, ...lastMinuteDeals].some((x) => x.slug === p.slug),
+    ),
+    ...tourPkgs.filter(
+      (p) =>
+        ![...popularPackages, ...oneDayTrips, ...lastMinuteDeals, ...destinationPackages].some(
+          (x) => x.slug === p.slug,
+        ),
+    ),
+  ];
+}
+
+// Keep a const for backwards compatibility, but prefer getAllPackages() for fresh data
+export const allPackages: Pkg[] = getAllPackages();
 
 export type PackageDetail = {
   slug: string;
@@ -2772,7 +2781,7 @@ export const packageDetails: Record<string, PackageDetail> = {
 };
 
 export function getPackageBySlug(slug: string): Pkg | undefined {
-  return allPackages.find((p) => p.slug === slug);
+  return getAllPackages().find((p) => p.slug === slug);
 }
 
 const TOUR_TYPE_BY_CATEGORY: Record<string, string> = {
@@ -2887,4 +2896,136 @@ export function getPackageDetail(slug: string): PackageDetail | undefined {
   const pkg = getPackageBySlug(slug);
   if (!pkg) return undefined;
   return buildPackageDetail(pkg);
+}
+
+const categoryMap: Record<string, PkgCategory | undefined> = {
+  "Group Tour": "group",
+  Honeymoon: "honeymoon",
+  Corporate: "corporate",
+  Customized: "customized",
+  Educational: "educational",
+};
+
+export function getAdminPackages(): Pkg[] {
+  try {
+    const raw = localStorage.getItem("tn-admin-packages");
+    if (!raw) return [];
+    const packages = JSON.parse(raw) as {
+      id: string;
+      title: string;
+      slug: string;
+      price: string;
+      location: string;
+      category: string;
+      subcategory?: string;
+      duration?: string;
+      groupSize?: string;
+      image: string;
+      description?: string;
+    }[];
+    return packages.map((p) => ({
+      images: p.image ? [p.image] : [],
+      title: p.title,
+      location: p.location,
+      duration: p.duration || "",
+      price: p.price,
+      slug: p.slug,
+      category: categoryMap[p.category],
+      subcategory: p.subcategory || undefined,
+    }));
+  } catch {
+    return [];
+  }
+}
+
+export interface AdminGalleryItem {
+  id: string;
+  src: string;
+  title: string;
+  location: string;
+}
+
+export function getAdminGallery(): AdminGalleryItem[] {
+  try {
+    const raw = localStorage.getItem("tn-admin-gallery");
+    if (!raw) return [];
+    return JSON.parse(raw);
+  } catch {
+    return [];
+  }
+}
+
+export interface AdminVisaCountry {
+  country: string;
+  requirements: string[];
+}
+
+export function getAdminVisa(): AdminVisaCountry[] {
+  try {
+    const raw = localStorage.getItem("tn-admin-visa");
+    if (!raw) return [];
+    return JSON.parse(raw);
+  } catch {
+    return [];
+  }
+}
+
+export interface AdminBannerContent {
+  subtitle: string;
+  title: string;
+  description: string;
+}
+
+export interface AdminBanners {
+  airTickets: AdminBannerContent;
+  home: string[];
+}
+
+const DEFAULT_BANNERS: AdminBanners = {
+  airTickets: {
+    subtitle: "",
+    title: "",
+    description: "",
+  },
+  home: [
+    "Enjoy Family Holiday Packages",
+    "Book Your Dream Vacation at Unbeatable Prices Today",
+    "Explore 500+ Destinations with Expert Guided Tours",
+  ],
+};
+
+export function getAdminBanners(): AdminBanners {
+  const defaults: AdminBanners = {
+    airTickets: {
+      subtitle: "",
+      title: "🕋 November Umrah Special! Fly with Kuwait Airways | ✈️ 15 Days Umrah Airfare Package starting from PKR 120,000 | 🎉 Limited promotional seats available – Book in advance for exclusive discounts! | 📞 Contact Travel Nest today to reserve your seat before fares increase.",
+      description: "",
+    },
+    home: [
+      "Enjoy Family Holiday Packages",
+      "Book Your Dream Vacation at Unbeatable Prices Today",
+      "Explore 500+ Destinations with Expert Guided Tours",
+    ],
+  };
+  try {
+    const raw = localStorage.getItem("tn-admin-banners");
+    if (!raw) return defaults;
+    const parsed = JSON.parse(raw);
+    if (!parsed || typeof parsed !== "object") return defaults;
+    const air = parsed.airTickets ?? defaults.airTickets;
+    let home: string[];
+    if (Array.isArray(parsed.home)) {
+      home = parsed.home.length > 0 ? parsed.home : defaults.home;
+    } else if (parsed.home && typeof parsed.home === "object" && parsed.home.title) {
+      home = [parsed.home.title];
+    } else {
+      home = defaults.home;
+    }
+    return {
+      airTickets: { subtitle: air.subtitle || "", title: air.title || defaults.airTickets.title, description: air.description || "" },
+      home,
+    };
+  } catch {
+    return defaults;
+  }
 }

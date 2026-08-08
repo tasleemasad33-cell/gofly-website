@@ -1,7 +1,7 @@
 import { useEffect, useMemo, useState } from "react";
 import useEmblaCarousel from "embla-carousel-react";
 import { ArrowRight, ChevronLeft, ChevronRight, Clock, MapPin, Star } from "lucide-react";
-import { allPackages, getPackageDetail, IMG, type Pkg } from "@/lib/gofly-data";
+import { getAllPackages, getPackageDetail, IMG, type Pkg } from "@/lib/gofly-data";
 import { SectionTitle } from "./SectionTitle";
 import { Reveal } from "./Reveal";
 import { InquiryStrip, PackageRowCard, parsePrice } from "./TourListing";
@@ -40,7 +40,7 @@ function PackagesHero() {
 
 /* ─── Featured package banner ─── */
 function FeaturedPackage() {
-  const featured = allPackages[0];
+  const featured = getAllPackages()[0];
   const [emblaRef, embla] = useEmblaCarousel({ loop: true });
   const [selected, setSelected] = useState(0);
 
@@ -179,7 +179,7 @@ export function TravelPackagesPage() {
   const perPage = 6;
 
   const filtered = useMemo(() => {
-    let list = [...allPackages];
+    let list = [...getAllPackages()];
     if (sort === "price-low") {
       list = list.sort((a, b) => parsePrice(a.price) - parsePrice(b.price));
     }

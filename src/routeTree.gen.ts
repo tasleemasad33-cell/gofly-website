@@ -11,6 +11,7 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as AboutRouteImport } from './routes/about'
+import { Route as AdminRouteImport } from './routes/admin'
 import { Route as AirTicketsRouteImport } from './routes/air-tickets'
 import { Route as ContactRouteImport } from './routes/contact'
 import { Route as CorporateToursRouteImport } from './routes/corporate-tours'
@@ -29,6 +30,13 @@ import { Route as PrivacyRouteImport } from './routes/privacy'
 import { Route as TermsRouteImport } from './routes/terms'
 import { Route as TransportationRouteImport } from './routes/transportation'
 import { Route as VisaFacilitationRouteImport } from './routes/visa-facilitation'
+import { Route as AdminBannersRouteImport } from './routes/admin.banners'
+import { Route as AdminDashboardRouteImport } from './routes/admin.dashboard'
+import { Route as AdminGalleryRouteImport } from './routes/admin.gallery'
+import { Route as AdminLoginRouteImport } from './routes/admin.login'
+import { Route as AdminSettingsRouteImport } from './routes/admin.settings'
+import { Route as AdminToursRouteImport } from './routes/admin.tours'
+import { Route as AdminVisaRouteImport } from './routes/admin.visa'
 import { Route as PackagesIndexRouteImport } from './routes/packages/index'
 import { Route as PackagesSlugRouteImport } from './routes/packages.$slug'
 
@@ -40,6 +48,11 @@ const IndexRoute = IndexRouteImport.update({
 const AboutRoute = AboutRouteImport.update({
   id: '/about',
   path: '/about',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AdminRoute = AdminRouteImport.update({
+  id: '/admin',
+  path: '/admin',
   getParentRoute: () => rootRouteImport,
 } as any)
 const AirTicketsRoute = AirTicketsRouteImport.update({
@@ -132,6 +145,41 @@ const VisaFacilitationRoute = VisaFacilitationRouteImport.update({
   path: '/visa-facilitation',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AdminBannersRoute = AdminBannersRouteImport.update({
+  id: '/banners',
+  path: '/banners',
+  getParentRoute: () => AdminRoute,
+} as any)
+const AdminDashboardRoute = AdminDashboardRouteImport.update({
+  id: '/dashboard',
+  path: '/dashboard',
+  getParentRoute: () => AdminRoute,
+} as any)
+const AdminGalleryRoute = AdminGalleryRouteImport.update({
+  id: '/gallery',
+  path: '/gallery',
+  getParentRoute: () => AdminRoute,
+} as any)
+const AdminLoginRoute = AdminLoginRouteImport.update({
+  id: '/login',
+  path: '/login',
+  getParentRoute: () => AdminRoute,
+} as any)
+const AdminSettingsRoute = AdminSettingsRouteImport.update({
+  id: '/settings',
+  path: '/settings',
+  getParentRoute: () => AdminRoute,
+} as any)
+const AdminToursRoute = AdminToursRouteImport.update({
+  id: '/tours',
+  path: '/tours',
+  getParentRoute: () => AdminRoute,
+} as any)
+const AdminVisaRoute = AdminVisaRouteImport.update({
+  id: '/visa',
+  path: '/visa',
+  getParentRoute: () => AdminRoute,
+} as any)
 const PackagesIndexRoute = PackagesIndexRouteImport.update({
   id: '/',
   path: '/',
@@ -146,6 +194,7 @@ const PackagesSlugRoute = PackagesSlugRouteImport.update({
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
+  '/admin': typeof AdminRouteWithChildren
   '/air-tickets': typeof AirTicketsRoute
   '/contact': typeof ContactRoute
   '/corporate-tours': typeof CorporateToursRoute
@@ -164,12 +213,20 @@ export interface FileRoutesByFullPath {
   '/terms': typeof TermsRoute
   '/transportation': typeof TransportationRoute
   '/visa-facilitation': typeof VisaFacilitationRoute
+  '/admin/banners': typeof AdminBannersRoute
+  '/admin/dashboard': typeof AdminDashboardRoute
+  '/admin/gallery': typeof AdminGalleryRoute
+  '/admin/login': typeof AdminLoginRoute
+  '/admin/settings': typeof AdminSettingsRoute
+  '/admin/tours': typeof AdminToursRoute
+  '/admin/visa': typeof AdminVisaRoute
   '/packages/$slug': typeof PackagesSlugRoute
   '/packages/': typeof PackagesIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
+  '/admin': typeof AdminRouteWithChildren
   '/air-tickets': typeof AirTicketsRoute
   '/contact': typeof ContactRoute
   '/corporate-tours': typeof CorporateToursRoute
@@ -187,6 +244,13 @@ export interface FileRoutesByTo {
   '/terms': typeof TermsRoute
   '/transportation': typeof TransportationRoute
   '/visa-facilitation': typeof VisaFacilitationRoute
+  '/admin/banners': typeof AdminBannersRoute
+  '/admin/dashboard': typeof AdminDashboardRoute
+  '/admin/gallery': typeof AdminGalleryRoute
+  '/admin/login': typeof AdminLoginRoute
+  '/admin/settings': typeof AdminSettingsRoute
+  '/admin/tours': typeof AdminToursRoute
+  '/admin/visa': typeof AdminVisaRoute
   '/packages/$slug': typeof PackagesSlugRoute
   '/packages': typeof PackagesIndexRoute
 }
@@ -194,6 +258,7 @@ export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
+  '/admin': typeof AdminRouteWithChildren
   '/air-tickets': typeof AirTicketsRoute
   '/contact': typeof ContactRoute
   '/corporate-tours': typeof CorporateToursRoute
@@ -212,6 +277,13 @@ export interface FileRoutesById {
   '/terms': typeof TermsRoute
   '/transportation': typeof TransportationRoute
   '/visa-facilitation': typeof VisaFacilitationRoute
+  '/admin/banners': typeof AdminBannersRoute
+  '/admin/dashboard': typeof AdminDashboardRoute
+  '/admin/gallery': typeof AdminGalleryRoute
+  '/admin/login': typeof AdminLoginRoute
+  '/admin/settings': typeof AdminSettingsRoute
+  '/admin/tours': typeof AdminToursRoute
+  '/admin/visa': typeof AdminVisaRoute
   '/packages/$slug': typeof PackagesSlugRoute
   '/packages/': typeof PackagesIndexRoute
 }
@@ -220,6 +292,7 @@ export interface FileRouteTypes {
   fullPaths:
     | '/'
     | '/about'
+    | '/admin'
     | '/air-tickets'
     | '/contact'
     | '/corporate-tours'
@@ -238,12 +311,20 @@ export interface FileRouteTypes {
     | '/terms'
     | '/transportation'
     | '/visa-facilitation'
+    | '/admin/banners'
+    | '/admin/dashboard'
+    | '/admin/gallery'
+    | '/admin/login'
+    | '/admin/settings'
+    | '/admin/tours'
+    | '/admin/visa'
     | '/packages/$slug'
     | '/packages/'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
     | '/about'
+    | '/admin'
     | '/air-tickets'
     | '/contact'
     | '/corporate-tours'
@@ -261,12 +342,20 @@ export interface FileRouteTypes {
     | '/terms'
     | '/transportation'
     | '/visa-facilitation'
+    | '/admin/banners'
+    | '/admin/dashboard'
+    | '/admin/gallery'
+    | '/admin/login'
+    | '/admin/settings'
+    | '/admin/tours'
+    | '/admin/visa'
     | '/packages/$slug'
     | '/packages'
   id:
     | '__root__'
     | '/'
     | '/about'
+    | '/admin'
     | '/air-tickets'
     | '/contact'
     | '/corporate-tours'
@@ -285,6 +374,13 @@ export interface FileRouteTypes {
     | '/terms'
     | '/transportation'
     | '/visa-facilitation'
+    | '/admin/banners'
+    | '/admin/dashboard'
+    | '/admin/gallery'
+    | '/admin/login'
+    | '/admin/settings'
+    | '/admin/tours'
+    | '/admin/visa'
     | '/packages/$slug'
     | '/packages/'
   fileRoutesById: FileRoutesById
@@ -292,6 +388,7 @@ export interface FileRouteTypes {
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AboutRoute: typeof AboutRoute
+  AdminRoute: typeof AdminRouteWithChildren
   AirTicketsRoute: typeof AirTicketsRoute
   ContactRoute: typeof ContactRoute
   CorporateToursRoute: typeof CorporateToursRoute
@@ -326,6 +423,13 @@ declare module '@tanstack/react-router' {
       path: '/about'
       fullPath: '/about'
       preLoaderRoute: typeof AboutRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/admin': {
+      id: '/admin'
+      path: '/admin'
+      fullPath: '/admin'
+      preLoaderRoute: typeof AdminRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/air-tickets': {
@@ -454,6 +558,55 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof VisaFacilitationRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/admin/banners': {
+      id: '/admin/banners'
+      path: '/banners'
+      fullPath: '/admin/banners'
+      preLoaderRoute: typeof AdminBannersRouteImport
+      parentRoute: typeof AdminRoute
+    }
+    '/admin/dashboard': {
+      id: '/admin/dashboard'
+      path: '/dashboard'
+      fullPath: '/admin/dashboard'
+      preLoaderRoute: typeof AdminDashboardRouteImport
+      parentRoute: typeof AdminRoute
+    }
+    '/admin/gallery': {
+      id: '/admin/gallery'
+      path: '/gallery'
+      fullPath: '/admin/gallery'
+      preLoaderRoute: typeof AdminGalleryRouteImport
+      parentRoute: typeof AdminRoute
+    }
+    '/admin/login': {
+      id: '/admin/login'
+      path: '/login'
+      fullPath: '/admin/login'
+      preLoaderRoute: typeof AdminLoginRouteImport
+      parentRoute: typeof AdminRoute
+    }
+    '/admin/settings': {
+      id: '/admin/settings'
+      path: '/settings'
+      fullPath: '/admin/settings'
+      preLoaderRoute: typeof AdminSettingsRouteImport
+      parentRoute: typeof AdminRoute
+    }
+    '/admin/tours': {
+      id: '/admin/tours'
+      path: '/tours'
+      fullPath: '/admin/tours'
+      preLoaderRoute: typeof AdminToursRouteImport
+      parentRoute: typeof AdminRoute
+    }
+    '/admin/visa': {
+      id: '/admin/visa'
+      path: '/visa'
+      fullPath: '/admin/visa'
+      preLoaderRoute: typeof AdminVisaRouteImport
+      parentRoute: typeof AdminRoute
+    }
     '/packages/': {
       id: '/packages/'
       path: '/'
@@ -470,6 +623,28 @@ declare module '@tanstack/react-router' {
     }
   }
 }
+
+interface AdminRouteChildren {
+  AdminBannersRoute: typeof AdminBannersRoute
+  AdminDashboardRoute: typeof AdminDashboardRoute
+  AdminGalleryRoute: typeof AdminGalleryRoute
+  AdminLoginRoute: typeof AdminLoginRoute
+  AdminSettingsRoute: typeof AdminSettingsRoute
+  AdminToursRoute: typeof AdminToursRoute
+  AdminVisaRoute: typeof AdminVisaRoute
+}
+
+const AdminRouteChildren: AdminRouteChildren = {
+  AdminBannersRoute: AdminBannersRoute,
+  AdminDashboardRoute: AdminDashboardRoute,
+  AdminGalleryRoute: AdminGalleryRoute,
+  AdminLoginRoute: AdminLoginRoute,
+  AdminSettingsRoute: AdminSettingsRoute,
+  AdminToursRoute: AdminToursRoute,
+  AdminVisaRoute: AdminVisaRoute,
+}
+
+const AdminRouteWithChildren = AdminRoute._addFileChildren(AdminRouteChildren)
 
 interface PackagesRouteChildren {
   PackagesSlugRoute: typeof PackagesSlugRoute
@@ -488,6 +663,7 @@ const PackagesRouteWithChildren = PackagesRoute._addFileChildren(
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AboutRoute: AboutRoute,
+  AdminRoute: AdminRouteWithChildren,
   AirTicketsRoute: AirTicketsRoute,
   ContactRoute: ContactRoute,
   CorporateToursRoute: CorporateToursRoute,
