@@ -523,16 +523,16 @@ export function AirTicketsPage() {
         const t = banners.airTickets;
         const text = t.title || "🕋 November Umrah Special! Fly with Kuwait Airways | ✈️ 15 Days Umrah Airfare Package starting from PKR 120,000 | 🎉 Limited promotional seats available – Book in advance for exclusive discounts! | 📞 Contact Travel Nest today to reserve your seat before fares increase.";
         return (
-          <div className="w-full">
-            <div className="relative overflow-hidden bg-gradient-to-r from-brand via-brand to-brand2 py-4 text-primary-foreground">
-              <div className="pointer-events-none absolute -left-10 top-1/2 size-40 -translate-y-1/2 rounded-full bg-white/10 blur-3xl" />
-              <div className="pointer-events-none absolute -right-10 top-1/2 size-40 -translate-y-1/2 rounded-full bg-white/10 blur-3xl" />
-              <div className="container-gofly">
-                <p className="flex flex-wrap items-center justify-center gap-x-3 gap-y-1 text-center text-sm font-medium sm:text-base">
-                  <Plane className="hidden size-4 shrink-0 sm:block" />
-                  <span>{text}</span>
-                </p>
-              </div>
+          <div className="w-full overflow-hidden bg-gradient-to-r from-brand via-brand to-brand2 py-4 text-primary-foreground">
+            <div className="marquee-track whitespace-nowrap">
+              <span className="inline-flex items-center gap-6 pr-6 text-sm font-medium sm:text-base">
+                <Plane className="hidden size-4 shrink-0 sm:block" />
+                {text}
+              </span>
+              <span className="inline-flex items-center gap-6 pr-6 text-sm font-medium sm:text-base">
+                <Plane className="hidden size-4 shrink-0 sm:block" />
+                {text}
+              </span>
             </div>
           </div>
         );
