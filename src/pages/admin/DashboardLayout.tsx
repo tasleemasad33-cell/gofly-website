@@ -17,6 +17,7 @@ import { useAuth } from "@/contexts/AdminAuth";
 const nav = [
   { id: "dashboard", label: "Dashboard", icon: LayoutDashboard, path: "/admin/dashboard" },
   { id: "tours", label: "Tour Packages", icon: Plane, path: "/admin/tours" },
+  { id: "tour-details", label: "Tour Details", icon: FileText, path: "/admin/tour-details" },
   { id: "gallery", label: "Gallery", icon: Camera, path: "/admin/gallery" },
   { id: "visa", label: "Visa Requirements", icon: FileText, path: "/admin/visa" },
   { id: "banners", label: "Banners", icon: Image, path: "/admin/banners" },

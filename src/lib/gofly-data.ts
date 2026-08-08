@@ -1,7 +1,7 @@
 export const IMG = "https://demo.egenslab.com/html/gofly/preview/assets/img";
 
 import { clientHeroSlides, clientGalleryImages, clientGalleryItems } from "@/lib/client-images";
-import type { ExperienceDestination, PopularActivity, PageStat, SiteContent } from "./admin-types";
+import type { ExperienceDestination, PopularActivity, PageStat, SiteContent, PackageDetailAdmin } from "./admin-types";
 
 export const heroSlides = clientHeroSlides;
 
@@ -2908,9 +2908,26 @@ function buildPackageDetail(pkg: Pkg): PackageDetail {
   };
 }
 
+export function getAdminPackageDetails(): Record<string, PackageDetailAdmin> {
+  try {
+    const raw = localStorage.getItem("tn-admin-package-details");
+    if (!raw) return {};
+    return JSON.parse(raw);
+  } catch {
+    return {};
+  }
+}
+
 export function getPackageDetail(slug: string): PackageDetail | undefined {
+  // Check admin-stored details first
+  const adminDetails = getAdminPackageDetails();
+  if (adminDetails[slug]) {
+    return { ...adminDetails[slug], slug } as PackageDetail;
+  }
+  // Then check hardcoded details
   const detail = packageDetails[slug];
   if (detail) return detail;
+  // Finally auto-generate
   const pkg = getPackageBySlug(slug);
   if (!pkg) return undefined;
   return buildPackageDetail(pkg);

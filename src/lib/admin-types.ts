@@ -77,3 +77,28 @@ export interface SiteContent {
   weddingStats: PageStat[];
   homeStats: PageStat[];
 }
+
+export interface PackageDetailAdmin {
+  slug: string;
+  rating: number;
+  reviews: number;
+  description: string;
+  tourType: string;
+  groupSize: string;
+  info: { label: string; value: string }[];
+  locations: { img: string; title: string; days: string }[];
+  highlights: string[];
+  itinerary: {
+    day: string;
+    title: string;
+    desc: string;
+    transport: string;
+    activities: string;
+    meals: string;
+    accommodation: string;
+  }[];
+  includes: string[];
+  excludes: string[];
+  additionalInfo: string[];
+  faqs: { q: string; a: string }[];
+}

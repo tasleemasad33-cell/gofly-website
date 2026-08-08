@@ -36,6 +36,7 @@ import { Route as AdminDashboardRouteImport } from './routes/admin.dashboard'
 import { Route as AdminGalleryRouteImport } from './routes/admin.gallery'
 import { Route as AdminLoginRouteImport } from './routes/admin.login'
 import { Route as AdminSettingsRouteImport } from './routes/admin.settings'
+import { Route as AdminTourDetailsRouteImport } from './routes/admin.tour-details'
 import { Route as AdminToursRouteImport } from './routes/admin.tours'
 import { Route as AdminVisaRouteImport } from './routes/admin.visa'
 import { Route as PackagesIndexRouteImport } from './routes/packages/index'
@@ -151,6 +152,11 @@ const AdminBannersRoute = AdminBannersRouteImport.update({
   path: '/banners',
   getParentRoute: () => AdminRoute,
 } as any)
+const AdminContentRoute = AdminContentRouteImport.update({
+  id: '/content',
+  path: '/content',
+  getParentRoute: () => AdminRoute,
+} as any)
 const AdminDashboardRoute = AdminDashboardRouteImport.update({
   id: '/dashboard',
   path: '/dashboard',
@@ -169,6 +175,11 @@ const AdminLoginRoute = AdminLoginRouteImport.update({
 const AdminSettingsRoute = AdminSettingsRouteImport.update({
   id: '/settings',
   path: '/settings',
+  getParentRoute: () => AdminRoute,
+} as any)
+const AdminTourDetailsRoute = AdminTourDetailsRouteImport.update({
+  id: '/tour-details',
+  path: '/tour-details',
   getParentRoute: () => AdminRoute,
 } as any)
 const AdminToursRoute = AdminToursRouteImport.update({
@@ -220,6 +231,7 @@ export interface FileRoutesByFullPath {
   '/admin/gallery': typeof AdminGalleryRoute
   '/admin/login': typeof AdminLoginRoute
   '/admin/settings': typeof AdminSettingsRoute
+  '/admin/tour-details': typeof AdminTourDetailsRoute
   '/admin/tours': typeof AdminToursRoute
   '/admin/visa': typeof AdminVisaRoute
   '/packages/$slug': typeof PackagesSlugRoute
@@ -252,6 +264,7 @@ export interface FileRoutesByTo {
   '/admin/gallery': typeof AdminGalleryRoute
   '/admin/login': typeof AdminLoginRoute
   '/admin/settings': typeof AdminSettingsRoute
+  '/admin/tour-details': typeof AdminTourDetailsRoute
   '/admin/tours': typeof AdminToursRoute
   '/admin/visa': typeof AdminVisaRoute
   '/packages/$slug': typeof PackagesSlugRoute
@@ -286,6 +299,7 @@ export interface FileRoutesById {
   '/admin/gallery': typeof AdminGalleryRoute
   '/admin/login': typeof AdminLoginRoute
   '/admin/settings': typeof AdminSettingsRoute
+  '/admin/tour-details': typeof AdminTourDetailsRoute
   '/admin/tours': typeof AdminToursRoute
   '/admin/visa': typeof AdminVisaRoute
   '/packages/$slug': typeof PackagesSlugRoute
@@ -321,6 +335,7 @@ export interface FileRouteTypes {
     | '/admin/gallery'
     | '/admin/login'
     | '/admin/settings'
+    | '/admin/tour-details'
     | '/admin/tours'
     | '/admin/visa'
     | '/packages/$slug'
@@ -353,6 +368,7 @@ export interface FileRouteTypes {
     | '/admin/gallery'
     | '/admin/login'
     | '/admin/settings'
+    | '/admin/tour-details'
     | '/admin/tours'
     | '/admin/visa'
     | '/packages/$slug'
@@ -386,6 +402,7 @@ export interface FileRouteTypes {
     | '/admin/gallery'
     | '/admin/login'
     | '/admin/settings'
+    | '/admin/tour-details'
     | '/admin/tours'
     | '/admin/visa'
     | '/packages/$slug'
@@ -607,6 +624,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AdminSettingsRouteImport
       parentRoute: typeof AdminRoute
     }
+    '/admin/tour-details': {
+      id: '/admin/tour-details'
+      path: '/tour-details'
+      fullPath: '/admin/tour-details'
+      preLoaderRoute: typeof AdminTourDetailsRouteImport
+      parentRoute: typeof AdminRoute
+    }
     '/admin/tours': {
       id: '/admin/tours'
       path: '/tours'
@@ -645,6 +669,7 @@ interface AdminRouteChildren {
   AdminGalleryRoute: typeof AdminGalleryRoute
   AdminLoginRoute: typeof AdminLoginRoute
   AdminSettingsRoute: typeof AdminSettingsRoute
+  AdminTourDetailsRoute: typeof AdminTourDetailsRoute
   AdminToursRoute: typeof AdminToursRoute
   AdminVisaRoute: typeof AdminVisaRoute
 }
@@ -656,6 +681,7 @@ const AdminRouteChildren: AdminRouteChildren = {
   AdminGalleryRoute: AdminGalleryRoute,
   AdminLoginRoute: AdminLoginRoute,
   AdminSettingsRoute: AdminSettingsRoute,
+  AdminTourDetailsRoute: AdminTourDetailsRoute,
   AdminToursRoute: AdminToursRoute,
   AdminVisaRoute: AdminVisaRoute,
 }
