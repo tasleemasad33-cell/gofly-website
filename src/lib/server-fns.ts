@@ -248,3 +248,43 @@ export const updateCreds = createServerFn({ method: "POST" })
     );
     return { success: true };
   });
+
+export const resetPassword = createServerFn({ method: "POST" })
+  .validator(
+    (data: {
+      action: "verify-email" | "update-password";
+      email: string;
+      newPassword?: string;
+    }) => data
+  )
+  .handler(async ({ data }) => {
+    await ensureDB();
+    let creds = await AdminCredentialsModel.findOne({}).lean();
+    if (!creds) {
+      await seedDB();
+      creds = await AdminCredentialsModel.findOne({}).lean();
+    }
+
+    if (data.action === "verify-email") {
+      if (data.email === creds.email) {
+        return { success: true };
+      }
+      return { success: false, error: "Email not found" };
+    }
+
+    if (data.action === "update-password") {
+      if (data.email !== creds.email) {
+        return { success: false, error: "Email not found" };
+      }
+      if (!data.newPassword || data.newPassword.length < 6) {
+        return { success: false, error: "Password must be at least 6 characters" };
+      }
+      await AdminCredentialsModel.findOneAndUpdate(
+        {},
+        { $set: { password: data.newPassword } }
+      );
+      return { success: true };
+    }
+
+    return { success: false, error: "Invalid action" };
+  });
